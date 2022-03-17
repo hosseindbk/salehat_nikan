@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\acountnumber;
 use App\Model\deposit;
 use App\Model\Menudashboard;
 use App\Model\Submenudashboard;
@@ -30,11 +31,13 @@ class DepositController extends Controller
 
     public function create()
     {
-        $users              = User::select('id' , 'name')->where('id' ,'>' ,1)->get();
+        $users              = User::select('id' , 'name' , 'melicode' , 'mobile')->where('id' ,'>' ,1)->get();
+        $acountnumbers      = acountnumber::select('id' , 'shomare_hesab')->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
 
         return view('Admin.deposits.create')
+            ->with(compact('acountnumbers'))
             ->with(compact('users'))
             ->with(compact('menudashboards'))
             ->with(compact('submenudashboards'));

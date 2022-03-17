@@ -49,7 +49,7 @@
                                                 <select name="user_id" class="form-control select-lg select2">
                                                     <option value="">انتخاب کنید</option>
                                                 @foreach($users as $user)
-                                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                                        <option value="{{$user->id}}">{{$user->name | $user->melicode | $user->mobile}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -64,6 +64,17 @@
                                             <div class="form-group">
                                                 <p class="mg-b-10">علت واریز</p>
                                                 <input type="text" name="reason" data-required="1" placeholder="علت واریز را وارد کنید" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <p class="mg-b-10">شماره حساب</p>
+                                                <select name="shomare_hesab_id" class="form-control select-lg select2">
+                                                    <option value="">انتخاب کنید</option>
+                                                    @foreach($acountnumbers as $acountnumber)
+                                                        <option value="{{$acountnumber->id}}">{{$acountnumber->shomare_hesab_id}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 mg-b-10 text-center">
