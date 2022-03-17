@@ -78,11 +78,15 @@ class DepositController extends Controller
                 ,'deposits.reason as reason' , 'users.name as name' , 'users.phone as phone' , 'deposits.code_number as code')
             ->orderby('deposits.id' , 'DESC')
             ->where('deposits.id' , $id)
-            ->get();        $menudashboards     = Menudashboard::whereStatus(4)->get();
+            ->get();
+        $user_id = deposit::pluck('user_id');
+        $acountnumbers      = acountnumber::select('id' , 'shomare_hesab')->whereUser_id($user_id)->get();
+        $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
 
 
         return view('Admin.deposits.edit')
+            ->with(compact('acountnumbers'))
             ->with(compact('users'))
             ->with(compact('deposits'))
             ->with(compact('menudashboards'))

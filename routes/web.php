@@ -14,6 +14,7 @@ Route::group(['namespace' => 'Admin' , 'middleware' => ['auth:web' , 'checkAdmin
     Route::resource('siteusers'                           , 'SiteuserController');
     Route::resource('acountnumber'                        , 'AcountnumberController');
     Route::resource('deposits'                            , 'DepositController');
+    Route::post('acountnumber/number'                              , 'AcountnumberController@acountnumber')->name('acountnumber');
 
 });
 

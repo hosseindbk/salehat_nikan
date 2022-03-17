@@ -71,8 +71,13 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <p class="mg-b-10">کد رهگیری</p>
-                                                    <input type="text" disabled  value="{{$deposit->code}}" class="form-control" />
+                                                    <p class="mg-b-10">شماره حساب</p>
+                                                    <select name="acountnumber_id" class="form-control select-lg select2" id="acountnumber_id">
+                                                        <option value="">انتخاب کنید</option>
+                                                        @foreach($acountnumbers as $acountnumber)
+                                                            <option value="{{$acountnumber->id}}"{{$acountnumber->id == $deposit->acountnumber_id ? 'selected' : ''}}>{{$acountnumber->shomare_hesab}}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 mg-b-10 text-center">
@@ -111,17 +116,34 @@
     <script src="{{asset('admin/assets/plugins/fancyuploder/fancy-uploader.js')}}"></script>
     <script src="{{asset('admin/assets/plugins/telephoneinput/telephoneinput.js')}}"></script>
     <script src="{{asset('admin/assets/plugins/telephoneinput/inttelephoneinput.js')}}"></script>
-    <script type="text/javascript">
-        function togglePassword(){
-            x = document.getElementById("togglePassword")
-            y = document.getElementById("pass")
-            if (y.type ==="password") {
-                y.type = 'text';
-            } else{
-                y.type="password";
-                y.innerHTML = "Show"
-            }
-        }
+    <script>
+        $(function(){
+            $('#user_id').change(function(){
+                $("#acountnumber_id option").remove();
+                var id = $('#user_id').val();
+
+                $.ajax({
+                    url : '{{ route( 'acountnumber' ) }}',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": id
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    success: function( result )
+                    {
+                        $.each( result, function(k, v) {
+                            $('#acountnumber_id').append($('<option>', {value:k, text:v}));
+                        });
+                    },
+                    error: function()
+                    {
+                        //handle errors
+                        alert('error...');
+                    }
+                });
+            });
+        });
     </script>
 
 @endsection
