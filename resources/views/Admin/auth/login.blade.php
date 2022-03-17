@@ -11,7 +11,7 @@
                         <div class="mt-5 pt-4 p-2 pos-absolute">
                             <div class="clearfix"></div>
                             <img src="{{asset('admin/assets/img/svgs/user.svg')}}" class="ht-100 mb-0" alt="user">
-                            <h5 class="mt-4 text-white">داشبورد مدیریتی اتوکالا</h5>
+                            <h5 class="mt-4 text-white">داشبورد مدیریتی صالحات نیکان</h5>
                             <span class="tx-white-6 tx-13 mb-5 mt-xl-0">برای ورود به داشبورد باید نام کاربری و رمز عبور دریافت نمایید</span>
                         </div>
                     </div>
