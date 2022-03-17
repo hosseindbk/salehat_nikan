@@ -49,7 +49,7 @@
                                                 <select name="user_id" class="form-control select-lg select2">
                                                     <option value="">انتخاب کنید</option>
                                                 @foreach($users as $user)
-                                                        <option value="{{$user->id}}">{{$user->name | $user->melicode | $user->mobile}}</option>
+                                                        <option value="{{$user->id}}">{{$user->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
