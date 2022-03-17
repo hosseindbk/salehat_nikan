@@ -49,7 +49,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <p class="mg-b-10">نام و نام خانوادگی</p>
-                                                    <select name="user_id" class="form-control select-lg select2">
+                                                    <select name="user_id" class="form-control select-lg select2" id="user_id">
                                                         <option value="">انتخاب کنید</option>
                                                         @foreach($users as $user)
                                                             <option value="{{$user->id}}" {{$deposit->user_id == $user->id ? 'selected' : ''}}>{{$user->name}}</option>
