@@ -50,7 +50,7 @@
 
                                                 <td>{{jdate($deposit->created_at)->format('%Y/%m/%d')}}</td>
                                                 <td>{{$deposit->name}}</td>
-                                                <td>{{$deposit->phone}}</td>
+                                                <td>{{$deposit->mobile}}</td>
                                                 <td>{{$deposit->amount}}</td>
                                                 <td>{{$deposit->reason}}</td>
                                                 <td>{{$deposit->status}}</td>
