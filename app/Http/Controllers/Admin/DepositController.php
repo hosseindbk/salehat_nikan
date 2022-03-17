@@ -79,7 +79,7 @@ class DepositController extends Controller
             ->orderby('deposits.id' , 'DESC')
             ->where('deposits.id' , $id)
             ->get();
-        $user_id = deposit::pluck('user_id');
+        $user_id = deposit::whereId($id)->pluck('user_id');
         $acountnumbers      = acountnumber::select('id' , 'shomare_hesab')->whereUser_id($user_id)->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
