@@ -51,6 +51,17 @@ class AcountnumberController extends Controller
         return Redirect::back();
     }
 
+    public function acountnumber(Request $request){
+        $acountnumbers = acountnumber::whereUser_id($request->input('id'))->get();
+        $output = [];
+
+        foreach($acountnumbers as $acountnumber )
+        {
+            $output[$acountnumber->id] = $acountnumber->shomare_hesab;
+        }
+        return $output;
+    }
+
     /**
      * Display the specified resource.
      *

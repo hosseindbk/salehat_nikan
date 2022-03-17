@@ -46,7 +46,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <p class="mg-b-10">نام و نام خانوادگی</p>
-                                                <select name="user_id" class="form-control select-lg select2">
+                                                <select name="user_id" class="form-control select-lg select2" id="user_id">
                                                     <option value="">انتخاب کنید</option>
                                                 @foreach($users as $user)
                                                         <option value="{{$user->id}}">{{$user->name}}</option>
@@ -69,11 +69,11 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <p class="mg-b-10">شماره حساب</p>
-                                                <select name="shomare_hesab_id" class="form-control select-lg select2">
+                                                <select name="acountnumber_id" class="form-control select-lg select2" id="acountnumber_id">
                                                     <option value="">انتخاب کنید</option>
-                                                    @foreach($acountnumbers as $acountnumber)
-                                                        <option value="{{$acountnumber->id}}">{{$acountnumber->shomare_hesab}}</option>
-                                                    @endforeach
+{{--                                                    @foreach($acountnumbers as $acountnumber)--}}
+{{--                                                        <option value="{{$acountnumber->id}}">{{$acountnumber->shomare_hesab}}</option>--}}
+{{--                                                    @endforeach--}}
                                                 </select>
                                             </div>
                                         </div>
@@ -92,8 +92,7 @@
         </div>
     </div>
 </div>
-
-
+@endsection
 @section('end')
     <script src="{{asset('admin/assets/plugins/select2/js/select2.min.js')}}"></script>
     <script src="{{asset('admin/assets/js/select2.js')}}"></script>
@@ -112,5 +111,34 @@
     <script src="{{asset('admin/assets/plugins/fancyuploder/fancy-uploader.js')}}"></script>
     <script src="{{asset('admin/assets/plugins/telephoneinput/telephoneinput.js')}}"></script>
     <script src="{{asset('admin/assets/plugins/telephoneinput/inttelephoneinput.js')}}"></script>
-@endsection
+
+    <script>
+        $(function(){
+            $('#user_id').change(function(){
+                $("#acountnumber_id option").remove();
+                var id = $('#user_id').val();
+
+                $.ajax({
+                    url : '{{ route( 'acountnumber' ) }}',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        "id": id
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    success: function( result )
+                    {
+                        $.each( result, function(k, v) {
+                            $('#acountnumber_id').append($('<option>', {value:k, text:v}));
+                        });
+                    },
+                    error: function()
+                    {
+                        //handle errors
+                        alert('error...');
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
