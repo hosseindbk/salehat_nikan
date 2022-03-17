@@ -16,7 +16,7 @@ class DepositController extends Controller
     {
         $deposits           = deposit::leftjoin('users' , 'users.id' ,'=' ,'deposits.user_id')
                                         ->select('deposits.id as id' , 'deposits.created_at as date' , 'deposits.amount as amount'
-                                        ,'deposits.reason as reason' , 'users.name as name' , 'users.mobile as mobie' , 'deposits.code_number as code')
+                                        ,'deposits.reason as reason' , 'users.name as name' , 'users.mobile as mobile' , 'deposits.code_number as code')
             ->orderby('deposits.id' , 'DESC')
             ->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
