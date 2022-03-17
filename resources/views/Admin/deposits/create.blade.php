@@ -19,7 +19,7 @@
                         <h2 class="main-content-title tx-24 mg-b-5">مدیریت واریزی</h2>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{url('admin/panel')}}">صفحه اصلی</a></li>
-                            <li class="breadcrumb-item"><a href="{{url('admin/users')}}"> مدیریت واریزی</a></li>
+                            <li class="breadcrumb-item"><a href="{{url('admin/deposits')}}"> مدیریت واریزی</a></li>
                             <li class="breadcrumb-item active" aria-current="page">ایجاد واریزی</li>
                         </ol>
                     </div>
@@ -72,7 +72,7 @@
                                                 <select name="shomare_hesab_id" class="form-control select-lg select2">
                                                     <option value="">انتخاب کنید</option>
                                                     @foreach($acountnumbers as $acountnumber)
-                                                        <option value="{{$acountnumber->id}}">{{$acountnumber->shomare_hesab_id}}</option>
+                                                        <option value="{{$acountnumber->id}}">{{$acountnumber->shomare_hesab}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
