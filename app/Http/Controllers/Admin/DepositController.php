@@ -100,6 +100,7 @@ class DepositController extends Controller
         $deposit->user_id      = $request->input('user_id');
         $deposit->amount       = $request->input('amount');
         $deposit->reason       = $request->input('reason');
+        $deposit->acountnumber_id  = $request->input('acountnumber_id');
         $deposit->code_number  = $request->input('code_number');
 
         $deposit->update();
