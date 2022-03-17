@@ -73,7 +73,6 @@
                                                 <div class="form-group">
                                                     <p class="mg-b-10">شماره حساب</p>
                                                     <select name="acountnumber_id" class="form-control select-lg select2" id="acountnumber_id">
-                                                        <option value="">انتخاب کنید</option>
                                                         @foreach($acountnumbers as $acountnumber)
                                                             <option value="{{$acountnumber->id}}" {{$acountnumber->id == $deposit->acountnumber_id ? 'selected' : ''}}>{{$acountnumber->shomare_hesab}}</option>
                                                         @endforeach
