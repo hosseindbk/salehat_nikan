@@ -51,7 +51,7 @@
                                                 <td>{{jdate($deposit->created_at)->format('%Y/%m/%d')}}</td>
                                                 <td>{{$deposit->name}}</td>
                                                 <td>{{$deposit->mobile}}</td>
-                                                <td>{{$deposit->amount}}</td>
+                                                <td>{{number_format($deposit->amount)}}</td>
                                                 <td>{{$deposit->reason}}</td>
                                                 <td>{{$deposit->shomarecard}}</td>
                                                 <td>{{$deposit->code}}</td>
