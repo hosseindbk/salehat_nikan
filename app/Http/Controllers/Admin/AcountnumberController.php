@@ -57,7 +57,7 @@ class AcountnumberController extends Controller
 
         foreach($acountnumbers as $acountnumber )
         {
-            $output[$acountnumber->id] = $acountnumber->shomare_hesab;
+            $output[$acountnumber->id] = $acountnumber->shomare_card;
         }
         return $output;
     }

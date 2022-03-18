@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\userrequest;
 use App\Model\acountnumber;
 use App\Model\Bank;
 use App\Model\Menudashboard;
@@ -11,7 +10,6 @@ use App\Model\Submenudashboard;
 use App\Model\Type_user;
 use App\Model\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class SiteuserController extends Controller
 {
@@ -45,16 +43,11 @@ class SiteuserController extends Controller
         $users = new user();
 
         $users->name            = $request->input('name');
-        $users->melicode        = $request->input('melicode');
         $users->type_id         = $request->input('type_id');
         $users->mobile          = $request->input('mobile');
         $users->mobile2         = $request->input('mobile2');
-        $users->mobile3         = $request->input('mobile3');
-        $users->email           = $request->input('email');
         $users->tel             = $request->input('tel');
-        $users->tel2            = $request->input('tel2');
-        $users->tel3            = $request->input('tel3');
-        $users->address         = $request->input('address');
+        $users->description     = $request->input('description');
         $users->status          = 1;
         $users->save();
 
@@ -85,16 +78,11 @@ class SiteuserController extends Controller
         $user = User::findOrfail($id);
 
         $user->name             = $request->input('name');
-        $user->melicode         = $request->input('melicode');
         $user->type_id          = $request->input('type_id');
         $user->mobile           = $request->input('mobile');
         $user->mobile2          = $request->input('mobile2');
-        $user->mobile3          = $request->input('mobile3');
-        $user->email            = $request->input('email');
         $user->tel              = $request->input('tel');
-        $user->tel2             = $request->input('tel2');
-        $user->tel3             = $request->input('tel3');
-        $user->address          = $request->input('address');
+        $user->description      = $request->input('description');
         $user->status           = $request->input('status');
         $user->phone_verify     = $request->input('phone_verify');
 

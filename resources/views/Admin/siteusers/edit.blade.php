@@ -52,16 +52,23 @@
                                                     <input type="text" name="name"  value="{{$user->name}}" class="form-control" />
                                                 </div>
                                                 <div class="form-group">
-                                                    <p class="mg-b-10">کد ملی</p>
-                                                    <input type="text" name="melicode"  value="{{$user->melicode}}" class="form-control" />
+                                                    <p class="mg-b-10">تلفن ثابت</p>
+                                                    <input type="text" name="tel" value="{{$user->tel}}" class="form-control" />
                                                 </div>
+
+                                            </div>
+                                            <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <p class="mg-b-10">آدرس ایمیل</p>
-                                                    <input type="text" name="email" value="{{$user->email}}" id="mail" class="form-control" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <p class="mg-b-10">آدرس </p>
-                                                    <input type="text" name="address" value="{{$user->address}}" id="mail" class="form-control" />
+                                                    <p class="mg-b-10">انتخاب وضعیت کاربر</p>
+                                                    <select name="status" class="form-control select-lg select2">
+                                                        @if($user->status == 1)
+                                                            <option value="1">در حال بررسی </option>
+                                                            <option value="2">تایید </option>
+                                                        @elseif($user->status == 2)
+                                                            <option value="2">تایید </option>
+                                                            <option value="1">در حال بررسی</option>
+                                                        @endif
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <p class="mg-b-10">وضعیت شماره کاربر</p>
@@ -69,20 +76,6 @@
                                                         <option value="0" {{$user->phone_verify == 0 ? 'selected' : ''}}>عدم تایید شماره</option>
                                                         <option value="1" {{$user->phone_verify == 1 ? 'selected' : ''}}> تایید شماره</option>
                                                     </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <p class="mg-b-10">تلفن ثابت</p>
-                                                    <input type="text" name="tel" value="{{$user->tel}}" class="form-control" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <p class="mg-b-10">تلفن ثابت2</p>
-                                                    <input type="text" name="tel2" value="{{$user->tel2}}" class="form-control" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <p class="mg-b-10">تلفن ثابت3</p>
-                                                    <input type="text" name="tel3" value="{{$user->tel3}}" class="form-control" />
                                                 </div>
 
                                                 <div class="form-group">
@@ -105,21 +98,10 @@
                                                     <input type="text" name="mobile2" value="{{$user->mobile2}}" class="form-control" />
                                                 </div>
                                                 <div class="form-group">
-                                                    <p class="mg-b-10">شماره موبایل3</p>
-                                                    <input type="text" name="mobile3" value="{{$user->mobile3}}" class="form-control" />
+                                                    <p class="mg-b-10">توضیحات</p>
+                                                    <textarea name="descripion" id="" rows="2" class="form-control">{{$user->descripion}}</textarea>
                                                 </div>
-                                                <div class="form-group">
-                                                    <p class="mg-b-10">انتخاب وضعیت کاربر</p>
-                                                    <select name="status" class="form-control select-lg select2">
-                                                        @if($user->status == 1)
-                                                            <option value="1">در حال بررسی </option>
-                                                            <option value="2">تایید </option>
-                                                        @elseif($user->status == 2)
-                                                            <option value="2">تایید </option>
-                                                            <option value="1">در حال بررسی</option>
-                                                        @endif
-                                                    </select>
-                                                </div>
+
                                             </div>
                                             <div class="col-lg-12 mg-b-10 text-center">
                                                 <div class="form-group">

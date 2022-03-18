@@ -18,7 +18,7 @@ class DepositController extends Controller
         $deposits           = deposit::leftjoin('users' , 'users.id' ,'=' ,'deposits.user_id')
                                      ->leftjoin('acountnumbers' , 'acountnumbers.id' ,'=' ,'deposits.acountnumber_id')
                                         ->select('deposits.id as id' , 'deposits.created_at as date' , 'deposits.amount as amount'
-                                        ,'deposits.reason as reason' , 'users.name as name', 'acountnumbers.shomare_hesab as shomarehesab' , 'users.mobile as mobile' , 'deposits.code_number as code')
+                                        ,'deposits.reason as reason' , 'users.name as name', 'acountnumbers.shomare_card as shomarecard' , 'users.mobile as mobile' , 'deposits.code_number as code')
             ->orderby('deposits.id' , 'DESC')
             ->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
@@ -80,7 +80,7 @@ class DepositController extends Controller
             ->where('deposits.id' , $id)
             ->get();
         $user_id = deposit::whereId($id)->pluck('user_id');
-        $acountnumbers      = acountnumber::select('id' , 'shomare_hesab')->whereUser_id($user_id)->get();
+        $acountnumbers      = acountnumber::select('id' , 'shomare_card')->whereUser_id($user_id)->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
 

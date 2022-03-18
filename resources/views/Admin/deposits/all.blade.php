@@ -37,7 +37,7 @@
                                             <th class="wd-10p"> شماره موبایل </th>
                                             <th class="wd-10p"> مبلغ واریزی(تومان) </th>
                                             <th class="wd-10p"> علت واریز </th>
-                                            <th class="wd-10p"> شماره حساب </th>
+                                            <th class="wd-10p"> شماره کارت </th>
                                             <th class="wd-10p"> کد رهگیری </th>
                                             <th class="wd-10p"> ویرایش </th>
                                             <th class="wd-10p"> حذف </th>
@@ -53,7 +53,7 @@
                                                 <td>{{$deposit->mobile}}</td>
                                                 <td>{{$deposit->amount}}</td>
                                                 <td>{{$deposit->reason}}</td>
-                                                <td>{{$deposit->shomarehesab}}</td>
+                                                <td>{{$deposit->shomarecard}}</td>
                                                 <td>{{$deposit->code}}</td>
                                                 <td>
                                                     <div class="btn-icon-list">

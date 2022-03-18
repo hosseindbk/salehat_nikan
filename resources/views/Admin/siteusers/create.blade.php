@@ -48,10 +48,7 @@
                                                 <p class="mg-b-10">نام و نام خانوادگی</p>
                                                 <input type="text" name="name"  placeholder="نام و نام خانوادگی را وارد کنید" class="form-control" />
                                             </div>
-                                            <div class="form-group">
-                                                <p class="mg-b-10">کد ملی</p>
-                                                <input type="text" name="melicode"  placeholder="نام و نام خانوادگی را وارد کنید" class="form-control" />
-                                            </div>
+
                                             <div class="form-group">
                                                 <p class="mg-b-10">نوع عضویت</p>
                                                 <select name="type_id" class="form-control select-lg select2">
@@ -71,14 +68,7 @@
                                                 <p class="mg-b-10">شماره موبایل2</p>
                                                 <input type="text" name="mobile2"  placeholder="شماره موبایل را وارد کنید" class="form-control" />
                                             </div>
-                                            <div class="form-group">
-                                                <p class="mg-b-10">شماره موبایل3</p>
-                                                <input type="text" name="mobile3" placeholder="شماره موبایل را وارد کنید" class="form-control" />
-                                            </div>
-                                            <div class="form-group">
-                                                <p class="mg-b-10">آدرس ایمیل</p>
-                                                <input type="text" name="email"  placeholder="آدرس ایمیل را وارد کنید" class="form-control" />
-                                            </div>
+
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -86,16 +76,8 @@
                                                 <input type="text" name="tel"  placeholder="تلفن ثابت را وارد کنید" class="form-control" />
                                             </div>
                                             <div class="form-group">
-                                                <p class="mg-b-10">تلفن ثابت2</p>
-                                                <input type="text" name="tel2"  placeholder="تلفن ثابت را وارد کنید" class="form-control" />
-                                            </div>
-                                            <div class="form-group">
-                                                <p class="mg-b-10">تلفن ثابت3</p>
-                                                <input type="text" name="tel3" placeholder="تلفن ثابت را وارد کنید" class="form-control" />
-                                            </div>
-                                            <div class="form-group">
-                                                <p class="mg-b-10">آدرس </p>
-                                                <input type="text" name="address"  placeholder="آدرس را وارد کنید" class="form-control" />
+                                                <p class="mg-b-10">توضیحات </p>
+                                                <textarea name="description" id="" cols="50" rows="2" class="form-control"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 mg-b-10 text-center">
