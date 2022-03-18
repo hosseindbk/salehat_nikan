@@ -64,10 +64,15 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <p class="mg-b-10">علت واریز</p>
-                                                    <input type="text" name="reason" data-required="1" value="{{$deposit->reason}}" class="form-control" />
-                                                </div>
+                                            <div class="form-group">
+                                                <p class="mg-b-10">علت واریز</p>
+                                                <select name="reason_id" class="form-control select-lg select2" id="user_id">
+                                                    <option value="">انتخاب کنید</option>
+                                                    @foreach($reasons as $reason)
+                                                        <option value="{{$reason->id}}" {{$reason->id == $deposit->reason_id ? 'selected' : ''}}>{{$reason->title}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">

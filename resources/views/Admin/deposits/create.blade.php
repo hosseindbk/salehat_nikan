@@ -61,19 +61,21 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <div class="form-group">
-                                                <p class="mg-b-10">علت واریز</p>
-                                                <input type="text" name="reason" data-required="1" placeholder="علت واریز را وارد کنید" class="form-control" />
-                                            </div>
+                                        <div class="form-group">
+                                            <p class="mg-b-10">علت واریز</p>
+                                            <select name="reason_id" class="form-control select-lg select2" id="user_id">
+                                                <option value="">انتخاب کنید</option>
+                                                @foreach($reasons as $reason)
+                                                    <option value="{{$reason->id}}">{{$reason->title}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <p class="mg-b-10">شماره کارت</p>
                                                 <select name="acountnumber_id" class="form-control select-lg select2" id="acountnumber_id">
                                                     <option value="">انتخاب کنید</option>
-{{--                                                    @foreach($acountnumbers as $acountnumber)--}}
-{{--                                                        <option value="{{$acountnumber->id}}">{{$acountnumber->shomare_hesab}}</option>--}}
-{{--                                                    @endforeach--}}
                                                 </select>
                                             </div>
                                         </div>

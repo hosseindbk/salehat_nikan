@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\acountnumber;
 use App\Model\deposit;
 use App\Model\Menudashboard;
+use App\Model\Reason;
 use App\Model\Submenudashboard;
 use App\Model\User;
 use Illuminate\Http\Request;
@@ -17,8 +18,9 @@ class DepositController extends Controller
     {
         $deposits           = deposit::leftjoin('users' , 'users.id' ,'=' ,'deposits.user_id')
                                      ->leftjoin('acountnumbers' , 'acountnumbers.id' ,'=' ,'deposits.acountnumber_id')
+                                     ->leftjoin('reasons' , 'reasons.id' ,'=' ,'deposits.reason_id')
                                         ->select('deposits.id as id' , 'deposits.created_at as date' , 'deposits.amount as amount'
-                                        ,'deposits.reason as reason' , 'users.name as name', 'acountnumbers.shomare_card as shomarecard' , 'users.mobile as mobile' , 'deposits.code_number as code')
+                                        , 'users.name as name' , 'reasons.title as reason', 'acountnumbers.shomare_card as shomarecard' , 'users.mobile as mobile' , 'deposits.code_number as code')
             ->orderby('deposits.id' , 'DESC')
             ->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
@@ -34,10 +36,12 @@ class DepositController extends Controller
     {
         $users              = User::select('id' , 'name' , 'melicode' , 'mobile')->where('id' ,'>' ,1)->get();
         $acountnumbers      = acountnumber::select('id' , 'shomare_hesab')->get();
+        $reasons            = Reason::select('id' , 'title')->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
 
         return view('Admin.deposits.create')
+            ->with(compact('reasons'))
             ->with(compact('acountnumbers'))
             ->with(compact('users'))
             ->with(compact('menudashboards'))
@@ -79,6 +83,8 @@ class DepositController extends Controller
             ->orderby('deposits.id' , 'DESC')
             ->where('deposits.id' , $id)
             ->get();
+        $reasons            = Reason::select('id' , 'title')->get();
+
         $user_id = deposit::whereId($id)->pluck('user_id');
         $acountnumbers      = acountnumber::select('id' , 'shomare_card')->whereUser_id($user_id)->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
@@ -86,6 +92,7 @@ class DepositController extends Controller
 
 
         return view('Admin.deposits.edit')
+            ->with(compact('reasons'))
             ->with(compact('acountnumbers'))
             ->with(compact('users'))
             ->with(compact('deposits'))
