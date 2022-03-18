@@ -48,7 +48,7 @@
                                         @foreach($deposits as $deposit)
                                             <tr class="odd gradeX">
 
-                                                <td>{{$deposit->id}}</td>
+                                                <td>{{$deposit->userid}}</td>
                                                 <td>{{jdate($deposit->created_at)->format('%Y/%m/%d')}}</td>
                                                 <td>{{$deposit->name}}</td>
                                                 <td>{{$deposit->mobile}}</td>

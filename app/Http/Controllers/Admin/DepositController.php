@@ -19,7 +19,7 @@ class DepositController extends Controller
         $deposits           = deposit::leftjoin('users' , 'users.id' ,'=' ,'deposits.user_id')
                                      ->leftjoin('acountnumbers' , 'acountnumbers.id' ,'=' ,'deposits.acountnumber_id')
                                      ->leftjoin('reasons' , 'reasons.id' ,'=' ,'deposits.reason_id')
-                                     ->select('deposits.id as id' , 'deposits.created_at as date' , 'deposits.amount as amount'
+                                     ->select('deposits.id as id' , 'users.id as userid' , 'deposits.created_at as date' , 'deposits.amount as amount'
                                         , 'users.name as name' , 'reasons.title as reason', 'acountnumbers.shomare_card as shomarecard' , 'users.mobile as mobile' , 'deposits.code_number as code')
             ->orderby('deposits.id' , 'DESC')
             ->get();
