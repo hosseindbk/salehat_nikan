@@ -32,6 +32,7 @@
                                     <table class="table" id="example1">
                                         <thead>
                                         <tr>
+                                            <th class="wd-10p"> کد کاربر </th>
                                             <th class="wd-10p"> نام و نام خانوادگی </th>
                                             <th class="wd-10p"> شماره موبایل </th>
                                             <th class="wd-10p"> تاریخ ایجاد حساب </th>
@@ -46,6 +47,7 @@
                                         @foreach($users as $user)
                                             <tr class="odd gradeX">
 
+                                                <td>{{$user->id}}</td>
                                                 <td>{{$user->name}}</td>
                                                 <td>{{$user->mobile}}</td>
                                                 <td>{{jdate($user->created_at)->format('%Y/%m/%d')}}</td>

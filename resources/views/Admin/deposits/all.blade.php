@@ -32,6 +32,7 @@
                                     <table class="table" id="example1">
                                         <thead>
                                         <tr>
+                                            <th class="wd-10p"> کد کاربر </th>
                                             <th class="wd-10p"> تاریخ واریز </th>
                                             <th class="wd-10p"> نام و نام خانوادگی </th>
                                             <th class="wd-10p"> شماره موبایل </th>
@@ -44,10 +45,10 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php $s = 1; ?>
                                         @foreach($deposits as $deposit)
                                             <tr class="odd gradeX">
 
+                                                <td>{{$deposit->id}}</td>
                                                 <td>{{jdate($deposit->created_at)->format('%Y/%m/%d')}}</td>
                                                 <td>{{$deposit->name}}</td>
                                                 <td>{{$deposit->mobile}}</td>
