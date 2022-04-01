@@ -1,6 +1,6 @@
 @extends('Admin.admin')
 @section('title')
-    <title> مدیریت حامیان </title>
+    <title> مدیریت کارشناسان </title>
     <link href="{{asset('admin/assets/plugins/datatable/dataTables.bootstrap4.min-rtl.css')}} " rel="stylesheet" />
     <link href="{{asset('admin/assets/plugins/datatable/responsivebootstrap4.min.css')}}" rel="stylesheet" />
     <link href="{{asset('admin/assets/plugins/datatable/fileexport/buttons.bootstrap4.min.css')}}" rel="stylesheet" />
@@ -11,10 +11,10 @@
             <div class="inner-body">
                 <div class="page-header">
                     <div>
-                        <h2 class="main-content-title tx-24 mg-b-5">مدیریت حامیان </h2>
+                        <h2 class="main-content-title tx-24 mg-b-5">مدیریت کارشناسان </h2>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{url('admin/panel')}}">صفحه اصلی</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">مدیریت حامیان </li>
+                            <li class="breadcrumb-item active" aria-current="page">مدیریت کارشناسان </li>
                         </ol>
                     </div>
                 </div>
@@ -24,8 +24,8 @@
                         <div class="card custom-card overflow-hidden">
                             <div class="card-body">
                                 <div>
-                                    <h6 class="main-content-label mb-1">لیست حامیان </h6>
-                                    <a href="{{url('admin/siteusers/create')}}" class="btn btn-primary btn-xs">افزودن حامیان </a>
+                                    <h6 class="main-content-label mb-1">لیست کارشناسان </h6>
+                                    <a href="{{url('admin/user-experts/create')}}" class="btn btn-primary btn-xs">افزودن کارشناسان </a>
                                 </div>
 
                                 <div class="table-responsive">
@@ -35,8 +35,8 @@
                                             <th class="wd-10p"> کد حامی </th>
                                             <th class="wd-10p"> نام و نام خانوادگی </th>
                                             <th class="wd-10p"> شماره موبایل </th>
-                                            <th class="wd-10p"> تاریخ ایجاد حساب </th>
-                                            <th class="wd-10p"> نوع همکاری </th>
+                                            <th class="wd-10p"> تاریخ عضویت </th>
+                                            <th class="wd-10p"> سطح </th>
                                             <th class="wd-10p"> وضعیت شماره </th>
                                             <th class="wd-10p"> وضعیت </th>
                                             <th class="wd-10p"> ویرایش </th>
@@ -76,13 +76,13 @@
                                                 </td>
                                                 <td>
                                                     <div class="btn-icon-list">
-                                                        <a href="{{ route('siteusers.edit' , $user->id ) }}" class="btn ripple btn-outline-info btn-icon">
+                                                        <a href="{{ route('user-experts.edit' , $user->id ) }}" class="btn ripple btn-outline-info btn-icon">
                                                             <i class="fe fe-edit-2"></i>
                                                         </a>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <form action="{{ route('siteusers.destroy' , $user->id) }}" method="post">
+                                                    <form action="{{ route('user-experts.destroy' , $user->id) }}" method="post">
                                                         {{ method_field('delete') }}
                                                         {{ csrf_field() }}
                                                         <div class="btn-icon-list">

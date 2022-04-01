@@ -1,6 +1,6 @@
 @extends('Admin.admin')
 @section('title')
-    <title> ایجاد واریزی</title>
+    <title> ایجاد کارشناس جدید</title>
     <link href="{{asset('admin/assets/plugins/spectrum-colorpicker/spectrum.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/plugins/ion-rangeslider/css/ion.rangeSlider.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/plugins/ion-rangeslider/css/ion.rangeSlider.skinFlat.css')}}" rel="stylesheet">
@@ -16,11 +16,11 @@
             <div class="inner-body">
                 <div class="page-header">
                     <div>
-                        <h2 class="main-content-title tx-24 mg-b-5">مدیریت واریزی</h2>
+                        <h2 class="main-content-title tx-24 mg-b-5">مدیریت کارشناسان</h2>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{url('admin/panel')}}">صفحه اصلی</a></li>
-                            <li class="breadcrumb-item"><a href="{{url('admin/deposits')}}"> مدیریت واریزی</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">ایجاد واریزی</li>
+                            <li class="breadcrumb-item"><a href="{{url('admin/user-experts')}}"> مدیریت کارشناسان</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">ایجاد کارشناسان</li>
                         </ol>
                     </div>
                 </div>
@@ -35,52 +35,60 @@
                         <div class="card custom-card">
                             <div class="card-body">
                                 <div>
-                                    <h6 class="main-content-label text-center mb-5">ورود اطلاعات منو داشبورد</h6>
+                                    <h6 class="main-content-label text-center mb-5">ورود اطلاعات کارشناسان</h6>
                                 </div>
-                                <form action="{{ route('deposits.store')}}" method="POST">
+                                <form action="{{ route('user-experts.store')}}" method="POST" enctype="multipart/form-data">
                                     <div class="row row-sm">
                                         {{csrf_field()}}
                                         <div class="col-md-12">
                                             @include('error')
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <p class="mg-b-10">نام و نام خانوادگی</p>
-                                                <select name="user_id" class="form-control select-lg select2" id="user_id">
+                                                <input type="text" name="name"  placeholder="نام و نام خانوادگی را وارد کنید" class="form-control" />
+                                            </div>
+                                            <div class="form-group">
+                                                <p class="mg-b-10">کد ملی</p>
+                                                <input type="text" name="melicode"  placeholder="کد ملی را وارد کنید" class="form-control" />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <p class="mg-b-10">نوع عضویت</p>
+                                                <select name="type_id" class="form-control select-lg select2">
                                                     <option value="">انتخاب کنید</option>
-                                                @foreach($users as $user)
-                                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                                    @foreach($typeusers as $typeuser)
+                                                        <option value="{{$typeuser->id}}">{{$typeuser->title}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
+                                        </div>
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <p class="mg-b-10">تاریخ واریز</p>
-                                                <input type="text" name="date"  class="form-control fc-datepicker" placeholder="روز / ماه / سال" >
+                                                <p class="mg-b-10">شماره موبایل</p>
+                                                <input type="text" name="mobile"  placeholder="شماره موبایل را وارد کنید" class="form-control" />
+                                            </div>
+                                            <div class="form-group">
+                                                <p class="mg-b-10">تلفن ثابت</p>
+                                                <input type="text" name="tel"  placeholder="تلفن ثابت را وارد کنید" class="form-control" />
+                                            </div>
+                                            <div class="form-group">
+                                                <p class="mg-b-10">آدرس محل سکونت</p>
+                                                <input type="text" name="address"  placeholder="آدرس محل سکونت را وارد کنید" class="form-control" />
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <div class="form-group">
-                                                <p class="mg-b-10">مبلغ واریز</p>
-                                                <input type="text" name="amount" data-required="1" placeholder="مبلغ واریز را وارد کنید" class="form-control loan_max_amount" />
+                                                <p class="mg-b-10">مبلغ حقوق (تومان)</p>
+                                                <input type="text" name="salary"  placeholder="مبلغ حقوق را وارد کنید" class="form-control loan_max_amount" />
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                        <div class="form-group">
-                                            <p class="mg-b-10">علت واریز</p>
-                                            <select name="reason_id" class="form-control select-lg select2">
-                                                <option value="">انتخاب کنید</option>
-                                                @foreach($reasons as $reason)
-                                                    <option value="{{$reason->id}}">{{$reason->title}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        </div>
-                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <p class="mg-b-10">شماره کارت</p>
-                                                <select name="acountnumber_id" class="form-control select-lg select2" id="acountnumber_id">
-                                                    <option value="">انتخاب کنید</option>
-                                                </select>
+                                                <p class="mg-b-10">تصویر کارت ملی </p>
+                                                <input type="file" name="meliimage" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <p class="mg-b-10">تصویر شناسنامه </p>
+                                                <input type="file" name="shimage" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-lg-12 mg-b-10 text-center">
@@ -98,7 +106,8 @@
         </div>
     </div>
 </div>
-@endsection
+
+
 @section('end')
     <script src="{{asset('admin/assets/plugins/select2/js/select2.min.js')}}"></script>
     <script src="{{asset('admin/assets/js/select2.js')}}"></script>
@@ -116,33 +125,5 @@
             numeralThousandsGroupStyle: 'thousand'
         }));
     </script>
-    <script>
-        $(function(){
-            $('#user_id').change(function(){
-                $("#acountnumber_id option").remove();
-                var id = $('#user_id').val();
-
-                $.ajax({
-                    url : '{{ route( 'acountnumber' ) }}',
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "id": id
-                    },
-                    type: 'post',
-                    dataType: 'json',
-                    success: function( result )
-                    {
-                        $.each( result, function(k, v) {
-                            $('#acountnumber_id').append($('<option>', {value:k, text:v}));
-                        });
-                    },
-                    error: function()
-                    {
-                        //handle errors
-                        alert('error...');
-                    }
-                });
-            });
-        });
-    </script>
+@endsection
 @endsection

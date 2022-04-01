@@ -1,6 +1,6 @@
 @extends('Admin.admin')
 @section('title')
-    <title> ویرایش حامیان </title>
+    <title> ویرایش کارشناسان </title>
     <link href="{{asset('admin/assets/plugins/spectrum-colorpicker/spectrum.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/plugins/ion-rangeslider/css/ion.rangeSlider.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/plugins/ion-rangeslider/css/ion.rangeSlider.skinFlat.css')}}" rel="stylesheet">
@@ -16,11 +16,11 @@
             <div class="inner-body">
                 <div class="page-header">
                     <div>
-                        <h2 class="main-content-title tx-24 mg-b-5">مدیریت حامیان </h2>
+                        <h2 class="main-content-title tx-24 mg-b-5">مدیریت کارشناسان </h2>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{url('admin/panel')}}">صفحه اصلی</a></li>
-                            <li class="breadcrumb-item"><a href="{{url('admin/siteusers')}}"> مدیریت حامیان </a></li>
-                            <li class="breadcrumb-item active" aria-current="page">ویرایش حامیان </li>
+                            <li class="breadcrumb-item"><a href="{{url('admin/user-experts')}}"> مدیریت کارشناسان </a></li>
+                            <li class="breadcrumb-item active" aria-current="page">ویرایش کارشناسان </li>
                         </ol>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                                         <h6 class="main-content-label text-center mb-5">ویرایش اطلاعات حامیان </h6>
                                     </div>
 
-                                    <form action="{{ route('siteusers.update', $user->id)}}" method="POST">
+                                    <form action="{{ route('user-experts.update', $user->id)}}" method="POST">
                                         {{csrf_field()}}
                                         {{ method_field('PATCH') }}
                                         <div class="row row-sm">

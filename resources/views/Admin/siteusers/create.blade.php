@@ -1,6 +1,6 @@
 @extends('Admin.admin')
 @section('title')
-    <title> ایجاد کاربر</title>
+    <title> ایجاد حامی جدید</title>
     <link href="{{asset('admin/assets/plugins/spectrum-colorpicker/spectrum.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/plugins/ion-rangeslider/css/ion.rangeSlider.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/plugins/ion-rangeslider/css/ion.rangeSlider.skinFlat.css')}}" rel="stylesheet">
@@ -16,11 +16,11 @@
             <div class="inner-body">
                 <div class="page-header">
                     <div>
-                        <h2 class="main-content-title tx-24 mg-b-5">مدیریت کاربر</h2>
+                        <h2 class="main-content-title tx-24 mg-b-5">مدیریت حامیان</h2>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{url('admin/panel')}}">صفحه اصلی</a></li>
-                            <li class="breadcrumb-item"><a href="{{url('admin/users')}}"> مدیریت کاربر</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">ایجاد کاربر</li>
+                            <li class="breadcrumb-item"><a href="{{url('admin/users')}}"> مدیریت حامیان</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">ایجاد حامیان</li>
                         </ol>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                         <div class="card custom-card">
                             <div class="card-body">
                                 <div>
-                                    <h6 class="main-content-label text-center mb-5">ورود اطلاعات منو داشبورد</h6>
+                                    <h6 class="main-content-label text-center mb-5">ورود اطلاعات حامیان</h6>
                                 </div>
                                 <form action="{{ route('siteusers.store')}}" method="POST">
                                     <div class="row row-sm">
@@ -54,7 +54,7 @@
                                                 <select name="type_id" class="form-control select-lg select2">
                                                     <option value="">انتخاب کنید</option>
                                                     @foreach($typeusers as $typeuser)
-                                                        <option value="{{$typeuser->id}}">{{$typeuser->title}}</option>
+                                                        <option value="{{$typeuser->id}}" selected>{{$typeuser->title}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

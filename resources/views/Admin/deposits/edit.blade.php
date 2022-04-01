@@ -56,17 +56,21 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
+                                                <div class="form-group">
+                                                    <p class="mg-b-10">تاریخ واریز</p>
+                                                    <input type="text" name="date"  class="form-control fc-datepicker" value="{{$deposit->date}}" >
+                                                </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <p class="mg-b-10">مبلغ واریز</p>
-                                                    <input type="text" name="amount" data-required="1" value="{{$deposit->amount}}" class="form-control" />
+                                                    <input type="text" name="amount" data-required="1" value="{{number_format($deposit->amount)}}" class="form-control loan_max_amount" />
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                             <div class="form-group">
                                                 <p class="mg-b-10">علت واریز</p>
-                                                <select name="reason_id" class="form-control select-lg select2" id="user_id">
+                                                <select name="reason_id" class="form-control select-lg select2">
                                                     <option value="">انتخاب کنید</option>
                                                     @foreach($reasons as $reason)
                                                         <option value="{{$reason->id}}" {{$reason->id == $deposit->reason_id ? 'selected' : ''}}>{{$reason->title}}</option>
@@ -105,21 +109,20 @@
 @section('end')
     <script src="{{asset('admin/assets/plugins/select2/js/select2.min.js')}}"></script>
     <script src="{{asset('admin/assets/js/select2.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min-rtl.js')}}"></script>
     <script src="{{asset('admin/assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/bootstrap-daterangepicker/moment.min.js')}}"></script>
-    <script src="{{asset('admin/assets/js/advanced-form-elements.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/sumoselect/jquery.sumoselect.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fileuploads/js/fileupload.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fileuploads/js/file-upload.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fancyuploder/jquery.ui.widget.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fancyuploder/jquery.fileupload.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fancyuploder/jquery.iframe-transport.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fancyuploder/jquery.fancy-fileupload.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fancyuploder/fancy-uploader.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/telephoneinput/telephoneinput.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/telephoneinput/inttelephoneinput.js')}}"></script>
+    <script src="{{asset('admin/assets/plugins/spectrum-colorpicker/spectrum.js')}}"></script>
+    <script src="{{asset('admin/assets/js/form-elements.js')}}"></script>
+    <script src="{{asset('admin/assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js')}}"></script>
+    <script src="{{asset('admin/assets/plugins/jquery.maskedinput/jquery.maskedinput.js')}}"></script>
+    <script src="{{asset('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min-rtl.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.5.3/dist/cleave.min.js"></script>
+
+    <script>
+        document.querySelectorAll('.loan_max_amount').forEach(inp => new Cleave(inp, {
+            numeral: true,
+            numeralThousandsGroupStyle: 'thousand'
+        }));
+    </script>
     <script>
         $(function(){
             $('#user_id').change(function(){

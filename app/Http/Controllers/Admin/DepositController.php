@@ -16,12 +16,12 @@ class DepositController extends Controller
 
     public function index()
     {
-        $deposits           = deposit::leftjoin('users' , 'users.id' ,'=' ,'deposits.user_id')
-                                     ->leftjoin('acountnumbers' , 'acountnumbers.id' ,'=' ,'deposits.acountnumber_id')
-                                     ->leftjoin('reasons' , 'reasons.id' ,'=' ,'deposits.reason_id')
-                                     ->select('deposits.id as id' , 'users.id as userid' , 'deposits.created_at as date' , 'deposits.amount as amount'
-                                        , 'users.name as name' , 'reasons.title as reason', 'acountnumbers.shomare_card as shomarecard' , 'users.mobile as mobile' , 'deposits.code_number as code')
-            ->orderby('deposits.id' , 'DESC')
+        $deposits  = deposit::leftjoin('users' , 'users.id' ,'=' ,'deposits.user_id')
+             ->leftjoin('acountnumbers' , 'acountnumbers.id' ,'=' ,'deposits.acountnumber_id')
+             ->leftjoin('reasons' , 'reasons.id' ,'=' ,'deposits.reason_id')
+             ->select('deposits.id as id' , 'users.id as userid' , 'deposits.date as date' , 'deposits.amount as amount'
+             , 'users.name as name' , 'reasons.title as reason', 'acountnumbers.shomare_card as shomarecard' , 'users.mobile as mobile' , 'deposits.code_number as code')
+            ->orderBy('deposits.created_at', 'desc')
             ->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
@@ -58,8 +58,9 @@ class DepositController extends Controller
         $deposits = new deposit();
 
         $deposits->user_id          = $request->input('user_id');
-        $deposits->amount           = $request->input('amount');
-        $deposits->reason           = $request->input('reason');
+        $deposits->amount           = str_replace(',' , '' , $request->input('amount'));
+        $deposits->date             = $request->input('date');
+        $deposits->reason_id        = $request->input('reason_id');
         $deposits->acountnumber_id  = $request->input('acountnumber_id');
         $deposits->code_number      = $code;
 
@@ -78,8 +79,8 @@ class DepositController extends Controller
         $users              = User::select('id' , 'name')->where('id' ,'>' ,1)->get();
 
         $deposits           = deposit::leftjoin('users' , 'users.id' ,'=' ,'deposits.user_id')
-            ->select('deposits.id as id' ,'deposits.user_id as user_id' , 'deposits.acountnumber_id as acountnumber_id' , 'deposits.created_at as date' , 'deposits.amount as amount'
-                ,'deposits.reason as reason' , 'users.name as name' , 'users.phone as phone' , 'deposits.code_number as code')
+            ->select('deposits.id as id' ,'deposits.user_id as user_id' , 'deposits.acountnumber_id as acountnumber_id' , 'deposits.date as date' , 'deposits.amount as amount'
+                ,'deposits.reason_id as reason' , 'users.name as name' , 'users.phone as phone' , 'deposits.code_number as code')
             ->orderby('deposits.id' , 'DESC')
             ->where('deposits.id' , $id)
             ->get();
@@ -104,10 +105,11 @@ class DepositController extends Controller
     {
         $deposit = deposit::findOrfail($id);
 
-        $deposit->user_id      = $request->input('user_id');
-        $deposit->amount       = $request->input('amount');
-        $deposit->reason       = $request->input('reason');
-        $deposit->acountnumber_id  = $request->input('acountnumber_id');
+        $deposit->user_id           = $request->input('user_id');
+        $deposit->amount            = str_replace(',' , '' , $request->input('amount'));
+        $deposit->date              = $request->input('date');
+        $deposit->reason_id         = $request->input('reason_id');
+        $deposit->acountnumber_id   = $request->input('acountnumber_id');
 
         $deposit->update();
         alert()->success('عملیات موفق', 'اطلاعات با موفقیت ثبت شد');

@@ -3,60 +3,56 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\acountnumber;
-use App\Model\Bank;
+use App\Model\Cost;
 use App\Model\Menudashboard;
 use App\Model\Submenudashboard;
 use App\Model\Type_user;
 use App\Model\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class SiteuserController extends Controller
+class CostController extends Controller
 {
+    public function index(){
 
-    public function index()
-    {
-        $users              = User::where('level' , '=', null)->orderBy('id' , 'DESC')->get();
-        $typeusers          = Type_user::where('id' , 3)->get();
+        $costs              = Cost::leftjoin('users' , 'users.id' , '=' , 'costs.user_id')
+        ->select('costs.reason as reason' , 'costs.amount as amount' , 'costs.description as description' , 'users.name as name','costs.date as time' )
+        ->where('users.type_id' , '=' , '1')
+        ->orderBy('costs.id' , 'DESC')
+        ->get();
+
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
 
-        return view('Admin.siteusers.all')
+        return view('Admin.costs.all')
+            ->with(compact('costs'))
             ->with(compact('menudashboards'))
-            ->with(compact('submenudashboards'))
-            ->with(compact('typeusers'))
-            ->with(compact('users'));
+            ->with(compact('submenudashboards'));
     }
+
     public function create()
     {
         $typeusers          = Type_user::where('id' , 3)->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
-        return view('Admin.siteusers.create')
+        return view('Admin.costs.create')
             ->with(compact('typeusers'))
             ->with(compact('menudashboards'))
             ->with(compact('submenudashboards'));
     }
-
     public function store(Request $request)
     {
-        $users = new user();
+        $costs = new cost();
 
-        $users->name            = $request->input('name');
-        $users->type_id         = $request->input('type_id');
-        $users->mobile          = $request->input('mobile');
-        $users->mobile2         = $request->input('mobile2');
-        $users->tel             = $request->input('tel');
-        $users->description     = $request->input('description');
-        $users->status          = 1;
-
-
-
-
-        $users->save();
+        $costs->user_id         = auth::user()->id;
+        $costs->amount          = str_replace(',' , '' , $request->input('amount'));
+        $costs->date            = $request->input('date');
+        $costs->reason          = $request->input('reason');
+        $costs->description     = $request->input('description');
+        $costs->save();
 
         alert()->success('عملیات موفق', 'اطلاعات با موفقیت ثبت شد');
-        return redirect(route('siteusers.index'));
+        return redirect(route('costs.index'));
 
     }
     public function edit($id)
@@ -76,25 +72,6 @@ class SiteuserController extends Controller
             ->with(compact('typeusers'))
             ->with(compact('users'));
     }
-
-    public function update(Request $request , $id)
-    {
-        $user = User::findOrfail($id);
-
-        $user->name             = $request->input('name');
-        $user->type_id          = $request->input('type_id');
-        $user->mobile           = $request->input('mobile');
-        $user->mobile2          = $request->input('mobile2');
-        $user->tel              = $request->input('tel');
-        $user->description      = $request->input('description');
-        $user->status           = $request->input('status');
-        $user->phone_verify     = $request->input('phone_verify');
-
-        $user->update();
-        alert()->success('عملیات موفق', 'اطلاعات با موفقیت ثبت شد');
-        return redirect(route('siteusers.index'));
-    }
-
 
     public function destroy(User $user)
     {
