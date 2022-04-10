@@ -107,9 +107,9 @@ class SiteuserController extends Controller
         return redirect(route('siteusers.index'));
     }
 
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $user = User::findOrfail($user);
+        $user = User::findOrfail($id);
         $user->delete();
         alert()->success('عملیات موفق', 'اطلاعات با موفقیت پاک شد');
         return back();
