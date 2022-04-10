@@ -109,6 +109,7 @@ class SiteuserController extends Controller
 
     public function destroy(User $user)
     {
+        $user = User::findOrfail($user);
         $user->delete();
         alert()->success('عملیات موفق', 'اطلاعات با موفقیت پاک شد');
         return back();
