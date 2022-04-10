@@ -71,12 +71,16 @@ class SiteuserController extends Controller
         $acountnumbers      = acountnumber::whereUser_id($id)->get();
         $typeusers          = Type_user::where('id' , 3)->get();
         $banks              = Bank::all();
+        $userhamahang       = User::select('id' , 'name')->whereType_id(2)->get();
+        $userjazb           = User::select('id' , 'name')->whereType_id(5)->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
 
         return view('Admin.siteusers.edit')
             ->with(compact('acountnumbers'))
             ->with(compact('banks'))
+            ->with(compact('userhamahang'))
+            ->with(compact('userjazb'))
             ->with(compact('menudashboards'))
             ->with(compact('submenudashboards'))
             ->with(compact('typeusers'))
