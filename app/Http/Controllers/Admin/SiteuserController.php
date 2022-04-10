@@ -33,7 +33,7 @@ class SiteuserController extends Controller
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
         $userhamahang       = User::select('id' , 'name')->whereType_id(2)->get();
-        $userjazb           = User::select('id' , 'name')->whereType_id(5)->get();
+        $userjazb           = User::select('id' , 'name')->whereType_id(4)->get();
         return view('Admin.siteusers.create')
             ->with(compact('userhamahang'))
             ->with(compact('userjazb'))
@@ -72,7 +72,7 @@ class SiteuserController extends Controller
         $typeusers          = Type_user::where('id' , 3)->get();
         $banks              = Bank::all();
         $userhamahang       = User::select('id' , 'name')->whereType_id(2)->get();
-        $userjazb           = User::select('id' , 'name')->whereType_id(5)->get();
+        $userjazb           = User::select('id' , 'name')->whereType_id(4)->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
 
