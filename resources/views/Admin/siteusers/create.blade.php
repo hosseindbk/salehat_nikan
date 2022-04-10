@@ -50,11 +50,20 @@
                                             </div>
 
                                             <div class="form-group">
+                                                <p class="mg-b-10">هماهنگ کننده</p>
+                                                <select name="hamahang" class="form-control select-lg select2">
+                                                    <option value="">انتخاب کنید</option>
+                                                    @foreach($userhamahang as $user)
+                                                        <option value="{{$user->name}}">{{$user->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
                                                 <p class="mg-b-10">نوع عضویت</p>
                                                 <select name="type_id" class="form-control select-lg select2">
                                                     <option value="">انتخاب کنید</option>
                                                     @foreach($typeusers as $typeuser)
-                                                        <option value="{{$typeuser->id}}" selected>{{$typeuser->title}}</option>
+                                                        <option value="{{$typeuser->id}}">{{$typeuser->title}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -68,7 +77,15 @@
                                                 <p class="mg-b-10">شماره موبایل2</p>
                                                 <input type="text" name="mobile2"  placeholder="شماره موبایل را وارد کنید" class="form-control" />
                                             </div>
-
+                                            <div class="form-group">
+                                                <p class="mg-b-10">حامی یاب</p>
+                                                <select name="jazb" class="form-control select-lg select2">
+                                                    <option value="">انتخاب کنید</option>
+                                                    @foreach($userjazb as $user)
+                                                        <option value="{{$user->name}}">{{$user->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">

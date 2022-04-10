@@ -32,7 +32,11 @@ class SiteuserController extends Controller
         $typeusers          = Type_user::where('id' , 3)->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
+        $userhamahang       = User::select('id' , 'name')->whereType_id(2)->get();
+        $userjazb           = User::select('id' , 'name')->whereType_id(5)->get();
         return view('Admin.siteusers.create')
+            ->with(compact('userhamahang'))
+            ->with(compact('userjazb'))
             ->with(compact('typeusers'))
             ->with(compact('menudashboards'))
             ->with(compact('submenudashboards'));
@@ -44,6 +48,8 @@ class SiteuserController extends Controller
 
         $users->name            = $request->input('name');
         $users->type_id         = $request->input('type_id');
+        $users->jazb            = $request->input('jazb');
+        $users->hamahang        = $request->input('hamahang');
         $users->mobile          = $request->input('mobile');
         $users->mobile2         = $request->input('mobile2');
         $users->tel             = $request->input('tel');
@@ -85,6 +91,8 @@ class SiteuserController extends Controller
         $user->type_id          = $request->input('type_id');
         $user->mobile           = $request->input('mobile');
         $user->mobile2          = $request->input('mobile2');
+        $user->jazb            = $request->input('jazb');
+        $user->hamahang        = $request->input('hamahang');
         $user->tel              = $request->input('tel');
         $user->description      = $request->input('description');
         $user->status           = $request->input('status');
@@ -94,7 +102,6 @@ class SiteuserController extends Controller
         alert()->success('عملیات موفق', 'اطلاعات با موفقیت ثبت شد');
         return redirect(route('siteusers.index'));
     }
-
 
     public function destroy(User $user)
     {
