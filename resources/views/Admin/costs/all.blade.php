@@ -37,8 +37,6 @@
                                             <th class="wd-10p"> مبلغ (تومان) </th>
                                             <th class="wd-10p"> علت </th>
                                             <th class="wd-10p"> توضیحات </th>
-                                            <th class="wd-10p"> ویرایش </th>
-                                            <th class="wd-10p"> حذف </th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -50,14 +48,14 @@
                                                 <td>{{$cost->reason}}</td>
                                                 <td>{{$cost->description}}</td>
 
-                                                <td>
+{{--                                                <td>--}}
 {{--                                                    <div class="btn-icon-list">--}}
 {{--                                                        <a href="{{ route('costs.edit' , $cost->id ) }}" class="btn ripple btn-outline-info btn-icon">--}}
 {{--                                                            <i class="fe fe-edit-2"></i>--}}
 {{--                                                        </a>--}}
 {{--                                                    </div>--}}
-                                                </td>
-                                                <td>
+{{--                                                </td>--}}
+{{--                                                <td>--}}
 {{--                                                    <form action="{{ route('costs.destroy' , $cost->id) }}" method="post">--}}
 {{--                                                        {{ method_field('delete') }}--}}
 {{--                                                        {{ csrf_field() }}--}}
@@ -67,7 +65,7 @@
 {{--                                                            </button>--}}
 {{--                                                        </div>--}}
 {{--                                                    </form>--}}
-                                                </td>
+{{--                                                </td>--}}
                                             </tr>
                                         @endforeach
                                         </tbody>

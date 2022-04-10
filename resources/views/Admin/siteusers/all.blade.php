@@ -39,8 +39,7 @@
                                             <th class="wd-10p"> نوع همکاری </th>
                                             <th class="wd-10p"> وضعیت شماره </th>
                                             <th class="wd-10p"> وضعیت </th>
-                                            <th class="wd-10p"> ویرایش </th>
-                                            <th class="wd-10p"> حذف </th>
+                                            <th class="wd-10p"> ویرایش/حذف</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -75,14 +74,12 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <div class="btn-icon-list">
+                                                    <div class="btn-icon-list" style="float: right;">
                                                         <a href="{{ route('siteusers.edit' , $user->id ) }}" class="btn ripple btn-outline-info btn-icon">
                                                             <i class="fe fe-edit-2"></i>
                                                         </a>
                                                     </div>
-                                                </td>
-                                                <td>
-                                                    <form action="{{ route('siteusers.destroy' , $user->id) }}" method="post">
+                                                    <form action="{{ route('siteusers.destroy' , $user->id) }}" method="post"  style="float: left;">
                                                         {{ method_field('delete') }}
                                                         {{ csrf_field() }}
                                                         <div class="btn-icon-list">
