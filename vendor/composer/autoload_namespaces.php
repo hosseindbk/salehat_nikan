@@ -9,6 +9,4 @@ return array(
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
     'Laravelium\\Sitemap' => array($vendorDir . '/laravelium/sitemap/src'),
     'Laravelium\\Feed' => array($vendorDir . '/laravelium/feed/src'),
-    'Highlight\\' => array($vendorDir . '/scrivo/highlight.php'),
-    'HighlightUtilities\\' => array($vendorDir . '/scrivo/highlight.php'),
 );

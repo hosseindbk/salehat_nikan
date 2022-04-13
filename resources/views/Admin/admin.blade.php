@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{asset('admin/assets/css-rtl/skins.css')}}">
     <link rel="stylesheet" href="{{asset('admin/assets/css-rtl/colors/color.css')}}" id="theme" type="text/css" media="all">
     <link rel="stylesheet" href="{{asset('admin/assets/css-rtl/sidemenu/sidemenu.css')}}">
-    <link rel="stylesheet" href="{{asset('site/css/vendor/sweetalert.css')}}">
+{{--    <link rel="stylesheet" href="{{asset('site/css/vendor/sweetalert.css')}}">--}}
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 {{--    <link rel="stylesheet" href="{{asset('admin/assets/css-rtl/dark-style.css')}}">--}}
 {{--    <link rel="stylesheet" href="{{asset('admin/assets/css-rtl/colors/default.css')}}">--}}

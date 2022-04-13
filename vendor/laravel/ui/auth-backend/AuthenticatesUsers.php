@@ -2,17 +2,10 @@
 
 namespace Illuminate\Foundation\Auth;
 
-use App\Model\ActiveCode;
-use App\Model\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Notifications\ActiveCode as ActiveCodeNotification;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Hash;
-use UxWeb\SweetAlert\SweetAlert;
-
 
 trait AuthenticatesUsers
 {
@@ -25,23 +18,7 @@ trait AuthenticatesUsers
      */
     public function showLoginForm()
     {
-        if (Auth::check()){
-            return Redirect::url()->previous();
-        }
-        return view('Admin.auth.login');
-    }
-    public function showLoginuserForm()
-    {
-
-        if (Auth::check()){
-            return Redirect::url()->previous();
-        }
-        session()->flash('url' , url()->previous());
-        return view('Site.auth.login');
-    }
-    public function showLoginrememberForm()
-    {
-        return view('Site.auth.remember');
+        return view('auth.login');
     }
 
     /**
@@ -56,6 +33,9 @@ trait AuthenticatesUsers
     {
         $this->validateLogin($request);
 
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
         if (method_exists($this, 'hasTooManyLoginAttempts') &&
             $this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
@@ -67,58 +47,13 @@ trait AuthenticatesUsers
             return $this->sendLoginResponse($request);
         }
 
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
     }
-
-    public function loginuser(Request $request)
-    {
-        $request->validate([
-            'phone' => 'required|numeric',
-            'password' => 'required',
-        ]);
-
-        if ($request->input('phone') != null && $request->input('password') != null) {
-            $user = User::wherePhone($request->input('phone'))->first();
-            if ($user != null) {
-                if (Hash::check($request->input('password'), $user->password)) {
-                    Auth::loginUsingId($user->id);
-                    alert()->success($user->name.' به وبسایت اتوکالا ' , 'خوش آمدید' );
-                    return Redirect::route('/');
-                } else {
-                    alert()->error('عملیات ناموفق', 'شماره تلفن و یا رمز عبور اشتباه است');
-                    return Redirect::back();
-                }
-            } else {
-
-                alert()->error('عملیات ناموفق', 'شماره تلفن و یا رمز عبور وارد نشده است');
-                return Redirect::back();
-            }
-        } else {
-            alert()->error('عملیات ناموفق', 'شماره تلفن و یا رمز عبور وارد نشده است');
-            return Redirect::back();
-        }
-    }
-    public function remember(Request $request){
-
-        $validData = $request->validate([
-            'phone' => ['required', 'exists:users,phone']
-        ]);
-
-        $user = User::wherePhone($validData['phone'])->first();
-
-        $request->session()->flash('auth', [
-            'user_id' => $user->id
-        ]);
-
-        $code = ActiveCode::generateCode($user);
-
-        $user->notify(new ActiveCodeNotification($code , $user->phone));
-        $phone = $validData['phone'];
-        return redirect(route('phone.token'))->with(['phone' => $phone]);
-    }
-
 
     /**
      * Validate the user login request.
@@ -132,14 +67,6 @@ trait AuthenticatesUsers
     {
         $request->validate([
             $this->username() => 'required|string',
-            'password' => 'required|string',
-        ]);
-    }
-
-    protected function validateLoginuser(Request $request)
-    {
-        $request->validate([
-            $this->phone() => 'required|string',
             'password' => 'required|string',
         ]);
     }
@@ -185,8 +112,8 @@ trait AuthenticatesUsers
         }
 
         return $request->wantsJson()
-            ? new JsonResponse([], 204)
-            : redirect()->intended($this->redirectPath());
+                    ? new JsonResponse([], 204)
+                    : redirect()->intended($this->redirectPath());
     }
 
     /**
@@ -269,6 +196,4 @@ trait AuthenticatesUsers
     {
         return Auth::guard();
     }
-
-
 }

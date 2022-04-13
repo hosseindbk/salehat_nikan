@@ -1,9 +1,9 @@
 @extends('Admin.admin')
 @section('title')
     <title> مدیریت حامیان </title>
-    <link href="{{asset('admin/assets/plugins/datatable/dataTables.bootstrap4.min-rtl.css')}} " rel="stylesheet" />
-    <link href="{{asset('admin/assets/plugins/datatable/responsivebootstrap4.min.css')}}" rel="stylesheet" />
-    <link href="{{asset('admin/assets/plugins/datatable/fileexport/buttons.bootstrap4.min.css')}}" rel="stylesheet" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 @endsection
 @section('main')
     <div class="main-content side-content pt-0">
@@ -29,86 +29,73 @@
                                 </div>
 
                                 <div class="table-responsive">
-                                    <table class="table" id="example1">
-                                        <thead>
-                                        <tr>
-                                            <th class="wd-10p"> کد حامی </th>
-                                            <th class="wd-10p"> نام و نام خانوادگی </th>
-                                            <th class="wd-10p"> شماره موبایل </th>
-                                            <th class="wd-10p"> تاریخ ایجاد حساب </th>
-                                            <th class="wd-10p"> نوع همکاری </th>
-                                            <th class="wd-10p"> وضعیت شماره </th>
-                                            <th class="wd-10p"> وضعیت </th>
-                                            <th class="wd-10p"> ویرایش/حذف</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($users as $user)
-                                            <tr class="odd gradeX">
-
-                                                <td>{{$user->id}}</td>
-                                                <td>{{$user->name}}</td>
-                                                <td>{{$user->mobile}}</td>
-                                                <td>{{jdate($user->created_at)->format('%Y/%m/%d')}}</td>
-                                                <td>
-                                                    @foreach($typeusers as $type_user)
-                                                        @if($type_user->id == $user->type_id)
-                                                            {{$type_user->title}}
-                                                        @endif
-                                                    @endforeach
-                                                </td>
-                                                <td>
-                                                    @if($user->phone_verify == 0)
-                                                        <button class="btn ripple btn-outline-info">تایید نشده</button>
-                                                    @elseif($user->phone_verify == 1)
-                                                        <button class="btn ripple btn-outline-success">تایید شده</button>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if($user->status == 1)
-                                                        <button class="btn ripple btn-outline-info">ثبت نام اولیه</button>
-                                                    @elseif($user->status == 2)
-                                                        <button class="btn ripple btn-outline-success">تایید مدیر</button>
-                                                    @elseif($user->status == 0)
-                                                        <button class="btn ripple btn-outline-warning">غیر فعال</button>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <div class="btn-icon-list" style="float: right;">
-                                                        <a href="{{ route('siteusers.edit' , $user->id ) }}" class="btn ripple btn-outline-info btn-icon">
-                                                            <i class="fe fe-edit-2"></i>
-                                                        </a>
-                                                    </div>
-                                                    <form action="{{ route('siteusers.destroy' , $user->id) }}" method="post"  style="float: left;">
-                                                        {{ method_field('delete') }}
-                                                        {{ csrf_field() }}
-                                                        <div class="btn-icon-list">
-                                                            <button type="submit" class="btn ripple btn-outline-danger btn-icon">
-                                                                <i class="fe fe-trash-2 "></i>
-                                                            </button>
-                                                        </div>
-                                                    </form>
-                                                </td>
+                                    <div class="table-responsive">
+                                        <style>
+                                            table{
+                                                margin: 0 auto;
+                                                width: 100% !important;
+                                                clear: both;
+                                                border-collapse: collapse;
+                                                table-layout: fixed;
+                                                word-wrap:break-word;
+                                            }
+                                        </style>
+                                        <table id="sample1" class="table table-striped table-bordered yajra-datatable">
+                                            <thead>
+                                            <tr>
+                                                <th class="wd-10p"> کد حامی </th>
+                                                <th class="wd-10p"> نام و نام خانوادگی </th>
+                                                <th class="wd-10p"> شماره موبایل </th>
+                                                <th class="wd-10p"> تاریخ عضویت </th>
+                                                <th class="wd-10p"> هماهنگ کننده </th>
+                                                <th class="wd-10p"> جذب کننده </th>
+                                                <th class="wd-10p"> وضعیت شماره </th>
+                                                <th class="wd-10p"> وضعیت </th>
+                                                <th class="wd-10p"> ویرایش/حذف</th>
                                             </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+             </div>
         </div>
     </div>
-@section('end')
-    <script src="{{asset('admin/assets/plugins/datatable/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/datatable/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/datatable/dataTables.responsive.min.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/datatable/fileexport/dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/datatable/fileexport/buttons.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/datatable/fileexport/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/datatable/fileexport/buttons.colVis.min.js')}}"></script>
-    <script src="{{asset('admin/assets/js/table-data.js')}}"></script>
 @endsection
+@section('end')
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            var table = $('.yajra-datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('siteusers.index') }}",
+                columns: [
+                    {data: 'id'             , name: 'id'            },
+                    {data: 'name'           , name: 'name'          },
+                    {data: 'mobile'         , name: 'mobile'        },
+                    {data: 'date'           , name: 'date'          },
+                    {data: 'hamahang'       , name: 'hamahang'      },
+                    {data: 'jazb'           , name: 'jazb'          },
+                    {data: 'status'         , name: 'status'        },
+                    {data: 'phone_verify'   , name: 'phone_verify'  },
+
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: true,
+                        searchable: true
+                    },
+                ]
+            });
+
+        });
+    </script>
 @endsection

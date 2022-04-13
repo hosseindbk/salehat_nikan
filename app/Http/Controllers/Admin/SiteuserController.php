@@ -10,22 +10,72 @@ use App\Model\Submenudashboard;
 use App\Model\Type_user;
 use App\Model\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class SiteuserController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $users              = User::where('level' , '=', null)->orderBy('id' , 'DESC')->get();
-        $typeusers          = Type_user::where('id' , 3)->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
+        if ($request->ajax()) {
+            $data = User::select('id' , 'name' , 'mobile' , 'date' , 'type_id' , 'hamahang' , 'jazb' , 'phone_verify' , 'status')->where('level' , '=', null)->get();
+            return Datatables::of($data)
+
+                ->editColumn('id', function ($data) {
+                    return ($data->id);
+                })
+                ->editColumn('name', function ($data) {
+                    return ($data->name);
+                })
+                ->editColumn('mobile', function ($data) {
+                    return ($data->mobile);
+                })
+                ->editColumn('date', function ($data) {
+                    return ($data->date);
+                })
+                ->editColumn('hamahang', function ($data) {
+                    return ($data->hamahang);
+                })
+                ->editColumn('jazb', function ($data) {
+                    return ($data->jazb);
+                })
+                ->editColumn('status', function ($data) {
+                    if ($data->status == "1") {
+                        return 'ثبت نام اولیه';
+                    }elseif ($data->status == "2") {
+                        return 'فعال';
+                    }elseif ($data->status == "3") {
+                        return 'غیر فعال';
+                    }
+                })
+                ->editColumn('phone_verify', function ($data) {
+                    if ($data->status == "1") {
+                        return 'تایید نشده';
+                    }elseif ($data->status == "2") {
+                        return 'تایید';
+                    }
+                })
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="' . route('siteusers.edit' , $row->id) . '" class="btn ripple btn-outline-info btn-sm">Edit</a>
+                                  <form action="' . route('siteusers.destroy' , $row->id) .'" method="post" style="display:inline">
+                                    '.csrf_field().'
+                                    '.method_field("DELETE").'
+                                         <button type="submit" class="btn ripple btn-outline-danger btn-sm">
+                                             <i class="fe fe-trash-2 "></i>
+                                         </button>
+                                </form>';
+
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
 
         return view('Admin.siteusers.all')
             ->with(compact('menudashboards'))
-            ->with(compact('submenudashboards'))
-            ->with(compact('typeusers'))
-            ->with(compact('users'));
+            ->with(compact('submenudashboards'));
     }
     public function create()
     {
