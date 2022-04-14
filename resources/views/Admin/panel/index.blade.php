@@ -1,6 +1,6 @@
 @extends('Admin.admin')
 @section('title')
-    <title> داشبورد مدیریتی بستا</title>
+    <title> داشبورد مدیریتی موسسه خیریه صالحات نیکان</title>
 @endsection
 @section('main')
     <div class="main-content side-content pt-0">
@@ -25,82 +25,104 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-lg-12 col-xl-12">
-                        <div class="card custom-card overflow-hidden">
-                            <div class="card-header border-bottom-0">
-                                <div>
-                                    <label class="main-content-label mb-2">نرخ بازدید وبسایت </label>
-                                    <span class="d-block tx-12 mb-0 text-muted">نرخ بازدید وب سایت بصورت ماهانه می باشد</span>
-                                </div>
-                            </div>
-                            <div class="card-body pl-0">
-                                <div class="">
-                                    <div class="container">
-                                        <canvas id="chartLine" class="chart-dropshadow2 ht-250"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     @foreach($submenudashboards as $submenudashboard)
                         @if($submenudashboard->title == 'users')
                             @can($submenudashboard->namayesh)
                                 <div class="col-sm-12 col-lg-12 col-xl-12">
-                        <div class="card custom-card mg-b-20">
-                            <div class="card-body" style="max-height: 500px; overflow: auto;">
-                                <div class="card-header border-bottom-0 pt-0 pl-0 pr-0 d-flex">
-                                    <div>
-                                        <label class="main-content-label mb-2">کاربران وبسایت </label>
+                                    <div class="card custom-card mg-b-20">
+                                        <div class="card-body" style="max-height: 500px; overflow: auto;">
+                                            <div class="card-header border-bottom-0 pt-0 pl-0 pr-0 d-flex">
+                                                <div>
+                                                    <label class="main-content-label mb-2"> حامیان </label>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive tasks">
+                                                <table class="table card-table table-vcenter text-nowrap mb-0  border">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="wd-lg-10p">نام و نام خانوادگی</th>
+                                                        <th class="wd-lg-20p">شماره موبایل</th>
+                                                        <th class="wd-lg-20p">زمان ثبت </th>
+                                                        <th class="wd-lg-20p">وضعیت</th>
+                                                        <th class="wd-lg-20p">ویرایش اطلاعات</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($hamis as $user)
+                                                        <tr>
+                                                            <td class="text-primary">{{$user->name}}</td>
+                                                            <td class="text-nowrap">{{$user->mobile}}</td>
+                                                            <td>{{jdate($user->created_at)->ago()}}</td>
+                                                            <td class="text-nowrap">
+                                                                @if($user->status == 1)
+                                                                    <button class="btn ripple btn-outline-info">ثبت نام اولیه</button>
+                                                                @elseif($user->status == 2)
+                                                                    <button class="btn ripple btn-outline-success">فعال</button>
+                                                                @elseif($user->status == 0)
+                                                                    <button class="btn ripple btn-outline-warning">غیر فعال</button>
+                                                                @endif
+                                                            </td>
+                                                            <td  class="text-nowrap">
+                                                                <a href="{{ route('siteusers.edit' , $user->id) }}"  class="btn btn-outline-primary btn-xs">
+                                                                    <i class="fe fe-edit-2"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="table-responsive tasks">
-                                    <table class="table card-table table-vcenter text-nowrap mb-0  border">
-                                        <thead>
-                                        <tr>
-                                            <th class="wd-lg-10p">نام و نام خانوادگی</th>
-                                            <th class="wd-lg-20p">شماره موبایل</th>
-                                            <th class="wd-lg-20p">ایمیل</th>
-                                            <th class="wd-lg-20p">نوع همکاری</th>
-                                            <th class="wd-lg-20p">زمان ثبت </th>
-                                            <th class="wd-lg-20p">وضعیت</th>
-                                            <th class="wd-lg-20p">ویرایش اطلاعات</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($users as $user)
-                                            <tr>
-                                                <td class="text-primary">{{$user->name}}</td>
-                                                <td class="text-nowrap">{{$user->phone}}</td>
-                                                <td class="text-nowrap">
-                                                    @foreach($typeusers as $type_user)
-                                                        @if($type_user->id == $user->type_id)
-                                                            {{$type_user->title}}
-                                                        @endif
+                                <div class="col-sm-12 col-lg-12 col-xl-12">
+                                    <div class="card custom-card mg-b-20">
+                                        <div class="card-body" style="max-height: 500px; overflow: auto;">
+                                            <div class="card-header border-bottom-0 pt-0 pl-0 pr-0 d-flex">
+                                                <div>
+                                                    <label class="main-content-label mb-2"> هماهنگ کننده و حامیار </label>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive tasks">
+                                                <table class="table card-table table-vcenter text-nowrap mb-0  border">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="wd-lg-10p">نام و نام خانوادگی</th>
+                                                        <th class="wd-lg-20p">شماره موبایل</th>
+                                                        <th class="wd-lg-20p">زمان ثبت </th>
+                                                        <th class="wd-lg-20p">وضعیت</th>
+                                                        <th class="wd-lg-20p">ویرایش اطلاعات</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($hamahang as $user)
+                                                        <tr>
+                                                            <td class="text-primary">{{$user->name}}</td>
+                                                            <td class="text-nowrap">{{$user->mobile}}</td>
+                                                            <td>{{jdate($user->created_at)->ago()}}</td>
+                                                            <td class="text-nowrap">
+                                                                @if($user->status == 1)
+                                                                    <button class="btn ripple btn-outline-info">ثبت نام اولیه</button>
+                                                                @elseif($user->status == 2)
+                                                                    <button class="btn ripple btn-outline-success">فعال</button>
+                                                                @elseif($user->status == 0)
+                                                                    <button class="btn ripple btn-outline-warning">غیر فعال</button>
+                                                                @endif
+                                                            </td>
+                                                            <td  class="text-nowrap">
+                                                                <a href="{{ route('siteusers.edit' , $user->id) }}"  class="btn btn-outline-primary btn-xs">
+                                                                    <i class="fe fe-edit-2"></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
                                                     @endforeach
-                                                </td>
-                                                <td>{{jdate($user->created_at)->ago()}}</td>
-                                                <td class="text-nowrap">
-                                                    @if($user->status == 1)
-                                                        <button class="btn ripple btn-outline-info">ثبت نام اولیه</button>
-                                                    @elseif($user->status == 2)
-                                                        <button class="btn ripple btn-outline-success">تایید مدیر</button>
-                                                    @elseif($user->status == 0)
-                                                        <button class="btn ripple btn-outline-warning">غیر فعال</button>
-                                                    @endif
-                                                </td>
-                                                <td  class="text-nowrap">
-                                                    <a href="{{ route('siteusers.edit' , $user->id) }}"  class="btn btn-outline-primary btn-xs">
-                                                        <i class="fe fe-edit-2"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
                             @endcan
                         @endif
                     @endforeach
