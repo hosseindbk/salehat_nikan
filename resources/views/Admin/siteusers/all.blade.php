@@ -87,8 +87,8 @@
                     {data: 'date'           , name: 'date'          },
                     {data: 'hamahang'       , name: 'hamahang'      },
                     {data: 'jazb'           , name: 'jazb'          },
-                    {data: 'status'         , name: 'status'        },
                     {data: 'phone_verify'   , name: 'phone_verify'  },
+                    {data: 'status'         , name: 'status'        },
 
                     {
                         data: 'action',

@@ -5,8 +5,6 @@
     <link href="{{asset('admin/assets/plugins/ion-rangeslider/css/ion.rangeSlider.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/plugins/ion-rangeslider/css/ion.rangeSlider.skinFlat.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/plugins/sumoselect/sumoselect-rtl.css')}}" rel="stylesheet">
-    <link href="{{asset('admin/assets/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('admin/assets/plugins/fancyuploder/fancy_fileupload.css')}}" rel="stylesheet" />
     <link href="{{asset('admin/assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/css-rtl/colors/default.css')}}" rel="stylesheet">
 @endsection
@@ -60,7 +58,7 @@
                                                     <select name="hamahang_id" class="form-control select-lg select2">
                                                         <option value="">انتخاب کنید</option>
                                                         @foreach($userhamahang as $huser)
-                                                            <option value="{{$huser->id}}" @if($huser->hamahang_id == $user->id ? 'selected' : '')@endif>{{$huser->name}}</option>
+                                                            <option value="{{$huser->id}}" {{$huser->id == $user->hamahang_id ? 'selected' : ''}}>{{$huser->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -68,8 +66,8 @@
                                                     <p class="mg-b-10">حامی یاب</p>
                                                     <select name="jazb_id" class="form-control select-lg select2">
                                                         <option value="">انتخاب کنید</option>
-                                                        @foreach($userjazb as $user)
-                                                            <option value="{{$user->id}}">{{$user->name}}</option>
+                                                        @foreach($userjazb as $juser)
+                                                            <option value="{{$juser->id}}">{{$juser->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -78,9 +76,10 @@
                                                 <div class="form-group">
                                                     <p class="mg-b-10">انتخاب وضعیت کاربر</p>
                                                     <select name="status" class="form-control select-lg select2">
-                                                            <option value="1" @if($user->status == 1 ? 'selected' : '')@endif>ثبت اولیه </option>
-                                                            <option value="2" @if($user->status == 2 ? 'selected' : '')@endif>فعال </option>
-                                                            <option value="3" @if($user->status == 3 ? 'selected' : '')@endif>غیر فعال </option>
+
+                                                            <option value="1" {{$user->status == 1 ? 'selected' : ''}}>ثبت اولیه </option>
+                                                            <option value="2" {{$user->status == 2 ? 'selected' : ''}}>فعال </option>
+                                                            <option value="3" {{$user->status == 3 ? 'selected' : ''}}>غیر فعال </option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -244,15 +243,6 @@
     <script src="{{asset('admin/assets/js/advanced-form-elements.js')}}"></script>
     <script src="{{asset('admin/assets/plugins/sumoselect/jquery.sumoselect.js')}}"></script>
     <script src="{{asset('admin/assets/plugins/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fileuploads/js/fileupload.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fileuploads/js/file-upload.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fancyuploder/jquery.ui.widget.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fancyuploder/jquery.fileupload.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fancyuploder/jquery.iframe-transport.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fancyuploder/jquery.fancy-fileupload.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fancyuploder/fancy-uploader.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/telephoneinput/telephoneinput.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/telephoneinput/inttelephoneinput.js')}}"></script>
 
 @endsection
 

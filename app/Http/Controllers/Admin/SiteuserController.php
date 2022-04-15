@@ -41,6 +41,13 @@ class SiteuserController extends Controller
                 ->editColumn('jazb', function ($data) {
                     return ($data->jazb);
                 })
+                ->editColumn('phone_verify', function ($data) {
+                    if ($data->phone_verify == "0") {
+                        return 'تایید نشده';
+                    }elseif ($data->phone_verify == "1") {
+                        return 'فعال';
+                    }
+                })
                 ->editColumn('status', function ($data) {
                     if ($data->status == "1") {
                         return 'ثبت نام اولیه';
@@ -50,13 +57,7 @@ class SiteuserController extends Controller
                         return 'غیر فعال';
                     }
                 })
-                ->editColumn('phone_verify', function ($data) {
-                    if ($data->status == "1") {
-                        return 'تایید نشده';
-                    }elseif ($data->status == "2") {
-                        return 'تایید';
-                    }
-                })
+
                 ->addColumn('action', function($row){
                     $actionBtn = '<a href="' . route('siteusers.edit' , $row->id) . '" class="btn ripple btn-outline-info btn-sm">Edit</a>
                                   <form action="' . route('siteusers.destroy' , $row->id) .'" method="post" style="display:inline">
@@ -94,16 +95,26 @@ class SiteuserController extends Controller
 
     public function store(Request $request)
     {
-        $hamahang   = User::whereId($request->input('hamahang_id'))->pluck('name');
-        $jazb       = User::whereId($request->input('jazb_id'))->pluck('name');
+        if($request->input('hamahang_id') != null) {
+            $hamahang = User::whereId($request->input('hamahang_id'))->pluck('name');
+            $hamahangi = $hamahang[0];
+        }else{
+            $hamahangi = null;
+        }
+        if($request->input('jazb_id') != null) {
+            $jazb = User::whereId($request->input('jazb_id'))->pluck('name');
+            $jazbi = $jazb[0];
+        }else{
+            $jazbi = null;
+        }
 
         $users = new user();
 
         $users->name            = $request->input('name');
         $users->type_id         = $request->input('type_id');
-        $users->jazb            = $jazb;
+        $users->jazb            = $jazbi;
         $users->jazb_id         = $request->input('jazb_id');
-        $users->hamahang        = $hamahang;
+        $users->hamahang        = $hamahangi;
         $users->hamahang_id     = $request->input('hamahang_id');
         $users->mobile          = $request->input('mobile');
         $users->phone           = $request->input('mobile');
@@ -111,8 +122,6 @@ class SiteuserController extends Controller
         $users->tel             = $request->input('tel');
         $users->description     = $request->input('description');
         $users->status          = 1;
-
-
 
 
         $users->save();
@@ -145,8 +154,18 @@ class SiteuserController extends Controller
 
     public function update(Request $request , $id)
     {
-        $hamahang   = User::whereId($request->input('hamahang_id'))->pluck('name');
-        $jazb       = User::whereId($request->input('jazb_id'))->pluck('name');
+        if($request->input('hamahang_id') != null) {
+            $hamahang = User::whereId($request->input('hamahang_id'))->pluck('name');
+            $hamahangi = $hamahang[0];
+        }else{
+            $hamahangi = null;
+        }
+        if($request->input('jazb_id') != null) {
+            $jazb = User::whereId($request->input('jazb_id'))->pluck('name');
+            $jazbi = $jazb[0];
+        }else{
+            $jazbi = null;
+        }
 
         $user = User::findOrfail($id);
 
@@ -155,9 +174,9 @@ class SiteuserController extends Controller
         $user->mobile           = $request->input('mobile');
         $user->phone            = $request->input('mobile');
         $user->mobile2          = $request->input('mobile2');
-        $user->jazb            = $jazb;
+        $user->jazb            = $jazbi;
         $user->jazb_id         = $request->input('jazb_id');
-        $user->hamahang        = $hamahang;
+        $user->hamahang        = $hamahangi;
         $user->hamahang_id     = $request->input('hamahang_id');
         $user->tel              = $request->input('tel');
         $user->description      = $request->input('description');
