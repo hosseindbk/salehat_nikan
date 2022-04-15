@@ -78,13 +78,9 @@
                                                 <div class="form-group">
                                                     <p class="mg-b-10">انتخاب وضعیت کاربر</p>
                                                     <select name="status" class="form-control select-lg select2">
-                                                        @if($user->status == 1)
-                                                            <option value="1">در حال بررسی </option>
-                                                            <option value="2">تایید </option>
-                                                        @elseif($user->status == 2)
-                                                            <option value="2">تایید </option>
-                                                            <option value="1">در حال بررسی</option>
-                                                        @endif
+                                                            <option value="1" @if($user->status == 1 ? 'selected' : '')@endif>ثبت اولیه </option>
+                                                            <option value="2" @if($user->status == 2 ? 'selected' : '')@endif>فعال </option>
+                                                            <option value="3" @if($user->status == 3 ? 'selected' : '')@endif>غیر فعال </option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
