@@ -5,8 +5,6 @@
     <link href="{{asset('admin/assets/plugins/ion-rangeslider/css/ion.rangeSlider.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/plugins/ion-rangeslider/css/ion.rangeSlider.skinFlat.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/plugins/sumoselect/sumoselect-rtl.css')}}" rel="stylesheet">
-    <link href="{{asset('admin/assets/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('admin/assets/plugins/fancyuploder/fancy_fileupload.css')}}" rel="stylesheet" />
     <link href="{{asset('admin/assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/css-rtl/colors/default.css')}}" rel="stylesheet">
 @endsection
@@ -62,6 +60,15 @@
                                             <div class="form-group">
                                                 <p class="mg-b-10">مبلغ واریز</p>
                                                 <input type="text" name="amount" data-required="1" placeholder="مبلغ واریز را وارد کنید" class="form-control loan_max_amount" />
+                                            </div>
+                                            <div class="form-group">
+                                                <p class="mg-b-10">هماهنگ کننده</p>
+                                                <select name="hamahang_id" class="form-control select-lg select2">
+                                                    <option value="">انتخاب کنید</option>
+                                                    @foreach($userhamahang as $huser)
+                                                        <option value="{{$huser->id}}" >{{$huser->name}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3">

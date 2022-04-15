@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Model\acountnumber;
 use App\Model\Bank;
+use App\Model\Hamis;
 use App\Model\Menudashboard;
 use App\Model\Submenudashboard;
 use App\Model\Type_user;
@@ -20,7 +21,7 @@ class SiteuserController extends Controller
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
         if ($request->ajax()) {
-            $data = User::select('id' , 'name' , 'mobile' , 'date' , 'type_id' , 'hamahang' , 'jazb' , 'phone_verify' , 'status')->where('level' , '=', null)->get();
+            $data = Hamis::select('id' , 'name' , 'mobile' , 'date' , 'hamahang_id' , 'jazb_id' , 'phone_verify' , 'status')->get();
             return Datatables::of($data)
 
                 ->editColumn('id', function ($data) {
@@ -36,10 +37,10 @@ class SiteuserController extends Controller
                     return ($data->date);
                 })
                 ->editColumn('hamahang', function ($data) {
-                    return ($data->hamahang);
+                    return ($data->hamahang_id);
                 })
                 ->editColumn('jazb', function ($data) {
-                    return ($data->jazb);
+                    return ($data->jazb_id);
                 })
                 ->editColumn('phone_verify', function ($data) {
                     if ($data->phone_verify == "0") {

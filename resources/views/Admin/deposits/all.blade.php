@@ -40,6 +40,7 @@
                                             <th class="wd-10p"> علت واریز </th>
                                             <th class="wd-10p"> شماره کارت </th>
                                             <th class="wd-10p"> کد رهگیری </th>
+                                            <th class="wd-10p"> هماهنگ کننده </th>
                                             <th class="wd-10p"> ویرایش/حذف</th>
                                         </tr>
                                         </thead>
@@ -55,6 +56,7 @@
                                                 <td>{{$deposit->reason}}</td>
                                                 <td>{{$deposit->shomarecard}}</td>
                                                 <td>{{$deposit->code}}</td>
+                                                <td>{{$deposit->hamahang}}</td>
                                                 <td>
                                                     <div class="btn-icon-list" style="float: right;">
                                                         <a href="{{ route('deposits.edit' , $deposit->id) }}" class="btn ripple btn-outline-info btn-icon">

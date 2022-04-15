@@ -35,12 +35,14 @@ class DepositController extends Controller
     public function create()
     {
         $users              = User::select('id' , 'name' , 'melicode' , 'mobile')->where('id' ,'>' ,1)->get();
+        $userhamahang       = User::select('id' , 'name')->whereType_id(2)->get();
         $acountnumbers      = acountnumber::select('id' , 'shomare_hesab')->get();
         $reasons            = Reason::select('id' , 'title')->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
 
         return view('Admin.deposits.create')
+            ->with(compact('userhamahang'))
             ->with(compact('reasons'))
             ->with(compact('acountnumbers'))
             ->with(compact('users'))
@@ -61,6 +63,7 @@ class DepositController extends Controller
         $deposits->amount           = str_replace(',' , '' , $request->input('amount'));
         $deposits->date             = $request->input('date');
         $deposits->reason_id        = $request->input('reason_id');
+        $deposits->hamahang_id      = $request->input('hamahang_id');
         $deposits->acountnumber_id  = $request->input('acountnumber_id');
         $deposits->code_number      = $code;
 
