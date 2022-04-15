@@ -39,6 +39,9 @@
                                                 table-layout: fixed;
                                                 word-wrap:break-word;
                                             }
+                                            td {
+                                                overflow-x: auto;
+                                            }
                                         </style>
                                         <table id="sample1" class="table table-striped table-bordered yajra-datatable">
                                             <thead>
