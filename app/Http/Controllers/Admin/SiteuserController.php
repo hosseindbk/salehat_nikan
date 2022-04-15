@@ -106,6 +106,7 @@ class SiteuserController extends Controller
         $users->hamahang        = $hamahang;
         $users->hamahang_id     = $request->input('hamahang_id');
         $users->mobile          = $request->input('mobile');
+        $users->phone           = $request->input('mobile');
         $users->mobile2         = $request->input('mobile2');
         $users->tel             = $request->input('tel');
         $users->description     = $request->input('description');
@@ -144,14 +145,20 @@ class SiteuserController extends Controller
 
     public function update(Request $request , $id)
     {
+        $hamahang   = User::whereId($request->input('hamahang_id'))->pluck('name');
+        $jazb       = User::whereId($request->input('jazb_id'))->pluck('name');
+
         $user = User::findOrfail($id);
 
         $user->name             = $request->input('name');
         $user->type_id          = $request->input('type_id');
         $user->mobile           = $request->input('mobile');
+        $user->phone            = $request->input('mobile');
         $user->mobile2          = $request->input('mobile2');
-        $user->jazb            = $request->input('jazb');
-        $user->hamahang        = $request->input('hamahang');
+        $user->jazb            = $jazb;
+        $user->jazb_id         = $request->input('jazb_id');
+        $user->hamahang        = $hamahang;
+        $user->hamahang_id     = $request->input('hamahang_id');
         $user->tel              = $request->input('tel');
         $user->description      = $request->input('description');
         $user->status           = $request->input('status');

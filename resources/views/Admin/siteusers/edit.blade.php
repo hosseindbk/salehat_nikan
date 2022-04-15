@@ -59,8 +59,8 @@
                                                     <p class="mg-b-10">هماهنگ کننده</p>
                                                     <select name="hamahang_id" class="form-control select-lg select2">
                                                         <option value="">انتخاب کنید</option>
-                                                        @foreach($userhamahang as $user)
-                                                            <option value="{{$user->id}}">{{$user->name}}</option>
+                                                        @foreach($userhamahang as $huser)
+                                                            <option value="{{$huser->id}}" @if($huser->hamahang_id == $user->id ? 'selected' : '')@endif>{{$huser->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
