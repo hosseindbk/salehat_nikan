@@ -44,10 +44,10 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <p class="mg-b-10">نام و نام خانوادگی</p>
-                                                <select name="user_id" class="form-control select-lg select2" id="user_id">
+                                                <select name="hami_id" class="form-control select-lg select2" id="user_id">
                                                     <option value="">انتخاب کنید</option>
-                                                @foreach($users as $user)
-                                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                                @foreach($hamis as $hami)
+                                                        <option value="{{$hami->id}}">{{$hami->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Model\acountnumber;
 use App\Model\Bank;
-use App\Model\Hamis;
+use App\Model\Hami;
 use App\Model\Menudashboard;
 use App\Model\Submenudashboard;
 use App\Model\Type_user;
@@ -21,7 +21,8 @@ class SiteuserController extends Controller
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
         if ($request->ajax()) {
-            $data = Hamis::select('id' , 'name' , 'mobile' , 'date' , 'hamahang_id' , 'jazb_id' , 'phone_verify' , 'status')->get();
+            $data = Hami::leftjoin('users' , 'users.id' , '=' , 'hamis.hamahang_id')->
+            select('hamis.id' , 'hamis.name' , 'hamis.mobile' , 'hamis.date' , 'users.name as username' , 'hamis.phone_verify' , 'hamis.status')->get();
             return Datatables::of($data)
 
                 ->editColumn('id', function ($data) {
@@ -36,11 +37,8 @@ class SiteuserController extends Controller
                 ->editColumn('date', function ($data) {
                     return ($data->date);
                 })
-                ->editColumn('hamahang', function ($data) {
-                    return ($data->hamahang_id);
-                })
-                ->editColumn('jazb', function ($data) {
-                    return ($data->jazb_id);
+                ->editColumn('username', function ($data) {
+                    return ($data->username);
                 })
                 ->editColumn('phone_verify', function ($data) {
                     if ($data->phone_verify == "0") {
@@ -96,36 +94,18 @@ class SiteuserController extends Controller
 
     public function store(Request $request)
     {
-        if($request->input('hamahang_id') != null) {
-            $hamahang = User::whereId($request->input('hamahang_id'))->pluck('name');
-            $hamahangi = $hamahang[0];
-        }else{
-            $hamahangi = null;
-        }
-        if($request->input('jazb_id') != null) {
-            $jazb = User::whereId($request->input('jazb_id'))->pluck('name');
-            $jazbi = $jazb[0];
-        }else{
-            $jazbi = null;
-        }
+        $hamis = new Hami();
 
-        $users = new user();
+        $hamis->name            = $request->input('name');
+        $hamis->jazb_id         = $request->input('jazb_id');
+        $hamis->hamahang_id     = $request->input('hamahang_id');
+        $hamis->mobile          = $request->input('mobile');
+        $hamis->mobile2         = $request->input('mobile2');
+        $hamis->tel             = $request->input('tel');
+        $hamis->description     = $request->input('description');
+        $hamis->status          = 1;
 
-        $users->name            = $request->input('name');
-        $users->type_id         = $request->input('type_id');
-        $users->jazb            = $jazbi;
-        $users->jazb_id         = $request->input('jazb_id');
-        $users->hamahang        = $hamahangi;
-        $users->hamahang_id     = $request->input('hamahang_id');
-        $users->mobile          = $request->input('mobile');
-        $users->phone           = $request->input('mobile');
-        $users->mobile2         = $request->input('mobile2');
-        $users->tel             = $request->input('tel');
-        $users->description     = $request->input('description');
-        $users->status          = 1;
-
-
-        $users->save();
+        $hamis->save();
 
         alert()->success('عملیات موفق', 'اطلاعات با موفقیت ثبت شد');
         return redirect(route('siteusers.index'));
@@ -133,7 +113,7 @@ class SiteuserController extends Controller
     }
     public function edit($id)
     {
-        $users              = User::whereId($id)->get();
+        $hamis              = Hami::whereId($id)->get();
         $acountnumbers      = acountnumber::whereUser_id($id)->get();
         $typeusers          = Type_user::where('id' , 3)->get();
         $banks              = Bank::all();
@@ -150,49 +130,33 @@ class SiteuserController extends Controller
             ->with(compact('menudashboards'))
             ->with(compact('submenudashboards'))
             ->with(compact('typeusers'))
-            ->with(compact('users'));
+            ->with(compact('hamis'));
     }
 
     public function update(Request $request , $id)
     {
-        if($request->input('hamahang_id') != null) {
-            $hamahang = User::whereId($request->input('hamahang_id'))->pluck('name');
-            $hamahangi = $hamahang[0];
-        }else{
-            $hamahangi = null;
-        }
-        if($request->input('jazb_id') != null) {
-            $jazb = User::whereId($request->input('jazb_id'))->pluck('name');
-            $jazbi = $jazb[0];
-        }else{
-            $jazbi = null;
-        }
 
-        $user = User::findOrfail($id);
+        $hami = Hami::findOrfail($id);
 
-        $user->name             = $request->input('name');
-        $user->type_id          = $request->input('type_id');
-        $user->mobile           = $request->input('mobile');
-        $user->phone            = $request->input('mobile');
-        $user->mobile2          = $request->input('mobile2');
-        $user->jazb            = $jazbi;
-        $user->jazb_id         = $request->input('jazb_id');
-        $user->hamahang        = $hamahangi;
-        $user->hamahang_id     = $request->input('hamahang_id');
-        $user->tel              = $request->input('tel');
-        $user->description      = $request->input('description');
-        $user->status           = $request->input('status');
-        $user->phone_verify     = $request->input('phone_verify');
+        $hami->name             = $request->input('name');
+        $hami->mobile           = $request->input('mobile');
+        $hami->mobile2          = $request->input('mobile2');
+        $hami->jazb_id          = $request->input('jazb_id');
+        $hami->hamahang_id      = $request->input('hamahang_id');
+        $hami->tel              = $request->input('tel');
+        $hami->description      = $request->input('description');
+        $hami->status           = $request->input('status');
+        $hami->phone_verify     = $request->input('phone_verify');
 
-        $user->update();
+        $hami->update();
         alert()->success('عملیات موفق', 'اطلاعات با موفقیت ثبت شد');
         return redirect(route('siteusers.index'));
     }
 
     public function destroy($id)
     {
-        $user = User::findOrfail($id);
-        $user->delete();
+        $hami = Hami::findOrfail($id);
+        $hami->delete();
         alert()->success('عملیات موفق', 'اطلاعات با موفقیت پاک شد');
         return back();
     }

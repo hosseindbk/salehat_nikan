@@ -51,7 +51,6 @@
                                                 <th class="wd-10p"> شماره موبایل </th>
                                                 <th class="wd-10p"> تاریخ عضویت </th>
                                                 <th class="wd-10p"> هماهنگ کننده </th>
-                                                <th class="wd-10p"> جذب کننده </th>
                                                 <th class="wd-10p"> وضعیت شماره </th>
                                                 <th class="wd-10p"> وضعیت </th>
                                                 <th class="wd-10p"> ویرایش/حذف</th>
@@ -85,8 +84,7 @@
                     {data: 'name'           , name: 'name'          },
                     {data: 'mobile'         , name: 'mobile'        },
                     {data: 'date'           , name: 'date'          },
-                    {data: 'hamahang'       , name: 'hamahang'      },
-                    {data: 'jazb'           , name: 'jazb'          },
+                    {data: 'username'       , name: 'username'      },
                     {data: 'phone_verify'   , name: 'phone_verify'  },
                     {data: 'status'         , name: 'status'        },
 

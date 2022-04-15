@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Model\acountnumber;
 use App\Model\deposit;
+use App\Model\Hami;
 use App\Model\Menudashboard;
 use App\Model\Reason;
 use App\Model\Submenudashboard;
@@ -17,10 +18,11 @@ class DepositController extends Controller
     public function index()
     {
         $deposits  = deposit::leftjoin('users' , 'users.id' ,'=' ,'deposits.user_id')
+             ->leftjoin('hamis' , 'hamis.id' ,'=' ,'deposits.user_id')
              ->leftjoin('acountnumbers' , 'acountnumbers.id' ,'=' ,'deposits.acountnumber_id')
              ->leftjoin('reasons' , 'reasons.id' ,'=' ,'deposits.reason_id')
-             ->select('deposits.id as id' , 'users.id as userid' , 'deposits.date as date' , 'deposits.amount as amount'
-             , 'users.name as name' , 'reasons.title as reason', 'acountnumbers.shomare_card as shomarecard' , 'users.mobile as mobile' , 'deposits.code_number as code')
+             ->select('deposits.id as id' , 'hamis.id as userid' , 'deposits.date as date' , 'deposits.amount as amount'
+             , 'hamis.name as name' , 'reasons.title as reason', 'acountnumbers.shomare_card as shomarecard' , 'hamis.mobile as mobile' , 'deposits.code_number as code')
             ->orderBy('deposits.created_at', 'desc')
             ->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
@@ -34,7 +36,7 @@ class DepositController extends Controller
 
     public function create()
     {
-        $users              = User::select('id' , 'name' , 'melicode' , 'mobile')->where('id' ,'>' ,1)->get();
+        $hamis              = Hami::select('id' , 'name'  , 'mobile')->get();
         $userhamahang       = User::select('id' , 'name')->whereType_id(2)->get();
         $acountnumbers      = acountnumber::select('id' , 'shomare_hesab')->get();
         $reasons            = Reason::select('id' , 'title')->get();
@@ -45,7 +47,7 @@ class DepositController extends Controller
             ->with(compact('userhamahang'))
             ->with(compact('reasons'))
             ->with(compact('acountnumbers'))
-            ->with(compact('users'))
+            ->with(compact('hamis'))
             ->with(compact('menudashboards'))
             ->with(compact('submenudashboards'));
     }
@@ -59,7 +61,7 @@ class DepositController extends Controller
 
         $deposits = new deposit();
 
-        $deposits->user_id          = $request->input('user_id');
+        $deposits->user_id          = $request->input('hami_id');
         $deposits->amount           = str_replace(',' , '' , $request->input('amount'));
         $deposits->date             = $request->input('date');
         $deposits->reason_id        = $request->input('reason_id');

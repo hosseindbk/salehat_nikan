@@ -31,13 +31,13 @@
                 <div class="row row-sm">
                     <div class="col-lg-12 col-md-12">
                         <div class="card custom-card">
-                            @foreach($users as $user)
+                            @foreach($hamis as $hami)
                                 <div class="card-body">
                                     <div>
                                         <h6 class="main-content-label text-center mb-5">ویرایش اطلاعات حامیان </h6>
                                     </div>
 
-                                    <form action="{{ route('siteusers.update', $user->id)}}" method="POST">
+                                    <form action="{{ route('siteusers.update', $hami->id)}}" method="POST">
                                         {{csrf_field()}}
                                         {{ method_field('PATCH') }}
                                         <div class="row row-sm">
@@ -47,18 +47,18 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <p class="mg-b-10">نام و نام خانوادگی</p>
-                                                    <input type="text" name="name"  value="{{$user->name}}" class="form-control" />
+                                                    <input type="text" name="name"  value="{{$hami->name}}" class="form-control" />
                                                 </div>
                                                 <div class="form-group">
                                                     <p class="mg-b-10">تلفن ثابت</p>
-                                                    <input type="text" name="tel" value="{{$user->tel}}" class="form-control" />
+                                                    <input type="text" name="tel" value="{{$hami->tel}}" class="form-control" />
                                                 </div>
                                                 <div class="form-group">
                                                     <p class="mg-b-10">هماهنگ کننده</p>
                                                     <select name="hamahang_id" class="form-control select-lg select2">
                                                         <option value="">انتخاب کنید</option>
                                                         @foreach($userhamahang as $huser)
-                                                            <option value="{{$huser->id}}" {{$huser->id == $user->hamahang_id ? 'selected' : ''}}>{{$huser->name}}</option>
+                                                            <option value="{{$huser->id}}" {{$huser->id == $hami->hamahang_id ? 'selected' : ''}}>{{$huser->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -77,16 +77,16 @@
                                                     <p class="mg-b-10">انتخاب وضعیت کاربر</p>
                                                     <select name="status" class="form-control select-lg select2">
 
-                                                            <option value="1" {{$user->status == 1 ? 'selected' : ''}}>ثبت اولیه </option>
-                                                            <option value="2" {{$user->status == 2 ? 'selected' : ''}}>فعال </option>
-                                                            <option value="3" {{$user->status == 3 ? 'selected' : ''}}>غیر فعال </option>
+                                                            <option value="1" {{$hami->status == 1 ? 'selected' : ''}}>ثبت اولیه </option>
+                                                            <option value="2" {{$hami->status == 2 ? 'selected' : ''}}>فعال </option>
+                                                            <option value="3" {{$hami->status == 3 ? 'selected' : ''}}>غیر فعال </option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <p class="mg-b-10">وضعیت شماره کاربر</p>
                                                     <select name="phone_verify" class="form-control select-lg select2">
-                                                        <option value="0" {{$user->phone_verify == 0 ? 'selected' : ''}}>عدم تایید شماره</option>
-                                                        <option value="1" {{$user->phone_verify == 1 ? 'selected' : ''}}> تایید شماره</option>
+                                                        <option value="0" {{$hami->phone_verify == 0 ? 'selected' : ''}}>عدم تایید شماره</option>
+                                                        <option value="1" {{$hami->phone_verify == 1 ? 'selected' : ''}}> تایید شماره</option>
                                                     </select>
                                                 </div>
 
@@ -94,7 +94,7 @@
                                                     <p class="mg-b-10">انتخاب نوع عضویت</p>
                                                     <select name="type_id" class="form-control select-lg select2">
                                                         @foreach($typeusers as $type_user)
-                                                            <option value="{{$type_user->id}}" {{$user->type_id == $type_user->id ? 'selected' : ''}}>{{$type_user->title}}</option>
+                                                            <option value="{{$type_user->id}}" {{$hami->type_id == $type_user->id ? 'selected' : ''}}>{{$type_user->title}}</option>
                                                         @endforeach
 
                                                     </select>
@@ -103,15 +103,15 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <p class="mg-b-10">شماره موبایل</p>
-                                                    <input type="text" name="mobile" value="{{$user->mobile}}" class="form-control" />
+                                                    <input type="text" name="mobile" value="{{$hami->mobile}}" class="form-control" />
                                                 </div>
                                                 <div class="form-group">
                                                     <p class="mg-b-10">شماره موبایل2</p>
-                                                    <input type="text" name="mobile2" value="{{$user->mobile2}}" class="form-control" />
+                                                    <input type="text" name="mobile2" value="{{$hami->mobile2}}" class="form-control" />
                                                 </div>
                                                 <div class="form-group">
                                                     <p class="mg-b-10">توضیحات</p>
-                                                    <textarea name="descripion" id="" rows="2" class="form-control">{{$user->descripion}}</textarea>
+                                                    <textarea name="descripion" id="" rows="2" class="form-control">{{$hami->descripion}}</textarea>
                                                 </div>
 
                                             </div>
@@ -132,7 +132,7 @@
                         <div class="card custom-card">
                             <div class="card-body">
                                 <div>
-                                    <h3 class="text-center mb-5"><span class="badge badge-light">   @foreach($users as $user) افزودن شماره های حساب  {{$user->name}} @endforeach</span></h3>
+                                    <h3 class="text-center mb-5"><span class="badge badge-light">   @foreach($hamis as $hami) افزودن شماره های حساب  {{$hami->name}} @endforeach</span></h3>
                                 </div>
                                 <form action="{{ route('acountnumber.store')}}" method="POST">
                                     {{csrf_field()}}
@@ -146,7 +146,7 @@
                                                         <option value="{{$bank->id}}">{{$bank->bank_name}}</option>
                                                     @endforeach
                                                 </select>
-                                                <input type="hidden" name="user_id" value="{{$user->id}}" >
+                                                <input type="hidden" name="user_id" value="{{$hami->id}}" >
                                             </div>
                                         </div>
                                         <div class="col-md-3">
