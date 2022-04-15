@@ -94,12 +94,17 @@ class SiteuserController extends Controller
 
     public function store(Request $request)
     {
+        $hamahang   = User::whereId($request->input('hamahang_id'))->pluck('name');
+        $jazb       = User::whereId($request->input('jazb_id'))->pluck('name');
+
         $users = new user();
 
         $users->name            = $request->input('name');
         $users->type_id         = $request->input('type_id');
-        $users->jazb            = $request->input('jazb');
-        $users->hamahang        = $request->input('hamahang');
+        $users->jazb            = $jazb;
+        $users->jazb_id         = $request->input('jazb_id');
+        $users->hamahang        = $hamahang;
+        $users->hamahang_id     = $request->input('hamahang_id');
         $users->mobile          = $request->input('mobile');
         $users->mobile2         = $request->input('mobile2');
         $users->tel             = $request->input('tel');
