@@ -116,8 +116,9 @@ class UserexpertController extends Controller
     }
 
 
-    public function destroy(User $user)
+    public function destroy($id)
     {
+        $user = User::findOrfail($id);
         $user->delete();
         alert()->success('عملیات موفق', 'اطلاعات با موفقیت پاک شد');
         return back();
