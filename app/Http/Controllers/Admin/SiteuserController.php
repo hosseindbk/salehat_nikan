@@ -11,6 +11,7 @@ use App\Model\Submenudashboard;
 use App\Model\Type_user;
 use App\Model\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class SiteuserController extends Controller
@@ -22,7 +23,7 @@ class SiteuserController extends Controller
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
         if ($request->ajax()) {
 
-            if (Auth::user()->id == 1 || Auth::user()->id == 2000) {
+            if (auth::user()->id == 1 || auth::user()->id == 2000) {
 
                 $data = Hami::leftjoin('users', 'users.id', '=', 'hamis.hamahang_id')->
                 select('hamis.id', 'hamis.name', 'hamis.mobile', 'hamis.date', 'users.name as username', 'hamis.phone_verify', 'hamis.status')->get();
