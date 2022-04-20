@@ -21,56 +21,111 @@ class SiteuserController extends Controller
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
         if ($request->ajax()) {
-            $data = Hami::leftjoin('users' , 'users.id' , '=' , 'hamis.hamahang_id')->
-            select('hamis.id' , 'hamis.name' , 'hamis.mobile' , 'hamis.date' , 'users.name as username' , 'hamis.phone_verify' , 'hamis.status')->get();
-            return Datatables::of($data)
 
-                ->editColumn('id', function ($data) {
-                    return ($data->id);
-                })
-                ->editColumn('name', function ($data) {
-                    return ($data->name);
-                })
-                ->editColumn('mobile', function ($data) {
-                    return ($data->mobile);
-                })
-                ->editColumn('date', function ($data) {
-                    return ($data->date);
-                })
-                ->editColumn('username', function ($data) {
-                    return ($data->username);
-                })
-                ->editColumn('phone_verify', function ($data) {
-                    if ($data->phone_verify == "0") {
-                        return 'تایید نشده';
-                    }elseif ($data->phone_verify == "1") {
-                        return 'فعال';
-                    }
-                })
-                ->editColumn('status', function ($data) {
-                    if ($data->status == "1") {
-                        return 'ثبت نام اولیه';
-                    }elseif ($data->status == "2") {
-                        return 'فعال';
-                    }elseif ($data->status == "3") {
-                        return 'غیر فعال';
-                    }
-                })
+            if (Auth::user()->id == 1 || Auth::user()->id == 2000) {
 
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="' . route('siteusers.edit' , $row->id) . '" class="btn ripple btn-outline-info btn-sm">Edit</a>
-                                  <form action="' . route('siteusers.destroy' , $row->id) .'" method="post" style="display:inline">
-                                    '.csrf_field().'
-                                    '.method_field("DELETE").'
+                $data = Hami::leftjoin('users', 'users.id', '=', 'hamis.hamahang_id')->
+                select('hamis.id', 'hamis.name', 'hamis.mobile', 'hamis.date', 'users.name as username', 'hamis.phone_verify', 'hamis.status')->get();
+
+                return Datatables::of($data)
+                    ->editColumn('id', function ($data) {
+                        return ($data->id);
+                    })
+                    ->editColumn('name', function ($data) {
+                        return ($data->name);
+                    })
+                    ->editColumn('mobile', function ($data) {
+                        return ($data->mobile);
+                    })
+                    ->editColumn('date', function ($data) {
+                        return ($data->date);
+                    })
+                    ->editColumn('username', function ($data) {
+                        return ($data->username);
+                    })
+                    ->editColumn('phone_verify', function ($data) {
+                        if ($data->phone_verify == "0") {
+                            return 'تایید نشده';
+                        } elseif ($data->phone_verify == "1") {
+                            return 'فعال';
+                        }
+                    })
+                    ->editColumn('status', function ($data) {
+                        if ($data->status == "1") {
+                            return 'ثبت نام اولیه';
+                        } elseif ($data->status == "2") {
+                            return 'فعال';
+                        } elseif ($data->status == "3") {
+                            return 'غیر فعال';
+                        }
+                    })
+                    ->addColumn('action', function ($row) {
+                        $actionBtn = '<a href="' . route('siteusers.edit', $row->id) . '" class="btn ripple btn-outline-info btn-sm">Edit</a>
+                                  <form action="' . route('siteusers.destroy', $row->id) . '" method="post" style="display:inline">
+                                    ' . csrf_field() . '
+                                    ' . method_field("DELETE") . '
                                          <button type="submit" class="btn ripple btn-outline-danger btn-sm">
                                              <i class="fe fe-trash-2 "></i>
                                          </button>
                                 </form>';
 
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+                        return $actionBtn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+            }else{
+                $data = Hami::leftjoin('users', 'users.id', '=', 'hamis.hamahang_id')->
+                    select('hamis.id', 'hamis.name', 'hamis.mobile', 'hamis.date', 'users.name as username', 'hamis.phone_verify', 'hamis.status')
+                    ->where('hamis.hamahang_id', '=', Auth::user()->id)
+                    ->get();
+
+                return Datatables::of($data)
+                    ->editColumn('id', function ($data) {
+                        return ($data->id);
+                    })
+                    ->editColumn('name', function ($data) {
+                        return ($data->name);
+                    })
+                    ->editColumn('mobile', function ($data) {
+                        return ($data->mobile);
+                    })
+                    ->editColumn('date', function ($data) {
+                        return ($data->date);
+                    })
+                    ->editColumn('username', function ($data) {
+                        return ($data->username);
+                    })
+                    ->editColumn('phone_verify', function ($data) {
+                        if ($data->phone_verify == "0") {
+                            return 'تایید نشده';
+                        } elseif ($data->phone_verify == "1") {
+                            return 'فعال';
+                        }
+                    })
+                    ->editColumn('status', function ($data) {
+                        if ($data->status == "1") {
+                            return 'ثبت نام اولیه';
+                        } elseif ($data->status == "2") {
+                            return 'فعال';
+                        } elseif ($data->status == "3") {
+                            return 'غیر فعال';
+                        }
+                    })
+                    ->addColumn('action', function ($row) {
+                        $actionBtn = '<a href="' . route('siteusers.edit', $row->id) . '" class="btn ripple btn-outline-info btn-sm">Edit</a>
+                                  <form action="' . route('siteusers.destroy', $row->id) . '" method="post" style="display:inline">
+                                    ' . csrf_field() . '
+                                    ' . method_field("DELETE") . '
+                                         <button type="submit" class="btn ripple btn-outline-danger btn-sm">
+                                             <i class="fe fe-trash-2 "></i>
+                                         </button>
+                                </form>';
+
+                        return $actionBtn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+            }
         }
 
         return view('Admin.siteusers.all')
