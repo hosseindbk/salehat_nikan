@@ -11,20 +11,33 @@ use App\Model\Reason;
 use App\Model\Submenudashboard;
 use App\Model\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DepositController extends Controller
 {
 
     public function index()
     {
-        $deposits  = deposit::leftjoin('users' , 'users.id' ,'=' ,'deposits.user_id')
-             ->leftjoin('hamis' , 'hamis.id' ,'=' ,'deposits.user_id')
-             ->leftjoin('acountnumbers' , 'acountnumbers.id' ,'=' ,'deposits.acountnumber_id')
-             ->leftjoin('reasons' , 'reasons.id' ,'=' ,'deposits.reason_id')
-             ->select('deposits.id as id' , 'hamis.id as userid' , 'deposits.date as date' , 'deposits.amount as amount'
-             , 'hamis.name as name' , 'reasons.title as reason', 'acountnumbers.shomare_card as shomarecard' , 'hamis.mobile as mobile' , 'deposits.code_number as code')
+        if (auth::user()->id == 1 || auth::user()->id == 2000) {
+            $deposits = deposit::leftjoin('users', 'users.id', '=', 'deposits.user_id')
+                ->leftjoin('hamis', 'hamis.id', '=', 'deposits.user_id')
+                ->leftjoin('acountnumbers', 'acountnumbers.id', '=', 'deposits.acountnumber_id')
+                ->leftjoin('reasons', 'reasons.id', '=', 'deposits.reason_id')
+                ->select('deposits.id as id', 'hamis.id as userid', 'deposits.date as date', 'deposits.amount as amount'
+                    , 'hamis.name as name', 'reasons.title as reason', 'acountnumbers.shomare_card as shomarecard', 'hamis.mobile as mobile', 'deposits.code_number as code')
+                ->orderBy('deposits.created_at', 'desc')
+                ->get();
+        }else{
+        $deposits = deposit::leftjoin('users', 'users.id', '=', 'deposits.user_id')
+            ->leftjoin('hamis', 'hamis.id', '=', 'deposits.user_id')
+            ->leftjoin('acountnumbers', 'acountnumbers.id', '=', 'deposits.acountnumber_id')
+            ->leftjoin('reasons', 'reasons.id', '=', 'deposits.reason_id')
+            ->select('deposits.id as id', 'hamis.id as userid', 'deposits.date as date', 'deposits.amount as amount'
+                , 'hamis.name as name', 'reasons.title as reason', 'acountnumbers.shomare_card as shomarecard', 'hamis.mobile as mobile', 'deposits.code_number as code')
             ->orderBy('deposits.created_at', 'desc')
+            ->where('deposits.user_id' , '=' , auth::user()->id )
             ->get();
+    }
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
 
