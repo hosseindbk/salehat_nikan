@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\Category;
+use App\Model\Hami;
 use App\Model\Menudashboard;
 use App\Model\Submenudashboard;
 use App\Model\User;
@@ -16,13 +17,12 @@ class PanelController extends Controller
     {
         $categories         = category::whereStatus(1)->get();
 
-        $hamis              = User::select('id' , 'name' , 'mobile' , 'status' , 'date')
-            ->where('level' , '=', null)
-            ->get();
-        $hamahang              = User::select('id' , 'name' , 'mobile' , 'status' , 'date')
-            ->where('level' , '=', 'admin')
-            ->where('id' , '>', 1)
-            ->get();
+        $hamis              = Hami::select('id' , 'name' , 'mobile' , 'status' , 'date')
+                                    ->get();
+        $hamahang           = User::select('id' , 'name' , 'mobile' , 'status' , 'date')
+                                    ->where('level' , '=', 'admin')
+                                    ->where('id' , '>', 1)
+                                    ->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
 
