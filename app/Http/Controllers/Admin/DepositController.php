@@ -35,7 +35,7 @@ class DepositController extends Controller
             ->select('deposits.id as id', 'hamis.id as userid', 'deposits.date as date', 'deposits.amount as amount'
                 , 'hamis.name as name', 'reasons.title as reason', 'acountnumbers.shomare_card as shomarecard', 'hamis.mobile as mobile', 'deposits.code_number as code')
             ->orderBy('deposits.created_at', 'desc')
-            ->where('deposits.user_id' , '=' , auth::user()->id )
+            ->where('deposits.hamahang_id' , '=' , auth::user()->id )
             ->get();
     }
         $menudashboards     = Menudashboard::whereStatus(4)->get();
