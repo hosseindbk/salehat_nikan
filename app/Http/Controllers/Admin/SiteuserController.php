@@ -23,7 +23,7 @@ class SiteuserController extends Controller
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
         if ($request->ajax()) {
 
-            if (auth::user()->id == 1 || auth::user()->id == 2000) {
+            if (auth::user()->id == 1 || auth::user()->id == 2000 || auth::user()->id == 2006) {
 
                 $data = Hami::leftjoin('users', 'users.id', '=', 'hamis.hamahang_id')->
                 select('hamis.id', 'hamis.name', 'hamis.mobile', 'hamis.date', 'users.name as username', 'hamis.phone_verify', 'hamis.status')->get();

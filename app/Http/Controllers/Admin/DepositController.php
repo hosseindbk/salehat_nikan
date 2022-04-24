@@ -18,7 +18,7 @@ class DepositController extends Controller
 
     public function index()
     {
-        if (auth::user()->id == 1 || auth::user()->id == 2000 || auth::user()->id == 2006) {
+        if (auth::user()->id == 1 || auth::user()->id == 2000) {
             $deposits = deposit::leftjoin('users', 'users.id', '=', 'deposits.user_id')
                 ->leftjoin('hamis', 'hamis.id', '=', 'deposits.user_id')
                 ->leftjoin('acountnumbers', 'acountnumbers.id', '=', 'deposits.acountnumber_id')
