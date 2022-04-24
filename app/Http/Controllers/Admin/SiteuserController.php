@@ -153,7 +153,7 @@ class SiteuserController extends Controller
         $hamis = new Hami();
 
         $hamis->name            = $request->input('name');
-        $hamis->jazb_id         = $request->input('jazb_id');
+        $hamis->date            = $request->input('date');
         $hamis->hamahang_id     = $request->input('hamahang_id');
         $hamis->mobile          = $request->input('mobile');
         $hamis->mobile2         = $request->input('mobile2');
@@ -197,7 +197,7 @@ class SiteuserController extends Controller
         $hami->name             = $request->input('name');
         $hami->mobile           = $request->input('mobile');
         $hami->mobile2          = $request->input('mobile2');
-        $hami->jazb_id          = $request->input('jazb_id');
+        $hami->date             = $request->input('date');
         $hami->hamahang_id      = $request->input('hamahang_id');
         $hami->tel              = $request->input('tel');
         $hami->description      = $request->input('description');

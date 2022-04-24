@@ -123,33 +123,4 @@
             numeralThousandsGroupStyle: 'thousand'
         }));
     </script>
-    <script>
-        $(function(){
-            $('#user_id').change(function(){
-                $("#acountnumber_id option").remove();
-                var id = $('#user_id').val();
-
-                $.ajax({
-                    url : '{{ route( 'acountnumber' ) }}',
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "id": id
-                    },
-                    type: 'post',
-                    dataType: 'json',
-                    success: function( result )
-                    {
-                        $.each( result, function(k, v) {
-                            $('#acountnumber_id').append($('<option>', {value:k, text:v}));
-                        });
-                    },
-                    error: function()
-                    {
-                        //handle errors
-                        alert('error...');
-                    }
-                });
-            });
-        });
-    </script>
 @endsection

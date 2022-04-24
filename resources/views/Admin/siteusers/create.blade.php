@@ -5,8 +5,6 @@
     <link href="{{asset('admin/assets/plugins/ion-rangeslider/css/ion.rangeSlider.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/plugins/ion-rangeslider/css/ion.rangeSlider.skinFlat.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/plugins/sumoselect/sumoselect-rtl.css')}}" rel="stylesheet">
-    <link href="{{asset('admin/assets/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('admin/assets/plugins/fancyuploder/fancy_fileupload.css')}}" rel="stylesheet" />
     <link href="{{asset('admin/assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('admin/assets/css-rtl/colors/default.css')}}" rel="stylesheet">
 @endsection
@@ -50,11 +48,11 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <p class="mg-b-10">هماهنگ کننده</p>
+                                                <p class="mg-b-10">حامی یاب</p>
                                                 <select name="hamahang_id" class="form-control select-lg select2">
                                                     <option value="">انتخاب کنید</option>
                                                     @foreach($userhamahang as $user)
-                                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                                        <option value="{{$user->id}}" {{$user->id == Auth::user()->id ? 'selected' : ''}}>{{$user->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -78,13 +76,8 @@
                                                 <input type="text" name="mobile2"  placeholder="شماره موبایل را وارد کنید" class="form-control" />
                                             </div>
                                             <div class="form-group">
-                                                <p class="mg-b-10">حامی یاب</p>
-                                                <select name="jazb_id" class="form-control select-lg select2">
-                                                    <option value="">انتخاب کنید</option>
-                                                    @foreach($userjazb as $user)
-                                                        <option value="{{$user->id}}">{{$user->name}}</option>
-                                                    @endforeach
-                                                </select>
+                                                <p class="mg-b-10">تاریخ عضویت</p>
+                                                <input type="text" name="date"  class="form-control fc-datepicker" placeholder="روز / ماه / سال" />
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -117,20 +110,12 @@
 @section('end')
     <script src="{{asset('admin/assets/plugins/select2/js/select2.min.js')}}"></script>
     <script src="{{asset('admin/assets/js/select2.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min-rtl.js')}}"></script>
     <script src="{{asset('admin/assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/bootstrap-daterangepicker/moment.min.js')}}"></script>
-    <script src="{{asset('admin/assets/js/advanced-form-elements.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/sumoselect/jquery.sumoselect.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fileuploads/js/fileupload.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fileuploads/js/file-upload.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fancyuploder/jquery.ui.widget.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fancyuploder/jquery.fileupload.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fancyuploder/jquery.iframe-transport.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fancyuploder/jquery.fancy-fileupload.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/fancyuploder/fancy-uploader.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/telephoneinput/telephoneinput.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/telephoneinput/inttelephoneinput.js')}}"></script>
+    <script src="{{asset('admin/assets/plugins/spectrum-colorpicker/spectrum.js')}}"></script>
+    <script src="{{asset('admin/assets/js/form-elements.js')}}"></script>
+    <script src="{{asset('admin/assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js')}}"></script>
+    <script src="{{asset('admin/assets/plugins/jquery.maskedinput/jquery.maskedinput.js')}}"></script>
+    <script src="{{asset('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min-rtl.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.5.3/dist/cleave.min.js"></script>
 @endsection
 @endsection

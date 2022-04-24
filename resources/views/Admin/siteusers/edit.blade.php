@@ -54,7 +54,7 @@
                                                     <input type="text" name="tel" value="{{$hami->tel}}" class="form-control" />
                                                 </div>
                                                 <div class="form-group">
-                                                    <p class="mg-b-10">هماهنگ کننده</p>
+                                                    <p class="mg-b-10">حامی یاب</p>
                                                     <select name="hamahang_id" class="form-control select-lg select2">
                                                         <option value="">انتخاب کنید</option>
                                                         @foreach($userhamahang as $huser)
@@ -63,13 +63,8 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <p class="mg-b-10">حامی یاب</p>
-                                                    <select name="jazb_id" class="form-control select-lg select2">
-                                                        <option value="">انتخاب کنید</option>
-                                                        @foreach($userjazb as $juser)
-                                                            <option value="{{$juser->id}}">{{$juser->name}}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <p class="mg-b-10">تاریخ عضویت</p>
+                                                    <input type="text" name="date"  class="form-control fc-datepicker" value="{{$hami->date}}" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -237,12 +232,13 @@
 @section('end')
     <script src="{{asset('admin/assets/plugins/select2/js/select2.min.js')}}"></script>
     <script src="{{asset('admin/assets/js/select2.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min-rtl.js')}}"></script>
     <script src="{{asset('admin/assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/bootstrap-daterangepicker/moment.min.js')}}"></script>
-    <script src="{{asset('admin/assets/js/advanced-form-elements.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/sumoselect/jquery.sumoselect.js')}}"></script>
-    <script src="{{asset('admin/assets/plugins/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+    <script src="{{asset('admin/assets/plugins/spectrum-colorpicker/spectrum.js')}}"></script>
+    <script src="{{asset('admin/assets/js/form-elements.js')}}"></script>
+    <script src="{{asset('admin/assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js')}}"></script>
+    <script src="{{asset('admin/assets/plugins/jquery.maskedinput/jquery.maskedinput.js')}}"></script>
+    <script src="{{asset('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min-rtl.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.5.3/dist/cleave.min.js"></script>
 
 @endsection
 

@@ -50,7 +50,7 @@
                                                 <th class="wd-10p"> نام و نام خانوادگی </th>
                                                 <th class="wd-10p"> شماره موبایل </th>
                                                 <th class="wd-10p"> تاریخ عضویت </th>
-                                                <th class="wd-10p"> هماهنگ کننده </th>
+                                                <th class="wd-10p"> حامی یاب </th>
                                                 <th class="wd-10p"> وضعیت شماره </th>
                                                 <th class="wd-10p"> وضعیت </th>
                                                 <th class="wd-10p"> ویرایش/حذف</th>
