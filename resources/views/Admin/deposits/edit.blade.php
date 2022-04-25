@@ -83,7 +83,7 @@
                                                     <p class="mg-b-10">شماره کارت</p>
                                                     <select name="acountnumber_id" class="form-control select-lg select2" id="acountnumber_id">
                                                         @foreach($acountnumbers as $acountnumber)
-                                                            <option value="{{$acountnumber->id}}" {{$acountnumber->id == $deposit->acountnumber_id ? 'selected' : ''}}>{{$acountnumber->shomare_card}}</option>
+                                                            <option value="{{$acountnumber->id}}" {{$acountnumber->id == $deposit->acountnumber_id ? 'selected' : ''}}>{{$acountnumber->title}} - {{$acountnumber->shomare_hesab}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

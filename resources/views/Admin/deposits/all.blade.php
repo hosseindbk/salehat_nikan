@@ -53,7 +53,7 @@
                                                 <td>{{$deposit->mobile}}</td>
                                                 <td>{{number_format($deposit->amount)}}</td>
                                                 <td>{{$deposit->reason}}</td>
-                                                <td>{{$deposit->shomarecard}}</td>
+                                                <td>{{$deposit->hesabtitle}} - {{$deposit->shomare_hesab}}</td>
                                                 <td>{{$deposit->code}}</td>
                                                 <td>{{$deposit->hamahang}}</td>
                                                 <td>
