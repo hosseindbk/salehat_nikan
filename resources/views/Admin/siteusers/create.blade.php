@@ -43,13 +43,13 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <p class="mg-b-10">نام و نام خانوادگی</p>
-                                                <input type="text" name="name"  placeholder="نام و نام خانوادگی را وارد کنید" class="form-control" />
+                                                <p class="mg-b-10">نام و نام خانوادگی حامی</p>
+                                                <input type="text" name="name" required  placeholder="نام و نام خانوادگی را وارد کنید" class="form-control" />
                                             </div>
 
                                             <div class="form-group">
                                                 <p class="mg-b-10">حامی یاب</p>
-                                                <select name="hamahang_id" class="form-control select-lg select2">
+                                                <select name="hamahang_id" required class="form-control select-lg select2">
                                                     <option value="">انتخاب کنید</option>
                                                     @foreach($userhamahang as $user)
                                                         <option value="{{$user->id}}" {{$user->id == Auth::user()->id ? 'selected' : ''}}>{{$user->name}}</option>
@@ -58,10 +58,10 @@
                                             </div>
                                             <div class="form-group">
                                                 <p class="mg-b-10">نوع عضویت</p>
-                                                <select name="type_id" class="form-control select-lg select2">
+                                                <select name="type_id" required class="form-control select-lg select2">
                                                     <option value="">انتخاب کنید</option>
                                                     @foreach($typeusers as $typeuser)
-                                                        <option value="{{$typeuser->id}}">{{$typeuser->title}}</option>
+                                                        <option value="{{$typeuser->id}}" {{$typeuser->id == 3 ? 'selected' : ''}}>{{$typeuser->title}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -69,7 +69,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <p class="mg-b-10">شماره موبایل</p>
-                                                <input type="text" name="mobile"  placeholder="شماره موبایل را وارد کنید" class="form-control" />
+                                                <input type="text" name="mobile" required placeholder="شماره موبایل را وارد کنید" class="form-control" />
                                             </div>
                                             <div class="form-group">
                                                 <p class="mg-b-10">شماره موبایل2</p>
