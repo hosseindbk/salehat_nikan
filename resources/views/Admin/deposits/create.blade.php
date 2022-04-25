@@ -88,7 +88,7 @@
                                                 <select name="acountnumber_id" class="form-control select-lg select2">
                                                     <option value="">انتخاب کنید</option>
                                                     @foreach($acountnumbers as $acountnumber)
-                                                        <option value="{{$acountnumber->id}}">{{$acountnumber->title}}</option>
+                                                        <option value="{{$acountnumber->id}}">{{$acountnumber->title}} - {{$acountnumber->shomare_hesab}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
