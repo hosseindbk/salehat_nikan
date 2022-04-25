@@ -85,8 +85,11 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <p class="mg-b-10">شماره کارت</p>
-                                                <select name="acountnumber_id" class="form-control select-lg select2" id="acountnumber_id">
+                                                <select name="acountnumber_id" class="form-control select-lg select2">
                                                     <option value="">انتخاب کنید</option>
+                                                    @foreach($acountnumbers as $acountnumber)
+                                                        <option value="{{$acountnumber->id}}">{{$acountnumber->title}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>

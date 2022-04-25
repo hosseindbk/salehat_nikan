@@ -51,7 +51,7 @@ class DepositController extends Controller
     {
         $hamis              = Hami::select('id' , 'name'  , 'mobile')->get();
         $userhamahang       = User::select('id' , 'name')->whereType_id(2)->get();
-        $acountnumbers      = acountnumber::select('id' , 'shomare_hesab')->get();
+        $acountnumbers      = acountnumber::select('id' , 'title')->get();
         $reasons            = Reason::select('id' , 'title')->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
