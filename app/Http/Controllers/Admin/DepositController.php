@@ -49,7 +49,7 @@ class DepositController extends Controller
 
     public function create()
     {
-        $hamis              = Hami::leftjoin('users' , 'users.id' , '=' ,'hamis.user_id' )->select('hamis.id' , 'hamis.name'  , 'hamis.mobile' , 'users.username')->get();
+        $hamis              = Hami::leftjoin('users' , 'users.id' , '=' ,'hamis.hamahang_id' )->select('hamis.id' , 'hamis.name'  , 'hamis.mobile' , 'users.name as username')->get();
         $userhamahang       = User::select('id' , 'name')->whereType_id(2)->get();
         $acountnumbers      = acountnumber::select('id' , 'shomare_hesab' , 'title')->get();
         $reasons            = Reason::select('id' , 'title')->get();
