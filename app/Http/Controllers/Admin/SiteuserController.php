@@ -151,33 +151,18 @@ class SiteuserController extends Controller
     public function store(Request $request)
     {
 
-        $input = $request->all();
+        $hamis = new Hami();
 
-        $request->validate([
-            'name'          => 'required',
-            'date'          => 'required',
-            'hamahang_id'   => 'required',
-            'mobile'        => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:11',
-            'mobile2'       => 'regex:/^([0-9\s\-\+\(\)]*)$/|min:11',
-            'status'        => 1
-        ]);
+        $hamis->name            = $request->input('name');
+        $hamis->date            = $request->input('date');
+        $hamis->hamahang_id     = $request->input('hamahang_id');
+        $hamis->mobile          = $request->input('mobile');
+        $hamis->mobile2         = $request->input('mobile2');
+        $hamis->tel             = $request->input('tel');
+        $hamis->description     = $request->input('description');
+        $hamis->status          = 1;
 
-        $input['status'] = 1 ;
-        Hami::create($input);
-
-
-//        $hamis = new Hami();
-//
-//        $hamis->name            = $request->input('name');
-//        $hamis->date            = $request->input('date');
-//        $hamis->hamahang_id     = $request->input('hamahang_id');
-//        $hamis->mobile          = $request->input('mobile');
-//        $hamis->mobile2         = $request->input('mobile2');
-//        $hamis->tel             = $request->input('tel');
-//        $hamis->description     = $request->input('description');
-//        $hamis->status          = 1;
-//
-//        $hamis->save();
+        $hamis->save();
 
         alert()->success('عملیات موفق', 'اطلاعات با موفقیت ثبت شد');
         return redirect(route('siteusers.index'));
