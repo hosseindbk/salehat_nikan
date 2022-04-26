@@ -25,7 +25,7 @@ class DepositController extends Controller
                 ->leftjoin('reasons', 'reasons.id', '=', 'deposits.reason_id')
                 ->select('deposits.id as id', 'hamis.id as userid', 'deposits.date as date', 'deposits.amount as amount'
                     , 'hamis.name as name', 'reasons.title as reason', 'users.name as hamahangname' ,  'acountnumbers.shomare_hesab as shomare_hesab'
-                    , 'hamis.mobile as mobile', 'deposits.code_number as code')
+                    , 'acountnumbers.title as hesabtitle', 'hamis.mobile as mobile', 'deposits.code_number as code')
                 ->orderBy('deposits.created_at', 'desc')
                 ->get();
         }else{
