@@ -47,7 +47,7 @@
                                                 <select name="hami_id" class="form-control select-lg select2" id="user_id">
                                                     <option value="">انتخاب کنید</option>
                                                 @foreach($hamis as $hami)
-                                                        <option value="{{$hami->id}}">{{$hami->name}}</option>
+                                                        <option value="{{$hami->id}}">{{$hami->name}} - {{$hami->username}} - {{$hami->mobile}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
