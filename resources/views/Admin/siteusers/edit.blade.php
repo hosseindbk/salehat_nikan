@@ -47,15 +47,15 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <p class="mg-b-10">نام و نام خانوادگی</p>
-                                                    <input type="text" name="name"  value="{{$hami->name}}" class="form-control" />
+                                                    <input type="text" name="name" required value="{{$hami->name}}" class="form-control" />
                                                 </div>
                                                 <div class="form-group">
                                                     <p class="mg-b-10">تلفن ثابت</p>
-                                                    <input type="text" name="tel" value="{{$hami->tel}}" class="form-control" />
+                                                    <input type="text" name="tel"  value="{{$hami->tel}}" class="form-control" />
                                                 </div>
                                                 <div class="form-group">
                                                     <p class="mg-b-10">حامی یاب</p>
-                                                    <select name="hamahang_id" class="form-control select-lg select2">
+                                                    <select name="hamahang_id" required class="form-control select-lg select2">
                                                         <option value="">انتخاب کنید</option>
                                                         @foreach($userhamahang as $huser)
                                                             <option value="{{$huser->id}}" {{$huser->id == $hami->hamahang_id ? 'selected' : ''}}>{{$huser->name}}</option>
@@ -64,7 +64,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <p class="mg-b-10">تاریخ عضویت</p>
-                                                    <input type="text" name="date"  class="form-control fc-datepicker" value="{{$hami->date}}" />
+                                                    <input type="text" name="date" required class="form-control fc-datepicker" value="{{$hami->date}}" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -87,7 +87,7 @@
 
                                                 <div class="form-group">
                                                     <p class="mg-b-10">انتخاب نوع عضویت</p>
-                                                    <select name="type_id" class="form-control select-lg select2">
+                                                    <select name="type_id" required class="form-control select-lg select2">
                                                         @foreach($typeusers as $type_user)
                                                             <option value="{{$type_user->id}}" {{$hami->type_id == $type_user->id ? 'selected' : ''}}>{{$type_user->title}}</option>
                                                         @endforeach
@@ -98,7 +98,7 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <p class="mg-b-10">شماره موبایل</p>
-                                                    <input type="text" name="mobile" value="{{$hami->mobile}}" class="form-control" />
+                                                    <input type="text" name="mobile" required value="{{$hami->mobile}}" class="form-control" />
                                                 </div>
                                                 <div class="form-group">
                                                     <p class="mg-b-10">شماره موبایل2</p>

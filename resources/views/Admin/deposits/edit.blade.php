@@ -49,7 +49,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <p class="mg-b-10">نام و نام خانوادگی</p>
-                                                    <select name="user_id" class="form-control select-lg select2" id="user_id">
+                                                    <select name="user_id" required class="form-control select-lg select2" id="user_id">
                                                         <option value="">انتخاب کنید</option>
                                                         @foreach($users as $user)
                                                             <option value="{{$user->id}}" {{$deposit->user_id == $user->id ? 'selected' : ''}}>{{$user->name}}</option>
@@ -58,19 +58,19 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <p class="mg-b-10">تاریخ واریز</p>
-                                                    <input type="text" name="date"  class="form-control fc-datepicker" value="{{$deposit->date}}" >
+                                                    <input type="text" name="date" required class="form-control fc-datepicker" value="{{$deposit->date}}" >
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <p class="mg-b-10">مبلغ واریز</p>
-                                                    <input type="text" name="amount" data-required="1" value="{{number_format($deposit->amount)}}" class="form-control loan_max_amount" />
+                                                    <input type="text" name="amount" required value="{{number_format($deposit->amount)}}" class="form-control loan_max_amount" />
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                             <div class="form-group">
                                                 <p class="mg-b-10">علت واریز</p>
-                                                <select name="reason_id" class="form-control select-lg select2">
+                                                <select name="reason_id" required class="form-control select-lg select2">
                                                     <option value="">انتخاب کنید</option>
                                                     @foreach($reasons as $reason)
                                                         <option value="{{$reason->id}}" {{$reason->id == $deposit->reason_id ? 'selected' : ''}}>{{$reason->title}}</option>

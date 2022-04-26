@@ -44,26 +44,26 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <p class="mg-b-10">نام و نام خانوادگی</p>
-                                                <select name="hami_id" class="form-control select-lg select2" id="user_id">
+                                                <select name="hami_id" required class="form-control select-lg select2" id="user_id">
                                                     <option value="">انتخاب کنید</option>
-                                                @foreach($hamis as $hami)
+                                                    @foreach($hamis as $hami)
                                                         <option value="{{$hami->id}}">{{$hami->name}} - {{$hami->username}} - {{$hami->mobile}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <p class="mg-b-10">تاریخ واریز</p>
-                                                <input type="text" name="date"  class="form-control fc-datepicker" placeholder="روز / ماه / سال" >
+                                                <input type="text" name="date" required class="form-control fc-datepicker" placeholder="روز / ماه / سال" >
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <p class="mg-b-10">مبلغ واریز</p>
-                                                <input type="text" name="amount" data-required="1" placeholder="مبلغ واریز را وارد کنید" class="form-control loan_max_amount" />
+                                                <input type="text" name="amount" required placeholder="مبلغ واریز را وارد کنید" class="form-control loan_max_amount" />
                                             </div>
                                             <div class="form-group">
                                                 <p class="mg-b-10">هماهنگ کننده</p>
-                                                <select name="hamahang_id" class="form-control select-lg select2">
+                                                <select name="hamahang_id" required class="form-control select-lg select2">
                                                     <option value="">انتخاب کنید</option>
                                                     @foreach($userhamahang as $huser)
                                                         <option value="{{$huser->id}}" >{{$huser->name}}</option>
@@ -74,7 +74,7 @@
                                         <div class="col-md-3">
                                         <div class="form-group">
                                             <p class="mg-b-10">علت واریز</p>
-                                            <select name="reason_id" class="form-control select-lg select2">
+                                            <select name="reason_id" required class="form-control select-lg select2">
                                                 <option value="">انتخاب کنید</option>
                                                 @foreach($reasons as $reason)
                                                     <option value="{{$reason->id}}">{{$reason->title}}</option>
@@ -85,7 +85,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <p class="mg-b-10">شماره کارت</p>
-                                                <select name="acountnumber_id" class="form-control select-lg select2">
+                                                <select name="acountnumber_id" required class="form-control select-lg select2">
                                                     <option value="">انتخاب کنید</option>
                                                     @foreach($acountnumbers as $acountnumber)
                                                         <option value="{{$acountnumber->id}}">{{$acountnumber->title}} - {{$acountnumber->shomare_hesab}}</option>

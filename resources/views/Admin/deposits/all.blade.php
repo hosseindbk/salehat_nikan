@@ -55,7 +55,7 @@
                                                 <td>{{$deposit->reason}}</td>
                                                 <td>{{$deposit->hesabtitle}} - {{$deposit->shomare_hesab}}</td>
                                                 <td>{{$deposit->code}}</td>
-                                                <td>{{$deposit->hamahang}}</td>
+                                                <td>{{$deposit->hamahangname}}</td>
                                                 <td>
                                                     <div class="btn-icon-list" style="float: right;">
                                                         <a href="{{ route('deposits.edit' , $deposit->id) }}" class="btn ripple btn-outline-info btn-icon">
