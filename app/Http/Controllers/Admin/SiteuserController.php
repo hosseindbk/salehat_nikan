@@ -27,7 +27,7 @@ class SiteuserController extends Controller
 
                 $data = Hami::leftjoin('users', 'users.id', '=', 'hamis.hamahang_id')
                     ->select('hamis.id', 'hamis.name', 'hamis.mobile', 'hamis.date', 'users.name as username', 'hamis.phone_verify', 'hamis.status')
-                    ->orderBy('hamis.id' , 'DESC')
+                    ->orderBy('id' , 'DESC')
                     ->get();
 
                 return Datatables::of($data)

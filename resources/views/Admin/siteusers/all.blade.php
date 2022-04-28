@@ -89,7 +89,6 @@
                     {data: 'username'       , name: 'username'      },
                     {data: 'phone_verify'   , name: 'phone_verify'  },
                     {data: 'status'         , name: 'status'        },
-
                     {
                         data: 'action',
                         name: 'action',
@@ -98,7 +97,6 @@
                     },
                 ]
             });
-
         });
     </script>
 @endsection
