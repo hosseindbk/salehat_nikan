@@ -95,18 +95,18 @@ class DepositController extends Controller
 
     public function edit($id)
     {
-        $users              = User::select('id' , 'name')->where('id' ,'>' ,1)->get();
+        $users    = User::select('id' , 'name')->where('id' ,'>' ,1)->get();
+        $deposits = deposit::leftjoin('hamis' , 'hamis.id' ,'=' ,'deposits.user_id')
+                        ->leftjoin('acountnumbers' , 'acountnumbers.id' , '=' , 'deposits.acountnumber_id' )
+                        ->select('deposits.id as id' ,'deposits.user_id as user_id' , 'acountnumbers.title as hesabtitle'
+                            , 'acountnumbers.shomare_hesab' , 'deposits.acountnumber_id as acountnumber_id' , 'deposits.date as date' , 'deposits.amount as amount'
+                            ,'deposits.reason_id as reason' , 'hamis.name as name' , 'hamis.mobile as mobile' , 'deposits.code_number as code')
+                        ->orderby('deposits.id' , 'DESC')
+                        ->where('deposits.id' , $id)
+                        ->get();
 
-        $deposits           = deposit::leftjoin('users' , 'users.id' ,'=' ,'deposits.user_id')
-            ->leftjoin('acountnumbers' , 'acountnumbers.id' , '=' , 'deposits.acountnumber_id' )
-            ->select('deposits.id as id' ,'deposits.user_id as user_id' , 'acountnumbers.title as hesabtitle' , 'acountnumbers.shomare_hesab' , 'deposits.acountnumber_id as acountnumber_id' , 'deposits.date as date' , 'deposits.amount as amount'
-                ,'deposits.reason_id as reason' , 'users.name as name' , 'users.phone as phone' , 'deposits.code_number as code')
-            ->orderby('deposits.id' , 'DESC')
-            ->where('deposits.id' , $id)
-            ->get();
         $reasons            = Reason::select('id' , 'title')->get();
-
-        $user_id = deposit::whereId($id)->pluck('user_id');
+        $user_id            = deposit::whereId($id)->pluck('user_id');
         $acountnumbers      = acountnumber::select('id' , 'shomare_card')->whereUser_id($user_id)->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();

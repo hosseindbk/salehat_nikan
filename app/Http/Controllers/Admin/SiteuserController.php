@@ -26,7 +26,7 @@ class SiteuserController extends Controller
             if (auth::user()->id == 1 || auth::user()->id == 2000 || auth::user()->id == 2006) {
 
                 $data = Hami::leftjoin('users', 'users.id', '=', 'hamis.hamahang_id')->
-                select('hamis.id', 'hamis.name', 'hamis.mobile', 'hamis.date', 'users.name as username', 'hamis.phone_verify', 'hamis.status')->get();
+                select('hamis.id', 'hamis.name', 'hamis.mobile', 'hamis.date', 'users.name as username', 'hamis.phone_verify', 'hamis.status')->latest()->get();
 
                 return Datatables::of($data)
                     ->editColumn('id', function ($data) {
