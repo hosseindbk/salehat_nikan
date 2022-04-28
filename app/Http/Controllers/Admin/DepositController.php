@@ -96,11 +96,12 @@ class DepositController extends Controller
     public function edit($id)
     {
         $users    = User::select('id' , 'name')->where('id' ,'>' ,1)->get();
+        $hamis    = Hami::select('id' , 'name')->get();
         $deposits = deposit::leftjoin('hamis' , 'hamis.id' ,'=' ,'deposits.user_id')
                         ->leftjoin('acountnumbers' , 'acountnumbers.id' , '=' , 'deposits.acountnumber_id' )
                         ->select('deposits.id as id' ,'deposits.user_id as user_id' , 'acountnumbers.title as hesabtitle'
                             , 'acountnumbers.shomare_hesab' , 'deposits.acountnumber_id as acountnumber_id' , 'deposits.date as date' , 'deposits.amount as amount'
-                            ,'deposits.reason_id as reason' , 'hamis.name as name' , 'hamis.mobile as mobile' , 'deposits.code_number as code')
+                            ,'deposits.reason_id as reason' , 'hamis.name as name', 'hamis.id as hamisid' , 'hamis.mobile as mobile' , 'deposits.code_number as code')
                         ->orderby('deposits.id' , 'DESC')
                         ->where('deposits.id' , $id)
                         ->get();
@@ -113,6 +114,7 @@ class DepositController extends Controller
 
 
         return view('Admin.deposits.edit')
+            ->with(compact('hamis'))
             ->with(compact('reasons'))
             ->with(compact('acountnumbers'))
             ->with(compact('users'))

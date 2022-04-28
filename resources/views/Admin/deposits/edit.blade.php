@@ -51,8 +51,8 @@
                                                     <p class="mg-b-10">نام و نام خانوادگی</p>
                                                     <select name="user_id" required class="form-control select-lg select2" id="user_id">
                                                         <option value="">انتخاب کنید</option>
-                                                        @foreach($users as $user)
-                                                            <option value="{{$user->id}}" {{$deposit->user_id == $user->id ? 'selected' : ''}}>{{$user->name}}</option>
+                                                        @foreach($hamis as $hami)
+                                                            <option value="{{$hami->id}}" {{$deposit->hamisid == $hami->id ? 'selected' : ''}}>{{$hami->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
