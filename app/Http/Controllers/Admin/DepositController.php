@@ -25,10 +25,10 @@ class DepositController extends Controller
 
                 if (auth::user()->id == 1 || auth::user()->id == 2000 || auth::user()->id == 2006) {
 
-                    $data = deposit::leftjoin('users', 'users.id', '=', 'deposits.hamahang_id')
-                        ->leftjoin('hamis', 'hamis.id', '=', 'deposits.user_id')
-                        ->leftjoin('acountnumbers', 'acountnumbers.id', '=', 'deposits.acountnumber_id')
-                        ->leftjoin('reasons', 'reasons.id', '=', 'deposits.reason_id')
+                    $data = deposit::leftjoin('users'   , 'users.id'        , '='   , 'deposits.hamahang_id')
+                        ->leftjoin('hamis'              , 'hamis.id'        , '='   , 'deposits.user_id')
+                        ->leftjoin('acountnumbers'      , 'acountnumbers.id', '='   , 'deposits.acountnumber_id')
+                        ->leftjoin('reasons'            , 'reasons.id'      , '='   , 'deposits.reason_id')
                         ->select('deposits.id as id', 'hamis.id as userid', 'deposits.date as date', 'deposits.amount as amount'
                             , 'hamis.name as name', 'reasons.title as reason', 'users.name as hamahangname' ,  'acountnumbers.shomare_hesab as shomare_hesab'
                             , 'acountnumbers.title as hesabtitle', 'hamis.mobile as mobile', 'deposits.code_number as code')
@@ -52,7 +52,7 @@ class DepositController extends Controller
                             return ($data->amount);
                         })
                         ->editColumn('reason', function ($data) {
-                            return ($data->amount);
+                            return ($data->reason);
                         })
                         ->editColumn('hesabtitle', function ($data) {
                             return ($data->hesabtitle);
