@@ -49,7 +49,7 @@ class DepositController extends Controller
                             return ($data->date);
                         })
                         ->editColumn('amount', function ($data) {
-                            return ($data->amount);
+                            return (number_format($data->amount));
                         })
                         ->editColumn('reason', function ($data) {
                             return ($data->reason);
