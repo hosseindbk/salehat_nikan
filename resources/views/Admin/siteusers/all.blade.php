@@ -76,7 +76,6 @@
     <script src="{{asset('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min-rtl.js')}}"></script>
     <script type="text/javascript">
         $(function () {
-
             var table = $('.yajra-datatable').DataTable({
                 processing: true,
                 serverSide: true,
@@ -93,9 +92,11 @@
                         data: 'action',
                         name: 'action',
                         orderable: true,
-                        searchable: true
+                        searchable: true,
+
                     },
-                ]
+                ],
+                "order": [[ 1, "desc" ]]
             });
         });
     </script>

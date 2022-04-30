@@ -99,7 +99,8 @@
                         orderable: true,
                         searchable: true
                     },
-                ]
+                ],
+                "order": [[ 1, "desc" ]]
             });
         });
     </script>
