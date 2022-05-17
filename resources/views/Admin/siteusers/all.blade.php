@@ -4,6 +4,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('keramat/vendors/dataTable/v1/css/semantic.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('keramat/vendors/dataTable/v1/css/dataTables.semanticui.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('keramat/vendors/dataTable/v1/css/buttons.semanticui.min.css')}}" type="text/css">
 @endsection
 @section('main')
     <div class="main-content side-content pt-0">
@@ -65,20 +68,60 @@
                         </div>
                     </div>
                 </div>
-             </div>
+            </div>
         </div>
     </div>
 @endsection
 @section('end')
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="{{asset('keramat/vendors/dataTable/v1/semantic.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/dataTables.semanticui.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.semanticui.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/jszip.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/vfs_fonts.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.print.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.colVis.min.js')}}"></script>
+
     <script src="{{asset('admin/assets/plugins/select2/js/select2.min.js')}}"></script>
     <script src="{{asset('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min-rtl.js')}}"></script>
     <script type="text/javascript">
+
         $(function () {
             var table = $('.yajra-datatable').DataTable({
+                order: [[ 1, 'desc' ]],
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        text: 'اکسل',
+                        className: 'btn btn-default btn-xs'
+                    },
+                    {
+                        extend: 'print',
+                        text: 'پرینت و pdf',
+                        className: 'btn btn-default btn-xs'
+                    },
+
+                ],
+                'columnDefs': [
+                    {
+                        'targets': 0,
+                        'checkboxes': true
+                    }
+                ],
+                "lengthChange": true,
+                "pageLength": '20',
+
                 processing: true,
                 serverSide: true,
+                orderable: true,
+                searchable: true,
+                fixedHeader: false,
+                orderCellsTop: false,
                 ajax: "{{ route('siteusers.index') }}",
                 columns: [
                     {data: 'id'             , name: 'id'            },
@@ -92,12 +135,15 @@
                         data: 'action',
                         name: 'action',
                         orderable: true,
-                        searchable: true,
-
+                        searchable: true
                     },
                 ],
-                "order": [[ 1, "desc" ]]
             });
+        });
+
+        $(document).ready(function() {
+            table.buttons().container()
+                .appendTo( $('div.eight.column:eq(0)', table.table().container()) );
         });
     </script>
 @endsection

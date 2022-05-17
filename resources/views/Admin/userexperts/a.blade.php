@@ -2,9 +2,9 @@
 @extends('dashboard.keramat.layouts.main')
 @section('style')
 
-    <link rel="stylesheet" href="{{asset('dashboard/keramat/vendors/dataTable/v1/css/semantic.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('dashboard/keramat/vendors/dataTable/v1/css/dataTables.semanticui.min.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('dashboard/keramat/vendors/dataTable/v1/css/buttons.semanticui.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('keramat/vendors/dataTable/v1/css/semantic.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('keramat/vendors/dataTable/v1/css/dataTables.semanticui.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('keramat/vendors/dataTable/v1/css/buttons.semanticui.min.css')}}" type="text/css">
     <style>
         body {
             margin: 0 !important;
@@ -118,10 +118,10 @@
                 <div class="card">
                     <div class="page-card">
                         <div class="row">
-                            <form method="get" action="{{ route('hotelLogDecreaseQuataRoute') }}" style="display: flex">
-                                <input type="number" class="form-control" name="page" value="{{$page}}" autocomplete="off" style="width: 100px">
-                                <button type="submit" class="dt-button ui button buttons-copy buttons-html5"><i class="fa fa-refresh"></i></button>
-                            </form>
+{{--                            <form method="get" action="{{ route('hotelLogDecreaseQuataRoute') }}" style="display: flex">--}}
+{{--                                <input type="number" class="form-control" name="page" value="{{$page}}" autocomplete="off" style="width: 100px">--}}
+{{--                                <button type="submit" class="dt-button ui button buttons-copy buttons-html5"><i class="fa fa-refresh"></i></button>--}}
+{{--                            </form>--}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -157,15 +157,15 @@
 @endsection
 @section('js')
 
-    <script src="{{asset('dashboard/keramat/vendors/dataTable/v1/semantic.min.js')}}"></script>
-    <script src="{{asset('dashboard/keramat/vendors/dataTable/v1/dataTables.semanticui.min.js')}}"></script>
-    <script src="{{asset('dashboard/keramat/vendors/dataTable/v1/dataTables.buttons.min.js')}}"></script>
-    <script src="{{asset('dashboard/keramat/vendors/dataTable/v1/buttons.semanticui.min.js')}}"></script>
-    <script src="{{asset('dashboard/keramat/vendors/dataTable/v1/jszip.min.js')}}"></script>
-    <script src="{{asset('dashboard/keramat/vendors/dataTable/v1/vfs_fonts.js')}}"></script>
-    <script src="{{asset('dashboard/keramat/vendors/dataTable/v1/buttons.html5.min.js')}}"></script>
-    <script src="{{asset('dashboard/keramat/vendors/dataTable/v1/buttons.print.min.js')}}"></script>
-    <script src="{{asset('dashboard/keramat/vendors/dataTable/v1/buttons.colVis.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/semantic.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/dataTables.semanticui.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.semanticui.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/jszip.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/vfs_fonts.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.print.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.colVis.min.js')}}"></script>
     <script>
         $('#sample1 thead tr').clone(true).appendTo('#sample1 thead');
         $('#sample1 thead tr:eq(1) th').each(function (i) {
