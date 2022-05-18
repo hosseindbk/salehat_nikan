@@ -222,7 +222,7 @@
     <div class="main-footer text-center">
         <div class="container">
             <div class="row row-sm">
-                <div class="col-md-12">
+                <div class="col-md-12" style="position: fixed;bottom: 0;width: 100%;">
                     <span>کپی رایت © 1400  . طراحی شده توسط <a href="http://bestagroup.ir">Bestagroup</a> کلیه حقوق محفوظ است.</span>
                 </div>
             </div>
