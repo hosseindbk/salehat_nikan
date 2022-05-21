@@ -24,9 +24,8 @@ class DepositController extends Controller
 
 
 
-        $startdate  =  $request->startdate;
-        $enddate    = $request->enddate;
-
+        $startdate  =   $request->startdate;
+        $enddate    =   $request->enddate;
 
         if($request->page)
             $page = $request->page;

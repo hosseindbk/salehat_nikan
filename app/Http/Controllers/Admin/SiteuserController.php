@@ -21,6 +21,12 @@ class SiteuserController extends Controller
     {
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
+        $startdate  =   $request->startdate;
+        $enddate    =   $request->enddate;
+        if($request->page)
+            $page = $request->page;
+        else
+            $page = 25;
         if ($request->ajax()) {
 
             if (auth::user()->id == 1 || auth::user()->id == 2000 || auth::user()->id == 2006) {
@@ -132,6 +138,9 @@ class SiteuserController extends Controller
         }
 
         return view('Admin.siteusers.all')
+            ->with(compact('startdate'))
+            ->with(compact('enddate'))
+            ->with(compact('page'))
             ->with(compact('menudashboards'))
             ->with(compact('submenudashboards'));
     }

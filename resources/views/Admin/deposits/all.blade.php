@@ -28,17 +28,17 @@
                             <div class="card-body">
                                 <div class="row">
                                     <form method="get" action="{{ url('admin/deposits') }}" style="display: flex">
-                                        <input type="number" class="form-control" name="page" value="{{$page}}" autocomplete="off" style="width: 100px">
-                                        <input type="text" class="form-control" name="startdate" placeholder="از تاریخ" autocomplete="off" style="width: 100px">
-                                        <input type="text" class="form-control" name="enddate" placeholder="تا تاریخ"  autocomplete="off" style="width: 100px">
+                                        <input type="number" class="form-control" name="page"    value="{{$page}}" autocomplete="off" style="width: 100px">
+                                        <input type="text" class="form-control" name="startdate" value="{{$startdate}}" placeholder="از تاریخ" autocomplete="on" style="width: 100px">
+                                        <input type="text" class="form-control" name="enddate"   value="{{$enddate}}" placeholder="تا تاریخ"  autocomplete="on" style="width: 100px">
                                         <button type="submit" class="btn btn-default">بروزرسانی جدول</button>
                                     </form>
+                                    <a href="{{url('admin/deposits/create')}}" class="btn btn-default">افزودن واریزی </a>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div>
                                     <h6 class="main-content-label mb-1">لیست واریزی ها </h6>
-                                    <a href="{{url('admin/deposits/create')}}" class="btn btn-primary btn-xs">افزودن واریزی </a>
                                 </div>
                                 <div class="table-responsive">
                                     <div class="table-responsive">
