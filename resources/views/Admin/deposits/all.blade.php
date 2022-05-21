@@ -27,10 +27,10 @@
                         <div class="card custom-card overflow-hidden">
                             <div class="page-card">
                                 <div class="row">
-{{--                                    <form method="get" action="{{ route('pagecount') }}" style="display: flex">--}}
-{{--                                        <input type="number" class="form-control" name="page" value="{{$page}}" autocomplete="off" style="width: 100px">--}}
-{{--                                        <button type="submit" class="dt-button ui button buttons-copy buttons-html5"><i class="fa fa-refresh"></i></button>--}}
-{{--                                    </form>--}}
+                                    <form method="get" action="{{ url('admin/deposits') }}" style="display: flex">
+                                        <input type="number" class="form-control" name="page" value="{{$page}}" autocomplete="off" style="width: 100px">
+                                        <button type="submit" class="dt-button ui button buttons-copy buttons-html5"><i class="fa fa-refresh"></i></button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -173,7 +173,7 @@
                 }
             ],
             "lengthChange": true,
-
+            "pageLength": '{{$page}}',
             processing: true,
             serverSide: true,
             orderable: true,
@@ -200,9 +200,6 @@
             ],
 
         });
-
-
-
 
         });
 

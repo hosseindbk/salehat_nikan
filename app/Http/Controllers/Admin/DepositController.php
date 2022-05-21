@@ -22,6 +22,10 @@ class DepositController extends Controller
         $menudashboards = Menudashboard::whereStatus(4)->get();
         $submenudashboards = Submenudashboard::whereStatus(4)->get();
 
+        if($request->page)
+            $page = $request->page;
+        else
+            $page = 25;
         if ($request->ajax()) {
 
             if (auth::user()->id == 1 || auth::user()->id == 2000 || auth::user()->id == 2006) {
@@ -135,6 +139,7 @@ class DepositController extends Controller
         }
 
         return view('Admin.deposits.all')
+            ->with(compact('page'))
             ->with(compact('menudashboards'))
             ->with(compact('submenudashboards'));
     }
