@@ -25,6 +25,14 @@
                 <div class="row row-sm">
                     <div class="col-lg-12">
                         <div class="card custom-card overflow-hidden">
+                            <div class="page-card">
+                                <div class="row">
+{{--                                    <form method="get" action="{{ route('pagecount') }}" style="display: flex">--}}
+{{--                                        <input type="number" class="form-control" name="page" value="{{$page}}" autocomplete="off" style="width: 100px">--}}
+{{--                                        <button type="submit" class="dt-button ui button buttons-copy buttons-html5"><i class="fa fa-refresh"></i></button>--}}
+{{--                                    </form>--}}
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <div>
                                     <h6 class="main-content-label mb-1">لیست واریزی ها </h6>
@@ -62,6 +70,12 @@
                                             </thead>
                                             <tbody>
                                             </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <th colspan="4" style="text-align:right">جمع هزینه:</th>
+                                                <th></th>
+                                            </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
@@ -106,6 +120,37 @@
         // });
         $(function () {
         var table = $('.yajra-datatable').DataTable({
+
+            footerCallback: function (row, data, start, end, display) {
+                var api = this.api();
+
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+                };
+
+                // Total over all pages
+                total = api
+                    .column(4)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                // Total over this page
+                pageTotal = api
+                    .column(4, { page: 'current' })
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                // Update footer
+                $(api.column(4).footer()).html('تومان' + pageTotal + ' ( تومان' + total + ' جمع واریزی)');
+            },
+
+
+
             order: [[ 1, 'desc' ]],
             dom: 'Bfrtip',
             buttons: [
@@ -128,7 +173,6 @@
                 }
             ],
             "lengthChange": true,
-            "pageLength": '20',
 
             processing: true,
             serverSide: true,
@@ -154,7 +198,12 @@
                     searchable: true
                 },
             ],
+
         });
+
+
+
+
         });
 
         $(document).ready(function() {
