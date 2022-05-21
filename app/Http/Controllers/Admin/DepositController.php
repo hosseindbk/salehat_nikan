@@ -23,9 +23,14 @@ class DepositController extends Controller
         $submenudashboards = Submenudashboard::whereStatus(4)->get();
 
 
+        $start  =   request('startdate');
+        $end    =   request('enddate');
 
-        $startdate  =   $request->startdate;
-        $enddate    =   $request->enddate;
+        global $startdate;
+        global $enddate;
+
+        $startdate  = $start;
+        $enddate    = $end;
 
         if($request->page)
             $page = $request->page;
@@ -33,7 +38,7 @@ class DepositController extends Controller
             $page = 25;
         if ($request->ajax()) {
 
-            if (auth::user()->id == 1 || auth::user()->id == 2000 || auth::user()->id == 2006) {
+             if (auth::user()->id == 1 || auth::user()->id == 2000 || auth::user()->id == 2006) {
 
                 $data = deposit::leftjoin('users', 'users.id', '=', 'deposits.hamahang_id')
                     ->leftjoin('hamis', 'hamis.id', '=', 'deposits.user_id')
@@ -43,7 +48,10 @@ class DepositController extends Controller
                         , 'hamis.name as name', 'reasons.title as reason', 'users.name as hamahangname', 'acountnumbers.shomare_hesab as shomare_hesab'
                         , 'acountnumbers.title as hesabtitle', 'hamis.mobile as mobile', 'deposits.code_number as code')
                     ->orderBy('deposits.created_at', 'desc')
+                    ->whereBetween('deposits.date' , ['1401/02/01' , '1401/02/28'])
                     ->get();
+
+                //dd($data);
                 return Datatables::of($data)
                     ->editColumn('id', function ($data) {
                         return ($data->id);
