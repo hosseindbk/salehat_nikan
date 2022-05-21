@@ -72,7 +72,7 @@
                                             </tbody>
                                             <tfoot>
                                             <tr>
-                                                <th colspan="4" style="text-align:right">جمع هزینه:</th>
+                                                <th colspan="4" style="text-align:right">مجموع واریزی:</th>
                                                 <th></th>
                                             </tr>
                                             </tfoot>
