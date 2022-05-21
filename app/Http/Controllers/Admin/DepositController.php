@@ -22,6 +22,12 @@ class DepositController extends Controller
         $menudashboards = Menudashboard::whereStatus(4)->get();
         $submenudashboards = Submenudashboard::whereStatus(4)->get();
 
+
+
+        $startdate  =  $request->startdate;
+        $enddate    = $request->enddate;
+
+
         if($request->page)
             $page = $request->page;
         else
@@ -39,7 +45,6 @@ class DepositController extends Controller
                         , 'acountnumbers.title as hesabtitle', 'hamis.mobile as mobile', 'deposits.code_number as code')
                     ->orderBy('deposits.created_at', 'desc')
                     ->get();
-
                 return Datatables::of($data)
                     ->editColumn('id', function ($data) {
                         return ($data->id);
@@ -139,6 +144,8 @@ class DepositController extends Controller
         }
 
         return view('Admin.deposits.all')
+            ->with(compact('startdate'))
+            ->with(compact('enddate'))
             ->with(compact('page'))
             ->with(compact('menudashboards'))
             ->with(compact('submenudashboards'));

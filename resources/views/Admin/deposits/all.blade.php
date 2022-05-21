@@ -25,11 +25,13 @@
                 <div class="row row-sm">
                     <div class="col-lg-12">
                         <div class="card custom-card overflow-hidden">
-                            <div class="page-card">
+                            <div class="card-body">
                                 <div class="row">
                                     <form method="get" action="{{ url('admin/deposits') }}" style="display: flex">
                                         <input type="number" class="form-control" name="page" value="{{$page}}" autocomplete="off" style="width: 100px">
-                                        <button type="submit" class="dt-button ui button buttons-copy buttons-html5"><i class="fa fa-refresh"></i></button>
+                                        <input type="text" class="form-control" name="startdate" placeholder="از تاریخ" autocomplete="off" style="width: 100px">
+                                        <input type="text" class="form-control" name="enddate" placeholder="تا تاریخ"  autocomplete="off" style="width: 100px">
+                                        <button type="submit" class="btn btn-default">بروزرسانی جدول</button>
                                     </form>
                                 </div>
                             </div>
@@ -104,6 +106,8 @@
     <script src="{{asset('admin/assets/plugins/select2/js/select2.min.js')}}"></script>
     <script src="{{asset('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min-rtl.js')}}"></script>
     <script type="text/javascript">
+
+
         // $('.yajra-datatable thead tr').clone(true).appendTo('.yajra-datatable thead');
         // $('.yajra-datatable thead tr:eq(1) th').each(function (i) {
         //     var title = $(this).text();
@@ -180,7 +184,7 @@
             searchable: true,
             fixedHeader: false,
             orderCellsTop: false,
-            ajax: "{{ route('deposits.index') }}",
+            ajax: "{{ route('deposits.index',['startDate'=>$startdate,'endDate'=>$enddate]) }}",
             columns: [
                 {data: 'id'             , name: 'id'            },
                 {data: 'date'           , name: 'date'          },
