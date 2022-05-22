@@ -74,7 +74,7 @@
                                             <tfoot>
                                             <tr>
                                                 <th colspan="4" style="text-align:right">مجموع واریزی:</th>
-                                                <th></th>
+                                                <th colspan="2"></th>
                                             </tr>
                                             </tfoot>
                                         </table>
@@ -146,12 +146,14 @@
                 {
                     extend: 'excel',
                     text: 'اکسل',
-                    className: 'btn btn-default btn-xs'
+                    className: 'btn btn-default btn-xs',
+                    footer: true
                 },
                 {
                     extend: 'print',
                     text: 'پرینت و pdf',
                     className: 'btn btn-default btn-xs',
+                    footer: true,
                     exportOptions: {
                         columns: ':visible'
                     }
