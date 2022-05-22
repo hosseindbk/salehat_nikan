@@ -39,7 +39,6 @@
                             <div class="card-body">
                                 <div>
                                     <h6 class="main-content-label mb-1">لیست واریزی ها </h6>
-                                </div>
                                 <div class="table-responsive">
                                     <div class="table-responsive">
                                         <style>
@@ -105,23 +104,9 @@
 
     <script src="{{asset('admin/assets/plugins/select2/js/select2.min.js')}}"></script>
     <script src="{{asset('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min-rtl.js')}}"></script>
+
     <script type="text/javascript">
 
-
-        // $('.yajra-datatable thead tr').clone(true).appendTo('.yajra-datatable thead');
-        // $('.yajra-datatable thead tr:eq(1) th').each(function (i) {
-        //     var title = $(this).text();
-        //     $(this).html('<input type="text" placeholder="جستجوی ' + title + '" />');
-        //
-        //     $('input', this).on('change change', function () {
-        //         if (table.column(i).search() !== this.value) {
-        //             table
-        //                 .column(i)
-        //                 .search(this.value)
-        //                 .draw();
-        //         }
-        //     });
-        // });
         $(function () {
         var table = $('.yajra-datatable').DataTable({
 
@@ -166,9 +151,12 @@
                 {
                     extend: 'print',
                     text: 'پرینت و pdf',
-                    className: 'btn btn-default btn-xs'
+                    className: 'btn btn-default btn-xs',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
                 },
-
+                'colvis'
             ],
             'columnDefs': [
                 {

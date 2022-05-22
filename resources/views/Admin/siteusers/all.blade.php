@@ -113,8 +113,12 @@
                     {
                         extend: 'print',
                         text: 'پرینت و pdf',
-                        className: 'btn btn-default btn-xs'
+                        className: 'btn btn-default btn-xs',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
                     },
+                    'colvis'
 
                 ],
                 'columnDefs': [
