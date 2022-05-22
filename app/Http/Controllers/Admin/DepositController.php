@@ -48,7 +48,7 @@ class DepositController extends Controller
                         , 'hamis.name as name', 'reasons.title as reason', 'users.name as hamahangname', 'acountnumbers.shomare_hesab as shomare_hesab'
                         , 'acountnumbers.title as hesabtitle', 'hamis.mobile as mobile', 'deposits.code_number as code')
                     ->orderBy('deposits.created_at', 'desc')
-                    ->whereBetween('deposits.date' , ['1401/02/01' , '1401/02/28'])
+//                    ->whereBetween('deposits.date' , ['1401/02/01' , '1401/02/28'])
                     ->get();
 
                 //dd($data);
