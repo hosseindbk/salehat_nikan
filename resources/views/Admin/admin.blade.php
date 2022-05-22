@@ -94,10 +94,10 @@
                 <a class="main-header-menu-icon" href="#" id="mainSidebarToggle"><span></span></a>
             </div>
             <div class="main-header-center">
-                <div class="responsive-logo">
-                    <a href="{{url('admin/panel')}}"><img src="{{asset('admin/assets/img/brand/logo.png')}}" class="mobile-logo" alt="بستا"></a>
-                    <a href="{{url('admin/panel')}}"><img src="{{asset('admin/assets/img/brand/logo-light.png')}}" class="mobile-logo-dark" alt="بستا"></a>
-                </div>
+{{--                <div class="responsive-logo">--}}
+{{--                    <a href="{{url('admin/panel')}}"><img src="{{asset('admin/assets/img/brand/logo.png')}}" class="mobile-logo" alt="بستا"></a>--}}
+{{--                    <a href="{{url('admin/panel')}}"><img src="{{asset('admin/assets/img/brand/logo-light.png')}}" class="mobile-logo-dark" alt="بستا"></a>--}}
+{{--                </div>--}}
             </div>
             <div class="main-header-right">
                 <div class="dropdown header-search">
