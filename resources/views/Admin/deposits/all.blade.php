@@ -74,8 +74,7 @@
                                             </tbody>
                                             <tfoot>
                                             <tr>
-                                                <th colspan="4" style="text-align:right">مجموع واریزی:</th>
-                                                <th></th>
+                                                <th colspan="10" class="totalcheck" style="text-align:right">مجموع واریزی:</th>
                                             </tr>
                                             </tfoot>
                                         </table>
@@ -136,7 +135,7 @@
                     }, 0);
 
                 // Update footer
-                $(api.column(4).footer()).html('تومان' + pageTotal + ' ( تومان' + total + ' جمع واریزی)');
+                $(api.column(4).footer('.totalcheck')).html('تومان' + pageTotal + ' ( تومان' + total + ' جمع واریزی)');
             },
 
 
