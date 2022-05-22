@@ -58,15 +58,16 @@
                                             <thead>
                                             <tr>
                                                 <th class="wd-10p"> کد کاربر </th>
-                                                <th class="wd-10p"> تاریخ واریز </th>
                                                 <th class="wd-10p"> نام و نام خانوادگی </th>
+                                                <th class="wd-10p"> تاریخ واریز </th>
                                                 <th class="wd-10p"> شماره موبایل </th>
                                                 <th class="wd-10p"> مبلغ واریزی(تومان) </th>
                                                 <th class="wd-10p"> علت واریز </th>
-                                                <th class="wd-10p"> شماره کارت </th>
+                                                <th class="wd-10p"> شماره حساب </th>
                                                 <th class="wd-10p"> کد رهگیری </th>
                                                 <th class="wd-10p"> هماهنگ کننده </th>
                                                 <th class="wd-10p"> ویرایش/حذف</th>
+                                                <th class="wd-10p">بررسی </th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -177,8 +178,8 @@
             ajax: "{{ route('deposits.index',['startDate'=>$startdate,'endDate'=>$enddate]) }}",
             columns: [
                 {data: 'id'             , name: 'id'            },
-                {data: 'date'           , name: 'date'          },
                 {data: 'name'           , name: 'name'          },
+                {data: 'date'           , name: 'date'          },
                 {data: 'mobile'         , name: 'mobile'        },
                 {data: 'amount'         , name: 'amount'        },
                 {data: 'reason'         , name: 'reason'        },
