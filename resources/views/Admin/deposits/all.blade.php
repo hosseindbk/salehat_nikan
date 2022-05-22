@@ -144,7 +144,7 @@
                     }, 0);
 
                 // Update footer
-                $(api.column(4).footer('.totalcheck')).html('تومان' + pageTotal + ' جمع واریزی ');
+                $(api.column(4).footer('.totalcheck')).html(' جمع واریزی ' + pageTotal + ' تومان ');
             },
 
 
