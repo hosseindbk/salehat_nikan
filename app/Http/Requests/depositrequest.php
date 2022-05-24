@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class offerrequest extends FormRequest
+class depositrequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,12 @@ class offerrequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user_id'           => ['required', 'string', 'max:255'],
+            'amount'            => ['required'],
+            'date'              => ['required'],
+            'reason_id'         => ['required'],
+            'hamahang_id'       => ['required'],
+            'acountnumber_id'   => ['required'],
         ];
     }
 }

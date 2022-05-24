@@ -27,13 +27,27 @@
                         <div class="card custom-card overflow-hidden">
                             <div class="card-body">
                                 <div class="row">
-                                    <form method="get" action="{{ url('admin/deposits') }}" style="display: flex">
-                                        <input type="number" class="form-control" name="page"      value="{{$page}}"      autocomplete="off" style="width: 100px">
-                                        <input type="text"   class="form-control" name="startdate" value="{{$startdate}}" autocomplete="on"  style="width: 100px" placeholder="از تاریخ" id="startdate">
-                                        <input type="text"   class="form-control" name="enddate"   value="{{$enddate}}"   autocomplete="on"  style="width: 100px" placeholder="تا تاریخ" id="enddate"  >
-                                        <button type="submit" class="btn btn-default">بروزرسانی جدول</button>
-                                    </form>
+                                    <div class="form-group col-md-2">
+                                        <form method="get" action="{{ url('admin/deposits') }}" style="display: flex">
+                                            <input type="number" class="form-control" name="page"    value="{{$page}}" autocomplete="off" style="width: 100px">
+                                            <button type="submit" class="btn btn-default">بروزرسانی جدول</button>
+                                        </form>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <input type="text" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="از تاریخ">
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <input type="text" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="تا تاریخ">
+                                    </div>
+{{--                                    <div class="form-group col-md-2">--}}
+{{--                                        <input type="number" class="form-control" id="page" name="page" placeholder="تعداد نمایش">--}}
+{{--                                    </div>--}}
+                                    <div class="form-group col-md-2">
+                                    <button type="submit" id="btnFiterSubmitSearch" class="btn btn-info btnFiterSubmitSearch">فیلتر</button>
+                                    </div>
+                                    <div class="form-group col-md-2">
                                     <a href="{{url('admin/deposits/create')}}" class="btn btn-default">افزودن واریزی </a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -176,16 +190,24 @@
                 }
             ],
             "lengthChange": true,
-            "pageLength": '{{$page}}',
+            "pageLength": {{$page}},
             processing: true,
             serverSide: true,
             orderable: true,
             searchable: true,
             fixedHeader: false,
             orderCellsTop: false,
-            ajax: "{{ route('deposits.index',['startDate'=>$startdate,'endDate'=>$enddate]) }}",
+            ajax:{
+              url:"{{ route('deposits.index') }}",
+            type: 'GET',
+            data: function (d) {
+                d.start_date = $('#start_date').val();
+                d.end_date = $('#end_date').val();
+                d.page = $('#page').val();
+            }
+            },
             columns: [
-                {data: 'userid'         , name: 'userid'            },
+                {data: 'userid'         , name: 'userid'        },
                 {data: 'name'           , name: 'name'          },
                 {data: 'date'           , name: 'date'          },
                 {data: 'mobile'         , name: 'mobile'        },
@@ -205,7 +227,9 @@
         });
 
         });
-
+        $('#btnFiterSubmitSearch').click(function(){
+            $('.yajra-datatable').DataTable().draw(true);
+        });
         $(document).ready(function() {
             table.buttons().container()
                 .appendTo( $('div.eight.column:eq(0)', table.table().container()) );

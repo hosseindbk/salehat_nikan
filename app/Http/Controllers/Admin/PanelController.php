@@ -17,8 +17,7 @@ class PanelController extends Controller
     {
         $categories         = category::whereStatus(1)->get();
 
-        $hamis              = Hami::select('id' , 'name' , 'mobile' , 'status' , 'date')
-                                    ->get();
+        $hamis              = Hami::select('id' , 'name' , 'mobile' , 'status' , 'date')->get();
         $hamahang           = User::select('id' , 'name' , 'mobile' , 'status' , 'date')
                                     ->where('level' , '=', 'admin')
                                     ->where('id' , '>', 1)

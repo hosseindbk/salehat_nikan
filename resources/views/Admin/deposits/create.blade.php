@@ -53,7 +53,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <p class="mg-b-10">تاریخ واریز</p>
-                                                <input type="text" name="date" required class="form-control fc-datepicker" placeholder="روز / ماه / سال" >
+                                                <input type="text" name="date" required class="form-control fc-datepicker" autocomplete="off" placeholder="روز / ماه / سال" >
                                             </div>
                                         </div>
                                         <div class="col-md-3">

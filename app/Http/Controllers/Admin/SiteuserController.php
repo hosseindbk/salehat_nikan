@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Hamirequest;
 use App\Model\acountnumber;
 use App\Model\Bank;
 use App\Model\Hami;
@@ -159,7 +160,7 @@ class SiteuserController extends Controller
             ->with(compact('submenudashboards'));
     }
 
-    public function store(Request $request)
+    public function store(Hamirequest $request)
     {
 
         $hamis = new Hami();

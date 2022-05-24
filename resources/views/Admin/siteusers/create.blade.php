@@ -77,7 +77,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <p class="mg-b-10">تاریخ عضویت</p>
-                                                <input type="text" name="date"  class="form-control fc-datepicker" placeholder="روز / ماه / سال" />
+                                                <input type="text" name="date" autocomplete="off"  class="form-control fc-datepicker" placeholder="روز / ماه / سال" />
                                             </div>
                                         </div>
                                         <div class="col-md-4">
