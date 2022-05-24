@@ -53,8 +53,8 @@ class DepositController extends Controller
 
                 //dd($data);
                 return Datatables::of($data)
-                    ->editColumn('id', function ($data) {
-                        return ($data->id);
+                    ->editColumn('userid', function ($data) {
+                        return ($data->userid);
                     })
                     ->editColumn('name', function ($data) {
                         return ($data->name);

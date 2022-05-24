@@ -185,7 +185,7 @@
             orderCellsTop: false,
             ajax: "{{ route('deposits.index',['startDate'=>$startdate,'endDate'=>$enddate]) }}",
             columns: [
-                {data: 'id'             , name: 'id'            },
+                {data: 'userid'         , name: 'userid'            },
                 {data: 'name'           , name: 'name'          },
                 {data: 'date'           , name: 'date'          },
                 {data: 'mobile'         , name: 'mobile'        },
