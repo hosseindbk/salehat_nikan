@@ -29,16 +29,17 @@
                                 <div class="row">
                                     <form method="get" action="{{ url('admin/siteusers') }}" style="display: flex">
                                         <input type="number" class="form-control" name="page"    value="{{$page}}" autocomplete="off" style="width: 100px">
-                                        <input type="text" class="form-control" name="startdate" value="{{$startdate}}" placeholder="از تاریخ" autocomplete="on" style="width: 100px">
-                                        <input type="text" class="form-control" name="enddate"   value="{{$enddate}}" placeholder="تا تاریخ"  autocomplete="on" style="width: 100px">
                                         <button type="submit" class="btn btn-default">بروزرسانی جدول</button>
                                     </form>
-                                    <a href="{{url('admin/siteusers/create')}}" class="btn btn-default">افزودن حامیان </a>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div>
-                                    <h6 class="main-content-label mb-1">لیست حامیان </h6>
+                                    <h6 class="main-content-label mb-1" style="float: right">لیست حامیان </h6>
+
+                                    <div class="form-group col-md-2" style="float: left;text-align: center">
+                                        <a href="{{url('admin/siteusers/create')}}" class="btn btn-default">افزودن حامی </a>
+                                    </div>
                                 </div>
 
                                 <div class="table-responsive">

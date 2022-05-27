@@ -27,32 +27,46 @@
                         <div class="card custom-card overflow-hidden">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="form-group col-md-2">
-                                        <form method="get" action="{{ url('admin/deposits') }}" style="display: flex">
-                                            <input type="number" class="form-control" name="page"    value="{{$page}}" autocomplete="off" style="width: 100px">
-                                            <button type="submit" class="btn btn-default">بروزرسانی جدول</button>
-                                        </form>
+                                    <div class="form-group col-md-1 ">
+                                        <input type="text" name="user_id" id="user_id" class="form-control " placeholder="کد کاربر">
                                     </div>
-                                    <div class="form-group col-md-2">
+                                    <div class="form-group col-md-2 ">
+                                        <input type="text" name="name" id="name" class="form-control " placeholder="نام و نام خانوادگی">
+                                    </div>
+                                    <div class="form-group col-md-1 ">
                                         <input type="text" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="از تاریخ">
                                     </div>
-                                    <div class="form-group col-md-2">
+                                    <div class="form-group col-md-1 ">
                                         <input type="text" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="تا تاریخ">
                                     </div>
-{{--                                    <div class="form-group col-md-2">--}}
-{{--                                        <input type="number" class="form-control" id="page" name="page" placeholder="تعداد نمایش">--}}
-{{--                                    </div>--}}
-                                    <div class="form-group col-md-2">
-                                    <button type="submit" id="btnFiterSubmitSearch" class="btn btn-info btnFiterSubmitSearch">فیلتر</button>
+                                    <div class="form-group col-md-1 ">
+                                        <input type="text" name="mobile" id="mobile" class="form-control " placeholder="شماره موبایل">
                                     </div>
-                                    <div class="form-group col-md-2">
-                                    <a href="{{url('admin/deposits/create')}}" class="btn btn-default">افزودن واریزی </a>
+                                    <div class="form-group col-md-1 ">
+                                        <input type="text" name="reason" id="reason" class="form-control " placeholder="علت">
                                     </div>
+                                    <div class="form-group col-md-1 ">
+                                        <input type="text" name="hesab" id="hesab" class="form-control " placeholder="شماره حساب">
+                                    </div>
+                                    <div class="form-group col-md-2 ">
+                                        <input type="text" name="hamahang" id="hamahang" class="form-control" placeholder="هماهنگ کننده">
+                                    </div>
+                                    <div class="form-group col-md-1 ">
+                                        <input type="text" name="page" id="page" class="form-control" placeholder="تعداد نمایش">
+                                    </div>
+                                    <div class="form-group col-md-1 ">
+                                        <button type="submit" id="btnFiterSubmitSearch" class="btn btn-default btnFiterSubmitSearch">اعمال فیلتر</button>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div>
-                                    <h6 class="main-content-label mb-1">لیست واریزی ها </h6>
+                                    <h6 class="main-content-label mb-1" style="float: right">لیست واریزی ها </h6>
+
+                                    <div class="form-group col-md-2" style="float: left;text-align: center">
+                                        <a href="{{url('admin/deposits/create')}}" class="btn btn-default">افزودن واریزی </a>
+                                    </div>
                                 <div class="table-responsive">
                                     <div class="table-responsive">
                                         <style>
@@ -190,20 +204,29 @@
                 }
             ],
             "lengthChange": true,
-            "pageLength": {{$page}},
+            {{--"pageLength": {{$page}},--}}
             processing: true,
             serverSide: true,
             orderable: true,
-            searchable: true,
+            searching: false,
+            paging: false,
+            searchable: false,
             fixedHeader: false,
             orderCellsTop: false,
             ajax:{
               url:"{{ route('deposits.index') }}",
             type: 'GET',
             data: function (d) {
-                d.start_date = $('#start_date').val();
-                d.end_date = $('#end_date').val();
-                d.page = $('#page').val();
+                d.start_date    = $('#start_date').val();
+                d.end_date      = $('#end_date').val();
+                d.name          = $('#name').val();
+                d.user_id       = $('#user_id').val();
+                d.mobile        = $('#mobile').val();
+                d.reason        = $('#reason').val();
+                d.hesab         = $('#hesab').val();
+                d.hamahang      = $('#hamahang').val();
+                d.page          = $('#page').val();
+
             }
             },
             columns: [
@@ -220,7 +243,7 @@
                     data: 'action',
                     name: 'action',
                     orderable: true,
-                    searchable: true
+                    searchable: false
                 },
             ],
 
@@ -233,6 +256,37 @@
         $(document).ready(function() {
             table.buttons().container()
                 .appendTo( $('div.eight.column:eq(0)', table.table().container()) );
+        });
+
+        var detailRows = [];
+
+        $('.yajra-datatable tbody').on('click', 'tr td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = dt.row(tr);
+            var idx = detailRows.indexOf(tr.attr('id'));
+
+            if (row.child.isShown()) {
+                tr.removeClass('details');
+                row.child.hide();
+
+                // Remove from the 'open' array
+                detailRows.splice(idx, 1);
+            } else {
+                tr.addClass('details');
+                row.child(format(row.data())).show();
+
+                // Add to the 'open' array
+                if (idx === -1) {
+                    detailRows.push(tr.attr('id'));
+                }
+            }
+        });
+
+        // On each draw, loop over the `detailRows` array and show any child rows
+        dt.on('draw', function () {
+            detailRows.forEach(function(id, i) {
+                $('#' + id + ' td.details-control').trigger('click');
+            });
         });
     </script>
 @endsection

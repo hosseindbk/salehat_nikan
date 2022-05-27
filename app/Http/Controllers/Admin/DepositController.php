@@ -23,18 +23,10 @@ class DepositController extends Controller
         $menudashboards = Menudashboard::whereStatus(4)->get();
         $submenudashboards = Submenudashboard::whereStatus(4)->get();
 
-        if($request->page)
-            $page = $request->page;
-        else
-            $page = 25;
         if ($request->ajax()) {
 
              if (auth::user()->id == 1 || auth::user()->id == 2000 || auth::user()->id == 2006) {
-                 $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
-                 $end_date = (!empty($_GET["end_date"])) ? ($_GET["end_date"]) : ('');
-//                 $page = (!empty($_GET["page"])) ? ($_GET["page"]) : (25);
-
-                 if($start_date && $end_date) {
+                     $page      = (!empty($_GET["page"]))   ? ($_GET["page"])   : (10);
 
                      $data = deposit::leftjoin('users', 'users.id', '=', 'deposits.hamahang_id')
                          ->leftjoin('hamis', 'hamis.id', '=', 'deposits.user_id')
@@ -44,19 +36,9 @@ class DepositController extends Controller
                              , 'hamis.name as name', 'reasons.title as reason', 'users.name as hamahangname', 'acountnumbers.shomare_hesab as shomare_hesab'
                              , 'acountnumbers.title as hesabtitle', 'hamis.mobile as mobile', 'deposits.code_number as code')
                          ->orderBy('deposits.created_at', 'desc')
-                         ->whereBetween('deposits.date', [$start_date, $end_date])
+                         ->filter()
+                         ->take($page)
                          ->get();
-                 }else {
-                     $data = deposit::leftjoin('users', 'users.id', '=', 'deposits.hamahang_id')
-                         ->leftjoin('hamis', 'hamis.id', '=', 'deposits.user_id')
-                         ->leftjoin('acountnumbers', 'acountnumbers.id', '=', 'deposits.acountnumber_id')
-                         ->leftjoin('reasons', 'reasons.id', '=', 'deposits.reason_id')
-                         ->select('deposits.id as id', 'hamis.id as userid', 'deposits.date as date', 'deposits.amount as amount'
-                             , 'hamis.name as name', 'reasons.title as reason', 'users.name as hamahangname', 'acountnumbers.shomare_hesab as shomare_hesab'
-                             , 'acountnumbers.title as hesabtitle', 'hamis.mobile as mobile', 'deposits.code_number as code')
-                         ->orderBy('deposits.created_at', 'desc')
-                         ->get();
-                 }
                 //dd($data);
                 return Datatables::of($data)
                     ->editColumn('userid', function ($data) {
@@ -101,13 +83,7 @@ class DepositController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             } else {
-
-
-                 $start_date = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');
-                 $end_date = (!empty($_GET["end_date"])) ? ($_GET["end_date"]) : ('');
-                 $page = (!empty($_GET["page"])) ? ($_GET["page"]) : (25);
-
-                 if($start_date && $end_date) {
+                     $page = (!empty($_GET["page"]))   ? ($_GET["page"])   : (10);
 
                      $data = deposit::leftjoin('users', 'users.id', '=', 'deposits.user_id')
                          ->leftjoin('hamis', 'hamis.id', '=', 'deposits.user_id')
@@ -116,20 +92,10 @@ class DepositController extends Controller
                          ->select('deposits.id as id', 'hamis.id as userid', 'deposits.date as date', 'deposits.amount as amount'
                              , 'hamis.name as name', 'reasons.title as reason', 'acountnumbers.shomare_card as shomarecard', 'hamis.mobile as mobile', 'deposits.code_number as code')
                          ->orderBy('deposits.created_at', 'desc')
+                         ->filter()
                          ->where('deposits.hamahang_id', '=', auth::user()->id)
-                         ->whereBetween('deposits.date', [$start_date, $end_date])
+                         ->take($page)
                          ->get();
-                 }else {
-                     $data = deposit::leftjoin('users', 'users.id', '=', 'deposits.user_id')
-                         ->leftjoin('hamis', 'hamis.id', '=', 'deposits.user_id')
-                         ->leftjoin('acountnumbers', 'acountnumbers.id', '=', 'deposits.acountnumber_id')
-                         ->leftjoin('reasons', 'reasons.id', '=', 'deposits.reason_id')
-                         ->select('deposits.id as id', 'hamis.id as userid', 'deposits.date as date', 'deposits.amount as amount'
-                             , 'hamis.name as name', 'reasons.title as reason', 'acountnumbers.shomare_card as shomarecard', 'hamis.mobile as mobile', 'deposits.code_number as code')
-                         ->orderBy('deposits.created_at', 'desc')
-                         ->where('deposits.hamahang_id', '=', auth::user()->id)
-                         ->get();
-                 }
 
                 return Datatables::of($data)
                     ->editColumn('id', function ($data) {
@@ -177,7 +143,6 @@ class DepositController extends Controller
         }
 
         return view('Admin.deposits.all')
-            ->with(compact('page'))
             ->with(compact('menudashboards'))
             ->with(compact('submenudashboards'));
     }
