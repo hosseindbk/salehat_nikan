@@ -89,6 +89,7 @@
                                                 <th class="wd-10p"> نام و نام خانوادگی </th>
                                                 <th class="wd-10p"> تاریخ واریز </th>
                                                 <th class="wd-10p"> شماره موبایل </th>
+                                                <th class="wd-10p"> شماره موبایل2 </th>
                                                 <th class="wd-10p"> مبلغ واریزی(تومان) </th>
                                                 <th class="wd-10p"> علت واریز </th>
                                                 <th class="wd-10p"> شماره حساب </th>
@@ -234,6 +235,7 @@
                 {data: 'name'           , name: 'name'          },
                 {data: 'date'           , name: 'date'          },
                 {data: 'mobile'         , name: 'mobile'        },
+                {data: 'mobile2'        , name: 'mobile2'       },
                 {data: 'amount'         , name: 'amount'        },
                 {data: 'reason'         , name: 'reason'        },
                 {data: 'hesabtitle'     , name: 'hesabtitle'    },
