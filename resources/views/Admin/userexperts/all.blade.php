@@ -31,7 +31,7 @@
                                     <table class="table" id="example1">
                                         <thead>
                                         <tr>
-                                            <th class="wd-10p"> کد حامی </th>
+                                            <th class="wd-10p"> کد کارشناس </th>
                                             <th class="wd-10p"> نام و نام خانوادگی </th>
                                             <th class="wd-10p"> شماره موبایل </th>
                                             <th class="wd-10p"> تاریخ عضویت </th>
