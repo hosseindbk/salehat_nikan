@@ -94,6 +94,7 @@
                                                 <th class="wd-10p"> شماره حساب </th>
                                                 <th class="wd-10p"> کد رهگیری </th>
                                                 <th class="wd-10p"> هماهنگ کننده </th>
+                                                <th class="wd-10p"> شماره موبایل2 </th>
                                                 <th class="wd-10p"> ویرایش/حذف</th>
                                                 <th class="wd-10p">بررسی </th>
                                             </tr>
@@ -239,6 +240,7 @@
                 {data: 'hesabtitle'     , name: 'hesabtitle'    },
                 {data: 'code'           , name: 'code'          },
                 {data: 'hamahangname'   , name: 'hamahangname'  },
+                {data: 'mobile2'        , name: 'mobile2'       },
                 {
                     data: 'action',
                     name: 'action',

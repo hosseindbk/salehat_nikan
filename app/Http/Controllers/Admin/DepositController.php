@@ -34,7 +34,7 @@ class DepositController extends Controller
                          ->leftjoin('reasons', 'reasons.id', '=', 'deposits.reason_id')
                          ->select('deposits.id as id', 'hamis.id as userid', 'deposits.date as date', 'deposits.amount as amount'
                              , 'hamis.name as name', 'reasons.title as reason', 'users.name as hamahangname', 'acountnumbers.shomare_hesab as shomare_hesab'
-                             , 'acountnumbers.title as hesabtitle', 'hamis.mobile as mobile', 'deposits.code_number as code')
+                             , 'acountnumbers.title as hesabtitle', 'hamis.mobile as mobile','hamis.mobile2 as mobile2', 'deposits.code_number as code')
                          ->orderBy('deposits.created_at', 'desc')
                          ->filter()
                          ->take($page)
@@ -49,6 +49,9 @@ class DepositController extends Controller
                     })
                     ->editColumn('mobile', function ($data) {
                         return ($data->mobile);
+                    })
+                    ->editColumn('mobile2', function ($data) {
+                        return ($data->mobile2);
                     })
                     ->editColumn('date', function ($data) {
                         return ($data->date);

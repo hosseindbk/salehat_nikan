@@ -39,7 +39,7 @@ class deposit extends Model
 
         $mobile       = request('mobile');
         if(isset($mobile)  && $mobile != null){
-            $query->where('hamis.mobile' , '=' , $mobile);
+            $query->where('hamis.mobile' , '=' , $mobile)->orwhere('hamis.mobile2' , '=' , $mobile);
         }
 
         $reason       = request('reason');
