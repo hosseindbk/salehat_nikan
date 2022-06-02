@@ -19,7 +19,7 @@ class RollcallController extends Controller
             ->where('users.level' , 'admin')
             ->where('users.id' ,  '>', 2000)
             ->get();
- 
+
         $typeusers          = Type_user::where('id' , '=' ,  2)->where('id' , '=' ,  5)->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
