@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Model\Menudashboard;
 use App\Model\Rollcall;
+use App\Model\rollcall_backup;
 use App\Model\Submenudashboard;
 use App\Model\Type_user;
 use App\Model\User;
@@ -14,11 +15,31 @@ class RollcallController extends Controller
 {
     public function index()
     {
+        $rolls =   Rollcall::whereDay('created_at', '<', date('d'))->get();
+
+        foreach ($rolls as $roll)
+        {
+            $rolls = new rollcall_backup();
+
+            $rolls->entertime      = $roll->entertime;
+            $rolls->exittime       = $roll->exittime;
+            $rolls->overtime       = $roll->overtime;
+            $rolls->lowtime        = $roll->lowtime;
+            $rolls->user_id        = $roll->user_id;
+            $rolls->date           = $roll->date;
+            $rolls->save();
+        }
+
+        Rollcall::whereDay('created_at', '<', date('d'))->delete();
+
+
         $users              = User::leftjoin('rollcalls' , 'rollcalls.user_id' , '=', 'users.id')
             ->select('users.id' , 'users.name' , 'rollcalls.entertime' , 'rollcalls.exittime' , 'rollcalls.overtime', 'rollcalls.lowtime')
             ->where('users.level' , 'admin')
             ->where('users.id' ,  '>', 2000)
             ->get();
+
+
 
         $typeusers          = Type_user::where('id' , '=' ,  2)->where('id' , '=' ,  5)->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();

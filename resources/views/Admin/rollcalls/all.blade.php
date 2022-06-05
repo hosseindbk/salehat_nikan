@@ -73,7 +73,7 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form action="{{route('rollcalls.store')}}" method="POST">
+                                                                    <form action="{{route('rollcalls.store')}}" method="POST" style="direction: ltr">
 
                                                                         {{csrf_field()}}
                                                                         <div class="form-group">
