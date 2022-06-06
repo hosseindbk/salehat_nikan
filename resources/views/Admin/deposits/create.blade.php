@@ -81,6 +81,10 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                            <div class="form-group">
+                                                <p class="mg-b-10"> توضیحات </p>
+                                                <textarea name="description" class="form-control" id="" cols="30" rows="2" placeholder="توضیحات"></textarea>
+                                            </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
@@ -93,6 +97,7 @@
                                                 </select>
                                             </div>
                                         </div>
+
                                         <div class="col-lg-12 mg-b-10 text-center">
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-info  btn-lg m-r-20">ذخیره اطلاعات</button>

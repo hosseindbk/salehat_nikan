@@ -32,9 +32,9 @@ class DepositController extends Controller
                          ->leftjoin('hamis', 'hamis.id', '=', 'deposits.user_id')
                          ->leftjoin('acountnumbers', 'acountnumbers.id', '=', 'deposits.acountnumber_id')
                          ->leftjoin('reasons', 'reasons.id', '=', 'deposits.reason_id')
-                         ->select('deposits.id as id', 'hamis.id as userid', 'deposits.date as date', 'deposits.amount as amount'
-                             , 'hamis.name as name', 'reasons.title as reason', 'users.name as hamahangname', 'acountnumbers.shomare_hesab as shomare_hesab'
-                             , 'acountnumbers.title as hesabtitle', 'hamis.mobile as mobile','hamis.mobile2 as mobile2', 'deposits.code_number as code')
+                         ->select('deposits.id as id', 'hamis.id as userid', 'deposits.date as date', 'deposits.amount as amount', 'deposits.code_number as code',
+                             'hamis.name as name','deposits.description as description', 'reasons.title as reason', 'users.name as hamahangname',
+                             'acountnumbers.shomare_hesab as shomare_hesab', 'acountnumbers.title as hesabtitle', 'hamis.mobile as mobile','hamis.mobile2 as mobile2')
                          ->orderBy('deposits.created_at', 'desc')
                          ->filter()
                          ->take($page)
@@ -93,7 +93,8 @@ class DepositController extends Controller
                          ->leftjoin('acountnumbers', 'acountnumbers.id', '=', 'deposits.acountnumber_id')
                          ->leftjoin('reasons', 'reasons.id', '=', 'deposits.reason_id')
                          ->select('deposits.id as id', 'hamis.id as userid', 'deposits.date as date', 'deposits.amount as amount'
-                             , 'hamis.name as name', 'reasons.title as reason', 'acountnumbers.shomare_card as shomarecard', 'hamis.mobile as mobile', 'deposits.code_number as code')
+                             , 'hamis.name as name', 'reasons.title as reason', 'acountnumbers.shomare_card as shomarecard', 'hamis.mobile as mobile'
+                             ,'deposits.description as description' , 'deposits.code_number as code')
                          ->orderBy('deposits.created_at', 'desc')
                          ->filter()
                          ->where('deposits.hamahang_id', '=', auth::user()->id)
@@ -183,6 +184,7 @@ class DepositController extends Controller
         $deposits->reason_id        = $request->input('reason_id');
         $deposits->hamahang_id      = $request->input('hamahang_id');
         $deposits->acountnumber_id  = $request->input('acountnumber_id');
+        $deposits->description      = $request->input('description');
         $deposits->code_number      = $code;
 
         $deposits->save();
@@ -201,16 +203,15 @@ class DepositController extends Controller
         $hamis    = Hami::select('id' , 'name')->get();
         $deposits = deposit::leftjoin('hamis' , 'hamis.id' ,'=' ,'deposits.user_id')
                         ->leftjoin('acountnumbers' , 'acountnumbers.id' , '=' , 'deposits.acountnumber_id' )
-                        ->select('deposits.id as id' ,'deposits.user_id as user_id' , 'acountnumbers.title as hesabtitle'
+                        ->select('deposits.id as id' ,'deposits.user_id as user_id' , 'acountnumbers.title as hesabtitle' , 'deposits.code_number as code'
                             , 'acountnumbers.shomare_hesab' , 'deposits.acountnumber_id as acountnumber_id' , 'deposits.date as date' , 'deposits.amount as amount'
-                            ,'deposits.reason_id as reason' , 'hamis.name as name', 'hamis.id as hamisid' , 'hamis.mobile as mobile' , 'deposits.code_number as code')
+                            ,'deposits.description as description','deposits.reason_id as reason' , 'hamis.name as name', 'hamis.id as hamisid' , 'hamis.mobile as mobile')
                         ->orderby('deposits.id' , 'DESC')
                         ->where('deposits.id' , $id)
                         ->get();
 
         $reasons            = Reason::select('id' , 'title')->get();
-        $user_id            = deposit::whereId($id)->pluck('user_id');
-        $acountnumbers      = acountnumber::select('id' , 'shomare_card')->whereUser_id($user_id)->get();
+        $acountnumbers      = acountnumber::select('id' , 'shomare_hesab' , 'title')->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
 
@@ -233,6 +234,7 @@ class DepositController extends Controller
         $deposit->amount            = str_replace(',' , '' , $request->input('amount'));
         $deposit->date              = $request->input('date');
         $deposit->reason_id         = $request->input('reason_id');
+        $deposit->description       = $request->input('description');
         $deposit->acountnumber_id   = $request->input('acountnumber_id');
 
         $deposit->update();
