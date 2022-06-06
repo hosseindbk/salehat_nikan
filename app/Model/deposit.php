@@ -6,6 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class deposit extends Model
 {
+    public function scopeHesab($query)
+    {
+        $hesab       = request('hesab');
+        if(isset($hesab)  && $hesab != null){
+            $query->whereAcountnumber_id($hesab);
+        }
+        $startdate     = request('startdate');
+        if(isset($startdate)  && $startdate != null){
+            $query->where('date' , '>=' , $startdate);
+        }
+        $enddate       = request('enddate');
+        if(isset($enddate)  && $enddate != null){
+            $query->where('date' , '<=' , $enddate);
+        }
+    }
     public function scopeFilter($query)
     {
 //        $start_date    = (!empty($_GET["start_date"])) ? ($_GET["start_date"]) : ('');

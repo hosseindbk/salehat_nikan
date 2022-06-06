@@ -17,6 +17,7 @@ Route::group(['namespace' => 'Admin' , 'middleware' => ['auth:web' , 'checkAdmin
     Route::resource('acountnumber'                        , 'AcountnumberController');
     Route::resource('deposits'                            , 'DepositController');
     Route::resource('user-experts'                        , 'UserexpertController');
+    Route::get('account-numbers'                            , 'AcountnumberController@index')->name('account-numbers');
     Route::resource('costs'                               , 'CostController');
     Route::resource('rollcalls'                           , 'RollcallController');
     Route::resource('salaris'                             , 'SalaryController');
