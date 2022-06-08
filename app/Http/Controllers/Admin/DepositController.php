@@ -203,7 +203,7 @@ class DepositController extends Controller
         $hamis    = Hami::select('id' , 'name')->get();
         $deposits = deposit::leftjoin('hamis' , 'hamis.id' ,'=' ,'deposits.user_id')
                         ->leftjoin('acountnumbers' , 'acountnumbers.id' , '=' , 'deposits.acountnumber_id' )
-                        ->select('deposits.id as id' ,'deposits.user_id as user_id' , 'acountnumbers.title as hesabtitle' , 'deposits.code_number as code'
+                        ->select('deposits.id as id' ,'deposits.hamahang_id as hamahang_id' , 'deposits.user_id as user_id' , 'acountnumbers.title as hesabtitle' , 'deposits.code_number as code'
                             , 'acountnumbers.shomare_hesab' , 'deposits.acountnumber_id as acountnumber_id' , 'deposits.date as date' , 'deposits.amount as amount'
                             ,'deposits.description as description','deposits.reason_id as reason' , 'hamis.name as name', 'hamis.id as hamisid' , 'hamis.mobile as mobile')
                         ->orderby('deposits.id' , 'DESC')
@@ -211,6 +211,7 @@ class DepositController extends Controller
                         ->get();
 
         $reasons            = Reason::select('id' , 'title')->get();
+        $userhamahang       = User::select('id' , 'name')->whereType_id(2)->get();
         $acountnumbers      = acountnumber::select('id' , 'shomare_hesab' , 'title')->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
@@ -220,6 +221,7 @@ class DepositController extends Controller
             ->with(compact('hamis'))
             ->with(compact('reasons'))
             ->with(compact('acountnumbers'))
+            ->with(compact('userhamahang'))
             ->with(compact('users'))
             ->with(compact('deposits'))
             ->with(compact('menudashboards'))
@@ -234,6 +236,7 @@ class DepositController extends Controller
         $deposit->amount            = str_replace(',' , '' , $request->input('amount'));
         $deposit->date              = $request->input('date');
         $deposit->reason_id         = $request->input('reason_id');
+        $deposit->hamahang_id       = $request->input('hamahang_id');
         $deposit->description       = $request->input('description');
         $deposit->acountnumber_id   = $request->input('acountnumber_id');
 

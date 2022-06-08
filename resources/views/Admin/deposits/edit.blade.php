@@ -67,20 +67,30 @@
                                                     <input type="text" name="amount" required value="{{number_format($deposit->amount)}}" class="form-control loan_max_amount" />
                                                 </div>
                                                 <div class="form-group">
+                                                    <p class="mg-b-10">هماهنگ کننده</p>
+                                                    <select name="hamahang_id" required class="form-control select-lg select2">
+                                                        <option value="">انتخاب کنید</option>
+                                                        @foreach($userhamahang as $huser)
+                                                            <option value="{{$huser->id}}" {{$deposit->hamahang_id == $huser->id ? 'selected' : ''}}>{{$huser->name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <p class="mg-b-10">علت واریز</p>
+                                                    <select name="reason_id" required class="form-control select-lg select2">
+                                                        <option value="">انتخاب کنید</option>
+                                                        @foreach($reasons as $reason)
+                                                            <option value="{{$reason->id}}" {{$reason->id == $deposit->reason ? 'selected' : ''}}>{{$reason->title}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
                                                     <p class="mg-b-10"> توضیحات </p>
                                                     <textarea name="description" class="form-control" id="" cols="30" rows="2">{{$deposit->description}}</textarea>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                            <div class="form-group">
-                                                <p class="mg-b-10">علت واریز</p>
-                                                <select name="reason_id" required class="form-control select-lg select2">
-                                                    <option value="">انتخاب کنید</option>
-                                                    @foreach($reasons as $reason)
-                                                        <option value="{{$reason->id}}" {{$reason->id == $deposit->reason ? 'selected' : ''}}>{{$reason->title}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
