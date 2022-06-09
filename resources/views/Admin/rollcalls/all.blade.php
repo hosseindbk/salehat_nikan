@@ -60,49 +60,49 @@
                                                 @else
                                                     <td><b class="text-danger">غایب</b></td>
 
-                                                <td>
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$user->id}}">ثبت زمان</button>
+                                                    <td>
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{$user->id}}">ثبت زمان</button>
 
-                                                    <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">ثبت اطلاعات حضور و غیاب {{$user->name}}</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form action="{{route('rollcalls.store')}}" method="POST" style="direction: ltr">
+                                                        <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">ثبت اطلاعات حضور و غیاب {{$user->name}}</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form action="{{route('rollcalls.store')}}" method="POST" style="direction: ltr">
 
-                                                                        {{csrf_field()}}
-                                                                        <div class="form-group">
-                                                                            <label for="recipient-name" class="col-form-label">ساعت ورود</label>
-                                                                            <input type="time" name="entertime" class="form-control">
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="message-text" class="col-form-label">ساعت خروج</label>
-                                                                            <input type="time" name="exittime"  class="form-control">
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="message-text" class="col-form-label"> اضافه کار</label>
-                                                                            <input type="time" name="overtime"  class="form-control">
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="message-text" class="col-form-label">کسر </label>
-                                                                            <input type="time" name="lowtime"  class="form-control">
-                                                                        </div>
-                                                                        <input type="hidden" name="user_id" value="{{$user->id}}" class="form-control">
-                                                                        <input type="hidden" name="date" value="{{jdate()->format('%Y/%m/%d')}}" class="form-control">
-                                                                        <div class="form-group">
-                                                                            <button type="submit" class="btn btn-primary">ثبت</button>
-                                                                        </div>
-                                                                    </form>
+                                                                            {{csrf_field()}}
+                                                                            <div class="form-group">
+                                                                                <label for="recipient-name" class="col-form-label">ساعت ورود</label>
+                                                                                <input type="time" name="entertime" class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="message-text" class="col-form-label">ساعت خروج</label>
+                                                                                <input type="time" name="exittime"  class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="message-text" class="col-form-label"> اضافه کار</label>
+                                                                                <input type="time" name="overtime"  class="form-control">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="message-text" class="col-form-label">کسر </label>
+                                                                                <input type="time" name="lowtime"  class="form-control">
+                                                                            </div>
+                                                                            <input type="hidden" name="user_id" value="{{$user->id}}" class="form-control">
+                                                                            <input type="hidden" name="date" value="{{jdate()->format('%Y/%m/%d')}}" class="form-control">
+                                                                            <div class="form-group">
+                                                                                <button type="submit" class="btn btn-primary">ثبت</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </td>
+                                                    </td>
                                             </tr>
                                             @endif
                                         @endforeach

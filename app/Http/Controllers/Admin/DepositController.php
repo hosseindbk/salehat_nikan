@@ -13,6 +13,7 @@ use App\Model\Submenudashboard;
 use App\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class DepositController extends Controller
@@ -27,7 +28,6 @@ class DepositController extends Controller
 
              if (auth::user()->id == 1 || auth::user()->id == 2000 || auth::user()->id == 2006) {
                      $page      = (!empty($_GET["page"]))   ? ($_GET["page"])   : (10);
-
                      $data = deposit::leftjoin('users', 'users.id', '=', 'deposits.hamahang_id')
                          ->leftjoin('hamis', 'hamis.id', '=', 'deposits.user_id')
                          ->leftjoin('acountnumbers', 'acountnumbers.id', '=', 'deposits.acountnumber_id')
@@ -39,6 +39,7 @@ class DepositController extends Controller
                          ->filter()
                          ->take($page)
                          ->get();
+
                 //dd($data);
                 return Datatables::of($data)
                     ->editColumn('userid', function ($data) {

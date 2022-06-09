@@ -14,7 +14,10 @@
 {{--    <link rel="stylesheet" href="{{asset('admin/assets/css-rtl/skins.css')}}">--}}
 {{--    <link rel="stylesheet" href="{{asset('admin/assets/css-rtl/colors/color.css')}}" id="theme" type="text/css" media="all">--}}
     <link rel="stylesheet" href="{{asset('admin/assets/css-rtl/sidemenu/sidemenu.css')}}">
-{{--    <link rel="stylesheet" href="{{asset('site/css/vendor/sweetalert.css')}}">--}}
+    <link rel="stylesheet" href="{{asset('css/admin/sweetalert.css')}}">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {{--    <link rel="stylesheet" href="{{asset('site/css/vendor/sweetalert.css')}}">--}}
 {{--    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>--}}
 {{--    <link rel="stylesheet" href="{{asset('admin/assets/css-rtl/dark-style.css')}}">--}}
 {{--    <link rel="stylesheet" href="{{asset('admin/assets/css-rtl/colors/default.css')}}">--}}
@@ -25,7 +28,7 @@
     </head>
 
 <body class="main-body leftmenu">
-
+@include('sweet::alert')
 <div id="global-loader">
     <div class="spinner-border text-primary" style="margin-top: 300px" role="status">
         <span class="sr-only">Loading...</span>
