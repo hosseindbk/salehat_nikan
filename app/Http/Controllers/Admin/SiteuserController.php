@@ -69,6 +69,7 @@ class SiteuserController extends Controller
                             return 'غیر فعال';
                         }
                     })
+                    ->addIndexColumn()
                     ->addColumn('action', function ($row) {
                         $actionBtn = '<a href="' . route('siteusers.edit', $row->id) . '" class="btn ripple btn-outline-info btn-sm">Edit</a>
                                   <form action="' . route('siteusers.destroy', $row->id) . '" method="post" style="display:inline">

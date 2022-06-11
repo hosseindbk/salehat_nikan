@@ -60,6 +60,7 @@
                                         <table id="sample1" class="table table-striped table-bordered yajra-datatable">
                                             <thead>
                                             <tr>
+                                                <th class="wd-10p"> ردیف </th>
                                                 <th class="wd-10p"> کد حامی </th>
                                                 <th class="wd-10p"> نام و نام خانوادگی </th>
                                                 <th class="wd-10p"> شماره موبایل </th>
@@ -139,6 +140,7 @@
                 orderCellsTop: false,
                 ajax: "{{ route('siteusers.index') }}",
                 columns: [
+                    {data: 'DT_RowIndex'    , name: 'DT_RowIndex'   },
                     {data: 'id'             , name: 'id'            },
                     {data: 'name'           , name: 'name'          },
                     {data: 'mobile'         , name: 'mobile'        },
