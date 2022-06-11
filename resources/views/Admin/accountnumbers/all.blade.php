@@ -58,6 +58,7 @@
                                         <thead>
                                         <tr>
                                             <th class="wd-10p"> نام حساب </th>
+                                            <th class="wd-10p"> تعداد واریزی </th>
                                             <th class="wd-10p"> مجموع واریزی حساب </th>
                                         </tr>
                                         </thead>
@@ -66,6 +67,7 @@
                                             <tr class="odd gradeX">
 
                                                 <td>{{$data->acountnumber_id}}</td>
+                                                <td>{{number_format($data->count)}}</td>
                                                 <td>{{number_format($data->sum)}}</td>
 
                                             </tr>
@@ -74,7 +76,8 @@
                                         </tbody>
                                             <tfoot>
                                             <tr>
-                                                <th class="totalcheck" style="text-align:right">مجموع واریزی کل : </th>
+                                                <th class="totalcheck" style="text-align:right">مجموع کل : </th>
+                                                <th class="totalcheck" style="text-align:right">{{ number_format($datas->sum('count')) }}</th>
                                                 <th class="totalcheck" style="text-align:right">{{ number_format($datas->sum('sum')) }}</th>
                                             </tr>
                                             </tfoot>

@@ -20,7 +20,7 @@ class AcountnumberController extends Controller
         $submenudashboards = Submenudashboard::whereStatus(4)->get();
 
                 $datas = deposit::groupBy('acountnumber_id')
-                    ->selectRaw('sum(amount) as sum, acountnumber_id')
+                    ->selectRaw('sum(amount) as sum, count(amount) as count, acountnumber_id')
                     ->hesab()
                     ->get();
                 //dd($data);

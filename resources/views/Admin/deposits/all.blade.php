@@ -85,6 +85,7 @@
                                         <table id="sample1" class="table table-striped table-bordered yajra-datatable">
                                             <thead>
                                             <tr>
+                                                <th class="wd-10p"> ردیف </th>
                                                 <th class="wd-10p"> کد کاربر </th>
                                                 <th class="wd-10p"> نام و نام خانوادگی </th>
                                                 <th class="wd-10p"> تاریخ واریز </th>
@@ -158,7 +159,7 @@
 
                 // Total over all pages
                 total = api
-                    .column(4)
+                    .column(5)
                     .data()
                     .reduce(function (a, b) {
                         return intVal(a) + intVal(b);
@@ -166,14 +167,14 @@
 
                 // Total over this page
                 pageTotal = api
-                    .column(4, { page: 'current' })
+                    .column(5, { page: 'current' })
                     .data()
                     .reduce(function (a, b) {
                         return intVal(a) + intVal(b);
                     }, 0);
 
                 // Update footer
-                $(api.column(4).footer('.totalcheck')).html(' جمع واریزی ' + pageTotal + ' تومان ');
+                $(api.column(5).footer('.totalcheck')).html(' جمع واریزی ' + pageTotal + ' تومان ');
             },
 
 
@@ -231,6 +232,7 @@
             }
             },
             columns: [
+                {data: 'DT_RowIndex'    , name: 'DT_RowIndex'   },
                 {data: 'userid'         , name: 'userid'        },
                 {data: 'name'           , name: 'name'          },
                 {data: 'date'           , name: 'date'          },

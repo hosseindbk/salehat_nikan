@@ -30,6 +30,7 @@
                                     <table class="table" id="example1">
                                         <thead>
                                         <tr>
+                                            <th class="wd-10p"> ردیف </th>
                                             <th class="wd-10p"> کد کارشناس </th>
                                             <th class="wd-10p"> نام و نام خانوادگی </th>
                                             <th class="wd-10p"> تاریخ امروز </th>
@@ -45,6 +46,7 @@
                                         @foreach($users as $user)
                                             <tr class="odd gradeX">
 
+                                                <td>{{$loop->iteration}}</td>
                                                 <td>{{$user->id}}</td>
                                                 <td>{{$user->name}}</td>
                                                 <td>{{jdate()->format('%Y/%m/%d')}}</td>

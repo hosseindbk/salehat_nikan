@@ -38,29 +38,29 @@ class SiteuserController extends Controller
                     ->get();
 
                 return Datatables::of($data)
-                    ->editColumn('id', function ($data) {
+                    ->addColumn('id', function ($data) {
                         return ($data->id);
                     })
-                    ->editColumn('name', function ($data) {
+                    ->addColumn('name', function ($data) {
                         return ($data->name);
                     })
-                    ->editColumn('mobile', function ($data) {
+                    ->addColumn('mobile', function ($data) {
                         return ($data->mobile);
                     })
-                    ->editColumn('date', function ($data) {
+                    ->addColumn('date', function ($data) {
                         return ($data->date);
                     })
-                    ->editColumn('username', function ($data) {
+                    ->addColumn('username', function ($data) {
                         return ($data->username);
                     })
-                    ->editColumn('phone_verify', function ($data) {
+                    ->addColumn('phone_verify', function ($data) {
                         if ($data->phone_verify == "0") {
                             return 'تایید نشده';
                         } elseif ($data->phone_verify == "1") {
                             return 'فعال';
                         }
                     })
-                    ->editColumn('status', function ($data) {
+                    ->addColumn('status', function ($data) {
                         if ($data->status == "1") {
                             return 'ثبت نام اولیه';
                         } elseif ($data->status == "2") {
@@ -91,29 +91,29 @@ class SiteuserController extends Controller
                     ->get();
 
                 return Datatables::of($data)
-                    ->editColumn('id', function ($data) {
+                    ->addColumn('id', function ($data) {
                         return ($data->id);
                     })
-                    ->editColumn('name', function ($data) {
+                    ->addColumn('name', function ($data) {
                         return ($data->name);
                     })
-                    ->editColumn('mobile', function ($data) {
+                    ->addColumn('mobile', function ($data) {
                         return ($data->mobile);
                     })
-                    ->editColumn('date', function ($data) {
+                    ->addColumn('date', function ($data) {
                         return ($data->date);
                     })
-                    ->editColumn('username', function ($data) {
+                    ->addColumn('username', function ($data) {
                         return ($data->username);
                     })
-                    ->editColumn('phone_verify', function ($data) {
+                    ->addColumn('phone_verify', function ($data) {
                         if ($data->phone_verify == "0") {
                             return 'تایید نشده';
                         } elseif ($data->phone_verify == "1") {
                             return 'فعال';
                         }
                     })
-                    ->editColumn('status', function ($data) {
+                    ->addColumn('status', function ($data) {
                         if ($data->status == "1") {
                             return 'ثبت نام اولیه';
                         } elseif ($data->status == "2") {

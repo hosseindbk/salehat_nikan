@@ -31,6 +31,7 @@
                                     <table class="table" id="example1">
                                         <thead>
                                         <tr>
+                                            <th class="wd-10p"> ردیف </th>
                                             <th class="wd-10p"> نام و نام خانوادگی </th>
                                             <th class="wd-10p"> تاریخ </th>
                                             <th class="wd-10p"> مبلغ (تومان) </th>
@@ -41,6 +42,7 @@
                                         <tbody>
                                         @foreach($costs as $cost)
                                             <tr class="odd gradeX">
+                                                <td>{{$loop->iteration}}</td>
                                                 <td>{{$cost->name}}</td>
                                                 <td>{{$cost->time}}</td>
                                                 <td>{{number_format($cost->amount)}}</td>

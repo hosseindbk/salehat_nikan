@@ -42,36 +42,37 @@ class DepositController extends Controller
 
                 //dd($data);
                 return Datatables::of($data)
-                    ->editColumn('userid', function ($data) {
+                    ->addColumn('userid', function ($data) {
                         return ($data->userid);
                     })
-                    ->editColumn('name', function ($data) {
+                    ->addColumn('name', function ($data) {
                         return ($data->name);
                     })
-                    ->editColumn('mobile', function ($data) {
+                    ->addColumn('mobile', function ($data) {
                         return ($data->mobile);
                     })
-                    ->editColumn('mobile2', function ($data) {
+                    ->addColumn('mobile2', function ($data) {
                         return ($data->mobile2);
                     })
-                    ->editColumn('date', function ($data) {
+                    ->addColumn('date', function ($data) {
                         return ($data->date);
                     })
-                    ->editColumn('amount', function ($data) {
+                    ->addColumn('amount', function ($data) {
                         return (number_format($data->amount));
                     })
-                    ->editColumn('reason', function ($data) {
+                    ->addColumn('reason', function ($data) {
                         return ($data->reason);
                     })
-                    ->editColumn('hesabtitle', function ($data) {
+                    ->addColumn('hesabtitle', function ($data) {
                         return ($data->hesabtitle);
                     })
-                    ->editColumn('code', function ($data) {
+                    ->addColumn('code', function ($data) {
                         return ($data->code);
                     })
-                    ->editColumn('hamahangname', function ($data) {
+                    ->addColumn('hamahangname', function ($data) {
                         return ($data->hamahangname);
                     })
+                    ->addIndexColumn()
                     ->addColumn('action', function ($row) {
                         $actionBtn = '<a href="' . route('deposits.edit', $row->id) . '" class="btn ripple btn-outline-info btn-sm">Edit</a>
                                   <form action="' . route('deposits.destroy', $row->id) . '" method="post" style="display:inline">
@@ -103,31 +104,31 @@ class DepositController extends Controller
                          ->get();
 
                 return Datatables::of($data)
-                    ->editColumn('id', function ($data) {
+                    ->addColumn('id', function ($data) {
                         return ($data->id);
                     })
-                    ->editColumn('name', function ($data) {
+                    ->addColumn('name', function ($data) {
                         return ($data->name);
                     })
-                    ->editColumn('mobile', function ($data) {
+                    ->addColumn('mobile', function ($data) {
                         return ($data->mobile);
                     })
-                    ->editColumn('date', function ($data) {
+                    ->addColumn('date', function ($data) {
                         return ($data->date);
                     })
-                    ->editColumn('amount', function ($data) {
+                    ->addColumn('amount', function ($data) {
                         return ($data->amount);
                     })
-                    ->editColumn('reason', function ($data) {
+                    ->addColumn('reason', function ($data) {
                         return ($data->amount);
                     })
-                    ->editColumn('hesabtitle', function ($data) {
+                    ->addColumn('hesabtitle', function ($data) {
                         return ($data->hesabtitle);
                     })
-                    ->editColumn('code', function ($data) {
+                    ->addColumn('code', function ($data) {
                         return ($data->code);
                     })
-                    ->editColumn('hamahangname', function ($data) {
+                    ->addColumn('hamahangname', function ($data) {
                         return ($data->hamahangname);
                     })
                     ->addColumn('action', function ($row) {
