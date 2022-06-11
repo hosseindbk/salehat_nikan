@@ -17,7 +17,6 @@ class CostController extends Controller
 
         $costs              = Cost::leftjoin('users' , 'users.id' , '=' , 'costs.user_id')
         ->select('costs.reason as reason' , 'costs.amount as amount' , 'costs.description as description' , 'users.name as name','costs.date as time' )
-        ->where('users.type_id' , '=' , '1')
         ->orderBy('costs.id' , 'DESC')
         ->get();
 
@@ -40,6 +39,7 @@ class CostController extends Controller
             ->with(compact('menudashboards'))
             ->with(compact('submenudashboards'));
     }
+
     public function store(Request $request)
     {
         $costs = new cost();
@@ -55,6 +55,7 @@ class CostController extends Controller
         return redirect(route('costs.index'));
 
     }
+
     public function edit($id)
     {
         $users              = User::whereId($id)->get();
