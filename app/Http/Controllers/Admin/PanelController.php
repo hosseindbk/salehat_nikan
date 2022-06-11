@@ -17,11 +17,12 @@ class PanelController extends Controller
     {
         $categories         = category::whereStatus(1)->get();
 
-        $hamis              = Hami::select('id' , 'name' , 'mobile' , 'status' , 'date')->get();
+        $hamis              = Hami::select('id' , 'name' , 'mobile' , 'status' , 'date')->take(20)->get();
         $hamahang           = User::select('id' , 'name' , 'mobile' , 'status' , 'date')
                                     ->where('level' , '=', 'admin')
                                     ->where('id' , '>', 1)
-                                    ->get();
+                                    ->take(20)
+                                    ->get(20);
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
 
