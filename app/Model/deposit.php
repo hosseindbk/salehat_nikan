@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class deposit extends Model
 {
-    public function scopeHesab($query)
+    public function scopeHesabfilter($query)
     {
         $hesab       = request('hesab');
         if(isset($hesab)  && $hesab != null){

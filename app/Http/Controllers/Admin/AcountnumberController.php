@@ -21,7 +21,7 @@ class AcountnumberController extends Controller
 
                 $datas = deposit::groupBy('acountnumber_id')
                     ->selectRaw('sum(amount) as sum, count(amount) as count, acountnumber_id')
-                    ->hesab()
+                    ->Hesabfilter()
                     ->get();
                 //dd($data);
 
