@@ -126,7 +126,7 @@
                 ajax: "{{ route('costs.index') }}",
                 columns: [
                     {data: 'DT_RowIndex'  , name: 'DT_RowIndex' },
-                    {data: 'name'         , name: 'name'        },
+                    {data: 'username'     , name: 'username'    },
                     {data: 'created_at'   , name: 'created_at'  },
                     {data: 'amount'       , name: 'amount'      },
                     {data: 'reason'       , name: 'reason'      },

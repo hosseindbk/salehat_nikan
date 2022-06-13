@@ -21,7 +21,7 @@ class CostController extends Controller
         if ($request->ajax()) {
 
             $data              = Cost::leftjoin('users' , 'users.id' , '=' , 'costs.user_id')
-                ->select('costs.reason as reason' , 'costs.amount as amount ' , 'costs.description as description' , 'users.name as name ','costs.created_at as created_at' )
+                ->select('costs.reason as reason' , 'costs.amount as amount' , 'costs.description as description' , 'users.name as username','costs.created_at as created_at' )
                 ->take($page)
                 ->get();
 
@@ -37,8 +37,8 @@ class CostController extends Controller
                 ->addColumn('description', function ($data) {
                     return ($data->description);
                 })
-                ->addColumn('name', function ($data) {
-                    return ($data->name);
+                ->addColumn('username', function ($data) {
+                    return ($data->username);
                 })
                 ->addColumn('created_at', function ($data) {
                     return (jdate($data->created_at)->format('%Y/%m/%d'));
