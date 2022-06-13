@@ -53,22 +53,6 @@ class SiteuserController extends Controller
                     ->addColumn('username', function ($data) {
                         return ($data->username);
                     })
-                    ->addColumn('phone_verify', function ($data) {
-                        if ($data->phone_verify == "0") {
-                            return 'تایید نشده';
-                        } elseif ($data->phone_verify == "1") {
-                            return 'فعال';
-                        }
-                    })
-                    ->addColumn('status', function ($data) {
-                        if ($data->status == "1") {
-                            return 'ثبت نام اولیه';
-                        } elseif ($data->status == "2") {
-                            return 'فعال';
-                        } elseif ($data->status == "3") {
-                            return 'غیر فعال';
-                        }
-                    })
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {
                         $actionBtn = '<a href="' . route('siteusers.edit', $row->id) . '" class="btn ripple btn-outline-info btn-sm">Edit</a>
@@ -105,22 +89,6 @@ class SiteuserController extends Controller
                     })
                     ->addColumn('username', function ($data) {
                         return ($data->username);
-                    })
-                    ->addColumn('phone_verify', function ($data) {
-                        if ($data->phone_verify == "0") {
-                            return 'تایید نشده';
-                        } elseif ($data->phone_verify == "1") {
-                            return 'فعال';
-                        }
-                    })
-                    ->addColumn('status', function ($data) {
-                        if ($data->status == "1") {
-                            return 'ثبت نام اولیه';
-                        } elseif ($data->status == "2") {
-                            return 'فعال';
-                        } elseif ($data->status == "3") {
-                            return 'غیر فعال';
-                        }
                     })
                     ->addColumn('action', function ($row) {
                         $actionBtn = '<a href="' . route('siteusers.edit', $row->id) . '" class="btn ripple btn-outline-info btn-sm">Edit</a>

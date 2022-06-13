@@ -66,8 +66,6 @@
                                                 <th class="wd-10p"> شماره موبایل </th>
                                                 <th class="wd-10p"> تاریخ عضویت </th>
                                                 <th class="wd-10p"> حامی یاب </th>
-                                                <th class="wd-10p"> وضعیت شماره </th>
-                                                <th class="wd-10p"> وضعیت </th>
                                                 <th class="wd-10p"> ویرایش/حذف</th>
                                             </tr>
                                             </thead>
@@ -146,8 +144,6 @@
                     {data: 'mobile'         , name: 'mobile'        },
                     {data: 'date'           , name: 'date'          },
                     {data: 'username'       , name: 'username'      },
-                    {data: 'phone_verify'   , name: 'phone_verify'  },
-                    {data: 'status'         , name: 'status'        },
                     {
                         data: 'action',
                         name: 'action',
