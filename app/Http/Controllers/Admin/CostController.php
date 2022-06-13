@@ -21,7 +21,7 @@ class CostController extends Controller
         if ($request->ajax()) {
 
             $data              = Cost::leftjoin('users' , 'users.id' , '=' , 'costs.user_id')
-                ->select('costs.reason' , 'costs.amount ' , 'costs.description' , 'users.name ','costs.created_at ' )
+                ->select('costs.reason as reason' , 'costs.amount as amount ' , 'costs.description as description' , 'users.name as name ','costs.created_at as created_at' )
                 ->take($page)
                 ->get();
 
