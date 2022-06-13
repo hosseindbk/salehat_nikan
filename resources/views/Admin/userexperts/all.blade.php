@@ -1,8 +1,12 @@
 @extends('Admin.admin')
 @section('title')
     <title> مدیریت کارشناسان </title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('keramat/vendors/dataTable/v1/css/semantic.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('keramat/vendors/dataTable/v1/css/dataTables.semanticui.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('keramat/vendors/dataTable/v1/css/buttons.semanticui.min.css')}}" type="text/css">
 @endsection
 @section('main')
     <div class="main-content side-content pt-0">
@@ -26,74 +30,36 @@
                                     <h6 class="main-content-label mb-1">لیست کارشناسان </h6>
                                     <a href="{{url('admin/user-experts/create')}}" class="btn btn-primary btn-xs">افزودن کارشناسان </a>
                                 </div>
-
                                 <div class="table-responsive">
-                                    <table class="table" id="example1">
-                                        <thead>
-                                        <tr>
-                                            <th class="wd-10p"> ردیف </th>
-                                            <th class="wd-10p"> کد کارشناس </th>
-                                            <th class="wd-10p"> نام و نام خانوادگی </th>
-                                            <th class="wd-10p"> شماره موبایل </th>
-                                            <th class="wd-10p"> تاریخ عضویت </th>
-                                            <th class="wd-10p"> سطح </th>
-                                            <th class="wd-10p"> وضعیت شماره </th>
-                                            <th class="wd-10p"> وضعیت </th>
-                                            <th class="wd-10p"> ویرایش/حذف</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($users as $user)
-                                            <tr class="odd gradeX">
-
-                                                <td>{{$loop->iteration}}</td>
-                                                <td>{{$user->id}}</td>
-                                                <td>{{$user->name}}</td>
-                                                <td>{{$user->mobile}}</td>
-                                                <td>{{jdate($user->created_at)->format('%Y/%m/%d')}}</td>
-                                                <td>
-                                                    @foreach($typeusers as $type_user)
-                                                        @if($type_user->id == $user->type_id)
-                                                            {{$type_user->title}}
-                                                        @endif
-                                                    @endforeach
-                                                </td>
-                                                <td>
-                                                    @if($user->phone_verify == 0)
-                                                        <button class="btn ripple btn-outline-info">تایید نشده</button>
-                                                    @elseif($user->phone_verify == 1)
-                                                        <button class="btn ripple btn-outline-success">تایید شده</button>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if($user->status == 1)
-                                                        <button class="btn ripple btn-outline-info">ثبت نام اولیه</button>
-                                                    @elseif($user->status == 2)
-                                                        <button class="btn ripple btn-outline-success">تایید مدیر</button>
-                                                    @elseif($user->status == 0)
-                                                        <button class="btn ripple btn-outline-warning">غیر فعال</button>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <div class="btn-icon-list" style="float: right;">
-                                                        <a href="{{ route('user-experts.edit' , $user->id ) }}" class="btn ripple btn-outline-info btn-icon">
-                                                            <i class="fe fe-edit-2"></i>
-                                                        </a>
-                                                    </div>
-                                                    <form action="{{ route('user-experts.destroy' , $user->id) }}" method="post" style="float: left;">
-                                                        {{ method_field('delete') }}
-                                                        {{ csrf_field() }}
-                                                        <div class="btn-icon-list">
-                                                            <button type="submit" class="btn ripple btn-outline-danger btn-icon">
-                                                                <i class="fe fe-trash-2 "></i>
-                                                            </button>
-                                                        </div>
-                                                    </form>
-                                                </td>
+                                    <div class="table-responsive">
+                                        <style>
+                                            table{
+                                                margin: 0 auto;
+                                                width: 100% !important;
+                                                clear: both;
+                                                border-collapse: collapse;
+                                                table-layout: fixed;
+                                                word-wrap:break-word;
+                                            }
+                                            td {
+                                                overflow-x: auto;
+                                            }
+                                        </style>
+                                        <table id="sample1" class="table table-striped table-bordered yajra-datatable">
+                                            <thead>
+                                            <tr>
+                                                <th class="wd-10p"> ردیف </th>
+                                                <th class="wd-10p"> کد کارشناس </th>
+                                                <th class="wd-10p"> نام و نام خانوادگی </th>
+                                                <th class="wd-10p"> شماره موبایل </th>
+                                                <th class="wd-10p"> تاریخ عضویت </th>
+                                                <th class="wd-10p"> ویرایش/حذف</th>
                                             </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -102,10 +68,82 @@
             </div>
         </div>
     </div>
+@endsection
 @section('end')
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="{{asset('keramat/vendors/dataTable/v1/semantic.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/dataTables.semanticui.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.semanticui.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/jszip.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/vfs_fonts.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.print.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.colVis.min.js')}}"></script>
+
     <script src="{{asset('admin/assets/plugins/select2/js/select2.min.js')}}"></script>
     <script src="{{asset('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min-rtl.js')}}"></script>
-@endsection
+    <script type="text/javascript">
+
+        $(function () {
+            var table = $('.yajra-datatable').DataTable({
+                order: [[ 1, 'desc' ]],
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        text: 'اکسل',
+                        className: 'btn btn-default btn-xs'
+                    },
+                    {
+                        extend: 'print',
+                        text: 'پرینت و pdf',
+                        className: 'btn btn-default btn-xs',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    'colvis'
+
+                ],
+                'columnDefs': [
+                    {
+                        'targets': 0,
+                        'checkboxes': true
+                    }
+                ],
+                "lengthChange": true,
+                "pageLength": '{{$page}}',
+
+                processing: true,
+                serverSide: true,
+                orderable: true,
+                searchable: true,
+                fixedHeader: false,
+                orderCellsTop: false,
+                ajax: "{{ route('user-experts.index') }}",
+                columns: [
+                    {data: 'DT_RowIndex'    , name: 'DT_RowIndex'   },
+                    {data: 'id'             , name: 'id'            },
+                    {data: 'name'           , name: 'name'          },
+                    {data: 'mobile'         , name: 'mobile'        },
+                    {data: 'created_at'     , name: 'created_at'    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: true,
+                        searchable: true
+                    },
+                ],
+            });
+        });
+
+        $(document).ready(function() {
+            table.buttons().container()
+                .appendTo( $('div.eight.column:eq(0)', table.table().container()) );
+        });
+    </script>
+
 @endsection

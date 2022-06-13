@@ -1,8 +1,12 @@
 @extends('Admin.admin')
 @section('title')
     <title> مدیریت هزینه ها </title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('keramat/vendors/dataTable/v1/css/semantic.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('keramat/vendors/dataTable/v1/css/dataTables.semanticui.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('keramat/vendors/dataTable/v1/css/buttons.semanticui.min.css')}}" type="text/css">
 @endsection
 @section('main')
     <div class="main-content side-content pt-0">
@@ -26,51 +30,36 @@
                                     <h6 class="main-content-label mb-1">لیست حامیان </h6>
                                     <a href="{{url('admin/costs/create')}}" class="btn btn-primary btn-xs">افزودن هزینه </a>
                                 </div>
-
                                 <div class="table-responsive">
-                                    <table class="table" id="example1">
-                                        <thead>
-                                        <tr>
-                                            <th class="wd-10p"> ردیف </th>
-                                            <th class="wd-10p"> نام و نام خانوادگی </th>
-                                            <th class="wd-10p"> تاریخ </th>
-                                            <th class="wd-10p"> مبلغ (تومان) </th>
-                                            <th class="wd-10p"> علت </th>
-                                            <th class="wd-10p"> توضیحات </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($costs as $cost)
-                                            <tr class="odd gradeX">
-                                                <td>{{$loop->iteration}}</td>
-                                                <td>{{$cost->name}}</td>
-                                                <td>{{$cost->time}}</td>
-                                                <td>{{number_format($cost->amount)}}</td>
-                                                <td>{{$cost->reason}}</td>
-                                                <td>{{$cost->description}}</td>
-
-{{--                                                <td>--}}
-{{--                                                    <div class="btn-icon-list">--}}
-{{--                                                        <a href="{{ route('costs.edit' , $cost->id ) }}" class="btn ripple btn-outline-info btn-icon">--}}
-{{--                                                            <i class="fe fe-edit-2"></i>--}}
-{{--                                                        </a>--}}
-{{--                                                    </div>--}}
-{{--                                                </td>--}}
-{{--                                                <td>--}}
-{{--                                                    <form action="{{ route('costs.destroy' , $cost->id) }}" method="post">--}}
-{{--                                                        {{ method_field('delete') }}--}}
-{{--                                                        {{ csrf_field() }}--}}
-{{--                                                        <div class="btn-icon-list">--}}
-{{--                                                            <button type="submit" class="btn ripple btn-outline-danger btn-icon">--}}
-{{--                                                                <i class="fe fe-trash-2 "></i>--}}
-{{--                                                            </button>--}}
-{{--                                                        </div>--}}
-{{--                                                    </form>--}}
-{{--                                                </td>--}}
+                                    <div class="table-responsive">
+                                        <style>
+                                            table{
+                                                margin: 0 auto;
+                                                width: 100% !important;
+                                                clear: both;
+                                                border-collapse: collapse;
+                                                table-layout: fixed;
+                                                word-wrap:break-word;
+                                            }
+                                            td {
+                                                overflow-x: auto;
+                                            }
+                                        </style>
+                                        <table id="sample1" class="table table-striped table-bordered yajra-datatable">
+                                            <thead>
+                                            <tr>
+                                                <th class="wd-10p"> ردیف </th>
+                                                <th class="wd-10p"> نام و نام خانوادگی </th>
+                                                <th class="wd-10p"> تاریخ </th>
+                                                <th class="wd-10p"> مبلغ (تومان) </th>
+                                                <th class="wd-10p"> علت </th>
+                                                <th class="wd-10p"> توضیحات </th>
                                             </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -79,10 +68,83 @@
             </div>
         </div>
     </div>
+@endsection
 @section('end')
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="{{asset('keramat/vendors/dataTable/v1/semantic.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/dataTables.semanticui.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.semanticui.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/jszip.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/vfs_fonts.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.print.min.js')}}"></script>
+    <script src="{{asset('keramat/vendors/dataTable/v1/buttons.colVis.min.js')}}"></script>
+
     <script src="{{asset('admin/assets/plugins/select2/js/select2.min.js')}}"></script>
     <script src="{{asset('admin/assets/plugins/perfect-scrollbar/perfect-scrollbar.min-rtl.js')}}"></script>
-@endsection
+    <script type="text/javascript">
+
+        $(function () {
+            var table = $('.yajra-datatable').DataTable({
+                order: [[ 1, 'desc' ]],
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        text: 'اکسل',
+                        className: 'btn btn-default btn-xs'
+                    },
+                    {
+                        extend: 'print',
+                        text: 'پرینت و pdf',
+                        className: 'btn btn-default btn-xs',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    'colvis'
+
+                ],
+                'columnDefs': [
+                    {
+                        'targets': 0,
+                        'checkboxes': true
+                    }
+                ],
+                "lengthChange": true,
+                "pageLength": '{{$page}}',
+
+                processing: true,
+                serverSide: true,
+                orderable: true,
+                searchable: true,
+                fixedHeader: false,
+                orderCellsTop: false,
+                ajax: "{{ route('costs.index') }}",
+                columns: [
+                    {data: 'DT_RowIndex'  , name: 'DT_RowIndex' },
+                    {data: 'name'         , name: 'name'        },
+                    {data: 'created_at'   , name: 'created_at'  },
+                    {data: 'amount'       , name: 'amount'      },
+                    {data: 'reason'       , name: 'reason'      },
+                    {data: 'description'  , name: 'description' },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: true,
+                        searchable: true
+                    },
+                ],
+            });
+        });
+
+        $(document).ready(function() {
+            table.buttons().container()
+                .appendTo( $('div.eight.column:eq(0)', table.table().container()) );
+        });
+    </script>
+
 @endsection

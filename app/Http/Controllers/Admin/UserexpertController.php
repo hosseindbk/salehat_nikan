@@ -11,22 +11,59 @@ use App\Model\Type_user;
 use App\Model\User;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserexpertController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $users              = User::where('level' , 'admin')->where('id' ,  '>', 1)->orderBy('id' , 'DESC')->get();
-        $typeusers          = Type_user::where('id' , '=' ,  2)->where('id' , '=' ,  5)->get();
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
+        $page      = (!empty($_GET["page"]))   ? ($_GET["page"])   : (20);
+
+        if ($request->ajax()) {
+            $data = User::select('id' , 'name' , 'mobile' , 'created_at')
+                ->where('level' , 'admin')
+                ->where('id' ,  '>', 1)
+                ->take($page)
+                ->get();
+
+            return Datatables::of($data)
+                ->addColumn('id', function ($data) {
+                    return ($data->id);
+                })
+
+                ->addColumn('name', function ($data) {
+                    return ($data->name);
+                })
+                ->addColumn('mobile', function ($data) {
+                    return ($data->mobile);
+                })
+                ->addColumn('created_at', function ($data) {
+                    return (jdate($data->created_at)->format('%Y/%m/%d'));
+                })
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="' . route('user-experts.edit', $row->id) . '" class="btn ripple btn-outline-info btn-sm">Edit</a>
+                                  <form action="' . route('user-experts.destroy', $row->id) . '" method="post" style="display:inline">
+                                    ' . csrf_field() . '
+                                    ' . method_field("DELETE") . '
+                                         <button type="submit" class="btn ripple btn-outline-danger btn-sm">
+                                             <i class="fe fe-trash-2 "></i>
+                                         </button>
+                                </form>';
+
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
 
         return view('Admin.userexperts.all')
+            ->with(compact('page'))
             ->with(compact('menudashboards'))
-            ->with(compact('submenudashboards'))
-            ->with(compact('typeusers'))
-            ->with(compact('users'));
+            ->with(compact('submenudashboards'));
     }
     public function create()
     {
