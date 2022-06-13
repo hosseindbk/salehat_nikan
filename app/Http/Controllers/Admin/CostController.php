@@ -44,8 +44,6 @@ class CostController extends Controller
                     return (jdate($data->created_at)->format('%Y/%m/%d'));
                 })
                 ->addIndexColumn()
-
-                ->rawColumns(['action'])
                 ->make(true);
         }
         $menudashboards     = Menudashboard::whereStatus(4)->get();

@@ -131,12 +131,6 @@
                     {data: 'amount'       , name: 'amount'      },
                     {data: 'reason'       , name: 'reason'      },
                     {data: 'description'  , name: 'description' },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: true,
-                        searchable: true
-                    },
                 ],
             });
         });
