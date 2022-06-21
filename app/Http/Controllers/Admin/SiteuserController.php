@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Hamirequest;
 use App\Model\acountnumber;
 use App\Model\Bank;
+use App\Model\deposit;
 use App\Model\Hami;
 use App\Model\Menudashboard;
 use App\Model\Submenudashboard;
@@ -13,6 +14,7 @@ use App\Model\Type_user;
 use App\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class SiteuserController extends Controller
@@ -20,6 +22,8 @@ class SiteuserController extends Controller
 
     public function index(Request $request)
     {
+
+
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
         $startdate  =   $request->startdate;
@@ -31,27 +35,33 @@ class SiteuserController extends Controller
         if ($request->ajax()) {
 
             if (auth::user()->id == 1 || auth::user()->id == 2000 || auth::user()->id == 2006) {
+//
+//                $datas = Hami::leftjoin('users', 'users.id', '=', 'hamis.hamahang_id')
+//                    ->select('hamis.id', 'hamis.name', 'hamis.mobile', 'hamis.date', 'users.name as username', 'hamis.status')
+//                    ->orderBy('id' , 'DESC')
+//                    ->get();
 
-                $data = Hami::leftjoin('users', 'users.id', '=', 'hamis.hamahang_id')
-                    ->select('hamis.id', 'hamis.name', 'hamis.mobile', 'hamis.date', 'users.name as username', 'hamis.phone_verify', 'hamis.status')
-                    ->orderBy('id' , 'DESC')
-                    ->get();
+//                $counts = Hami::leftjoin('deposits' ,'deposits.user_id' ,'=' , 'hamis.id')->SelectRaw('COUNT(deposits.user_id) as total' , 'hamis.id as hami')->groupBy('deposits.user_id')->get();
 
-                return Datatables::of($data)
-                    ->addColumn('id', function ($data) {
-                        return ($data->id);
+                $mergeTbl  = DB::select("SELECT COUNT(deposits.user_id) as total , hamis.id , hamis.name , hamis.mobile , users.name as username from hamis left join users on hamis.hamahang_id = users.id left join deposits on hamis.id = deposits.user_id GROUP BY deposits.user_id , hamis.id , hamis.name ,
+hamis.mobile , users.name");
+//                $mergeTbl = $datas->leftjoin($counts , $counts->hami , '=', $datas->id);
+
+                return Datatables::of($mergeTbl)
+                    ->addColumn('id', function ($mergeTbl) {
+                        return ($mergeTbl->id);
                     })
-                    ->addColumn('name', function ($data) {
-                        return ($data->name);
+                    ->addColumn('name', function ($mergeTbl) {
+                        return ($mergeTbl->name);
                     })
-                    ->addColumn('mobile', function ($data) {
-                        return ($data->mobile);
+                    ->addColumn('mobile', function ($mergeTbl) {
+                        return ($mergeTbl->mobile);
                     })
-                    ->addColumn('date', function ($data) {
-                        return ($data->date);
+                    ->addColumn('username', function ($mergeTbl) {
+                        return ($mergeTbl->username);
                     })
-                    ->addColumn('username', function ($data) {
-                        return ($data->username);
+                    ->addColumn('total', function ($mergeTbl) {
+                        return ($mergeTbl->total);
                     })
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {
