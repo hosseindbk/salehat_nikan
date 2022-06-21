@@ -10,21 +10,47 @@ use App\Model\Type_user;
 use App\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
 
 class CostController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
 
-        $costs              = Cost::leftjoin('users' , 'users.id' , '=' , 'costs.user_id')
-        ->select('costs.reason as reason' , 'costs.amount as amount' , 'costs.description as description' , 'users.name as name','costs.date as time' )
-        ->orderBy('costs.id' , 'DESC')
-        ->get();
+        $page      = (!empty($_GET["page"]))   ? ($_GET["page"])   : (20);
 
+        if ($request->ajax()) {
+
+            $data              = Cost::leftjoin('users' , 'users.id' , '=' , 'costs.user_id')
+                ->select('costs.reason as reason' , 'costs.amount as amount' , 'costs.description as description' , 'users.name as username','costs.created_at as created_at' )
+                ->take($page)
+                ->get();
+
+
+            return Datatables::of($data)
+                ->addColumn('reason', function ($data) {
+                    return ($data->reason);
+                })
+
+                ->addColumn('amount', function ($data) {
+                    return ($data->amount);
+                })
+                ->addColumn('description', function ($data) {
+                    return ($data->description);
+                })
+                ->addColumn('username', function ($data) {
+                    return ($data->username);
+                })
+                ->addColumn('created_at', function ($data) {
+                    return (jdate($data->created_at)->format('%Y/%m/%d'));
+                })
+                ->addIndexColumn()
+                ->make(true);
+        }
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
 
         return view('Admin.costs.all')
-            ->with(compact('costs'))
+            ->with(compact('page'))
             ->with(compact('menudashboards'))
             ->with(compact('submenudashboards'));
     }

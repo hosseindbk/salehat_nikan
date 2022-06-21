@@ -26,6 +26,24 @@
                     <div class="col-lg-12">
                         <div class="card custom-card overflow-hidden">
                             <div class="card-body">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-1 ">
+                                            <input type="text" name="id" id="id" class="form-control " placeholder="کد کاربر">
+                                        </div>
+                                        <div class="form-group col-md-2 ">
+                                            <input type="text" name="name" id="name" class="form-control " placeholder="نام و نام خانوادگی">
+                                        </div>
+
+                                        <div class="form-group col-md-1 ">
+                                            <input type="text" name="page" id="page" class="form-control" placeholder="تعداد نمایش">
+                                        </div>
+                                        <div class="form-group col-md-1 ">
+                                            <button type="submit" id="btnFiterSubmitSearch" class="btn btn-default btnFiterSubmitSearch">اعمال فیلتر</button>
+                                        </div>
+
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <form method="get" action="{{ url('admin/siteusers') }}" style="display: flex">
                                         <input type="number" class="form-control" name="page"    value="{{$page}}" autocomplete="off" style="width: 100px">
@@ -64,10 +82,8 @@
                                                 <th class="wd-10p"> کد حامی </th>
                                                 <th class="wd-10p"> نام و نام خانوادگی </th>
                                                 <th class="wd-10p"> شماره موبایل </th>
-                                                <th class="wd-10p"> تاریخ عضویت </th>
                                                 <th class="wd-10p"> حامی یاب </th>
-                                                <th class="wd-10p"> وضعیت شماره </th>
-                                                <th class="wd-10p"> وضعیت </th>
+                                                <th class="wd-10p"> تعداد واریزی </th>
                                                 <th class="wd-10p"> ویرایش/حذف</th>
                                             </tr>
                                             </thead>
@@ -138,16 +154,23 @@
                 searchable: true,
                 fixedHeader: false,
                 orderCellsTop: false,
-                ajax: "{{ route('siteusers.index') }}",
+                ajax:{
+                    url:"{{ route('siteusers.index') }}",
+                    type: 'GET',
+                    data: function (d) {
+                        d.id          = $('#id').val();
+                        d.name        = $('#name').val();
+                        d.mobile      = $('#mobile').val();
+                        d.username    = $('#username').val();
+                    }
+                },
                 columns: [
                     {data: 'DT_RowIndex'    , name: 'DT_RowIndex'   },
-                    {data: 'id'             , name: 'id'            },
+                    {data: 'id'           , name: 'id'          },
                     {data: 'name'           , name: 'name'          },
                     {data: 'mobile'         , name: 'mobile'        },
-                    {data: 'date'           , name: 'date'          },
                     {data: 'username'       , name: 'username'      },
-                    {data: 'phone_verify'   , name: 'phone_verify'  },
-                    {data: 'status'         , name: 'status'        },
+                    {data: 'total'          , name: 'total'      },
                     {
                         data: 'action',
                         name: 'action',
@@ -157,10 +180,43 @@
                 ],
             });
         });
-
+        $('#btnFiterSubmitSearch').click(function(){
+            $('.yajra-datatable').DataTable().draw(true);
+        });
         $(document).ready(function() {
             table.buttons().container()
                 .appendTo( $('div.eight.column:eq(0)', table.table().container()) );
+        });
+
+        var detailRows = [];
+
+        $('.yajra-datatable tbody').on('click', 'tr td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = dt.row(tr);
+            var idx = detailRows.indexOf(tr.attr('id'));
+
+            if (row.child.isShown()) {
+                tr.removeClass('details');
+                row.child.hide();
+
+                // Remove from the 'open' array
+                detailRows.splice(idx, 1);
+            } else {
+                tr.addClass('details');
+                row.child(format(row.data())).show();
+
+                // Add to the 'open' array
+                if (idx === -1) {
+                    detailRows.push(tr.attr('id'));
+                }
+            }
+        });
+
+        // On each draw, loop over the `detailRows` array and show any child rows
+        dt.on('draw', function () {
+            detailRows.forEach(function(id, i) {
+                $('#' + id + ' td.details-control').trigger('click');
+            });
         });
     </script>
 @endsection
