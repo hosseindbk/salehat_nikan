@@ -8,7 +8,7 @@ class deposit extends Model
 {
     public function scopeHesabfilter($query)
     {
-        $hesab       = request('hesab');
+        $hesab       = request('account_number');
         if(isset($hesab)  && $hesab != null){
             $query->whereAcountnumber_id($hesab);
         }

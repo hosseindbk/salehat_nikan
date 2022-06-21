@@ -29,19 +29,19 @@
                                                 <select name="account_number"  class="form-control select2">
                                                     <option value="">انتخاب کنید</option>
                                                     @foreach($account_numbers as $account_number)
-                                                        <option value="{{$account_number->id}}">{{$account_number->title}}</option>
+                                                        <option value="{{$account_number->id}}" {{request('startdate') == $account_number->id ? 'selected' : ''}}>{{$account_number->title}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" name="statdate" class="form-control" autocomplete="off" placeholder="روز / ماه / سال" >
+                                                <input type="text" name="startdate" class="form-control" value="{{request('startdate')}}" autocomplete="off" placeholder="روز / ماه / سال" >
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" name="enddate" class="form-control" autocomplete="off" placeholder="روز / ماه / سال" >
+                                                <input type="text" name="enddate" class="form-control" value="{{request('enddate')}}" autocomplete="off" placeholder="روز / ماه / سال" >
                                             </div>
                                         </div>
                                         <div class="col-md-3">
