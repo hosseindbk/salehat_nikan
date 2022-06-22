@@ -215,8 +215,8 @@ class DepositController extends Controller
             $code = mt_rand(1000000, 9999999);
             $code = $code . jdate()->format('Ymd');
 
-        $hamiyab_name = Hami::leftjoin('users' , 'users.id' , '=', 'hamis.hamahang_id')->select('users.name')->where('hamis.id' , $request->input('hami_id'))->get();
-
+        $hamiyab_id = Hami::select('hamahang_id')->whereId($request->input('hami_id'))->get();
+        $hamiyab_name = User::whereId($hamiyab_id)->pluck('name');
         $deposits = new deposit();
 
         $deposits->user_id          = $request->input('hami_id');
