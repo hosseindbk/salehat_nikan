@@ -212,17 +212,19 @@ class DepositController extends Controller
     public function store(depositrequest $request)
     {
 
-            $code = mt_rand(1000000, 9999999);
-            $code = $code . jdate()->format('Ymd');
+        $code = mt_rand(1000000, 9999999);
+        $code = $code . jdate()->format('Ymd');
 
         $hamiyab_id = Hami::select('hamahang_id')->whereId($request->input('hami_id'))->get();
-        $hamiyab_name = User::whereId($hamiyab_id)->pluck('name');
+
+        $hamiyab_name = User::whereId($hamiyab_id)->select('name')->get();
+
         $deposits = new deposit();
 
         $deposits->user_id          = $request->input('hami_id');
         $deposits->amount           = str_replace(',' , '' , $request->input('amount'));
         $deposits->date             = $request->input('date');
-        $deposits->hamiyab          = $hamiyab_name;
+        $deposits->hamiyab          = $hamiyab_name[0];
         $deposits->reason_id        = $request->input('reason_id');
         $deposits->hamahang_id      = $request->input('hamahang_id');
         $deposits->acountnumber_id  = $request->input('acountnumber_id');
