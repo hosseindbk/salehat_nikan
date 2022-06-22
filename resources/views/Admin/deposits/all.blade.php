@@ -95,7 +95,9 @@
                                                 <th class="wd-10p"> شماره حساب </th>
                                                 <th class="wd-10p"> کد رهگیری </th>
                                                 <th class="wd-10p"> هماهنگ کننده </th>
+                                                <th class="wd-10p"> حامی یاب </th>
                                                 <th class="wd-10p"> شماره موبایل2 </th>
+                                                <th class="wd-10p"> توضیحات </th>
                                                 <th class="wd-10p"> ویرایش/حذف</th>
                                                 <th class="wd-10p">بررسی </th>
                                             </tr>
@@ -197,7 +199,12 @@
                         columns: ':visible'
                     }
                 },
-                'colvis'
+                {
+                    extend: 'colvis',
+                    text: 'انتخاب فیلد',
+                    className: 'btn btn-default btn-xs',
+                    footer: true,
+                },
             ],
             'columnDefs': [
                 {
@@ -242,7 +249,9 @@
                 {data: 'hesabtitle'     , name: 'hesabtitle'    ,  "width": "80px"},
                 {data: 'code'           , name: 'code'          ,  "width": "100px"},
                 {data: 'hamahangname'   , name: 'hamahangname'  ,  "width": "100px"},
+                {data: 'hamiyab'        , name: 'hamiyab'       ,  "width": "100px"},
                 {data: 'mobile2'        , name: 'mobile2'       ,  "width": "70px"},
+                {data: 'description'    , name: 'description'   ,  "width": "100px"},
                 {
                     data: 'action'      ,     name: 'action'    ,"width": "70px",
                     orderable: true,

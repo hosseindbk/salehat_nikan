@@ -32,9 +32,21 @@ class DepositController extends Controller
                          ->leftjoin('hamis', 'hamis.id', '=', 'deposits.user_id')
                          ->leftjoin('acountnumbers', 'acountnumbers.id', '=', 'deposits.acountnumber_id')
                          ->leftjoin('reasons', 'reasons.id', '=', 'deposits.reason_id')
-                         ->select('deposits.id as id', 'hamis.id as userid', 'deposits.date as date', 'deposits.amount as amount', 'deposits.code_number as code',
-                             'hamis.name as name','deposits.description as description', 'reasons.title as reason', 'users.name as hamahangname',
-                             'acountnumbers.shomare_hesab as shomare_hesab', 'acountnumbers.title as hesabtitle', 'hamis.mobile as mobile','hamis.mobile2 as mobile2')
+                         ->select(
+                               'hamis.name as name'
+                             , 'users.name as hamahangname'
+                             , 'hamis.id as userid'
+                             , 'deposits.hamiyab as hamiyab'
+                             , 'deposits.id as id'
+                             , 'deposits.date as date'
+                             , 'deposits.amount as amount'
+                             , 'deposits.code_number as code'
+                             , 'reasons.title as reason'
+                             , 'deposits.description as description'
+                             , 'acountnumbers.shomare_hesab as shomare_hesab'
+                             , 'acountnumbers.title as hesabtitle'
+                             , 'hamis.mobile as mobile','hamis.mobile2 as mobile2')
+
                          ->orderBy('deposits.created_at', 'desc')
                          ->filter()
                          ->take($page)
@@ -72,6 +84,12 @@ class DepositController extends Controller
                     ->addColumn('hamahangname', function ($data) {
                         return ($data->hamahangname);
                     })
+                    ->addColumn('hamiyab', function ($data) {
+                        return ($data->hamiyab);
+                    })
+                    ->addColumn('description', function ($data) {
+                        return ($data->description);
+                    })
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {
                         $actionBtn = '<a href="' . route('deposits.edit', $row->id) . '" class="btn ripple btn-outline-info btn-sm">Edit</a>
@@ -94,9 +112,20 @@ class DepositController extends Controller
                          ->leftjoin('hamis', 'hamis.id', '=', 'deposits.user_id')
                          ->leftjoin('acountnumbers', 'acountnumbers.id', '=', 'deposits.acountnumber_id')
                          ->leftjoin('reasons', 'reasons.id', '=', 'deposits.reason_id')
-                         ->select('deposits.id as id', 'hamis.id as userid', 'deposits.date as date', 'deposits.amount as amount'
-                             , 'hamis.name as name', 'reasons.title as reason', 'acountnumbers.shomare_card as shomarecard', 'hamis.mobile as mobile'
-                             ,'deposits.description as description' , 'deposits.code_number as code')
+                         ->select(
+                             'hamis.name as name'
+                             , 'users.name as hamahangname'
+                             , 'hamis.id as userid'
+                             , 'deposits.hamiyab as hamiyab'
+                             , 'deposits.id as id'
+                             , 'deposits.date as date'
+                             , 'deposits.amount as amount'
+                             , 'deposits.code_number as code'
+                             , 'reasons.title as reason'
+                             , 'deposits.description as description'
+                             , 'acountnumbers.shomare_hesab as shomare_hesab'
+                             , 'acountnumbers.title as hesabtitle'
+                             , 'hamis.mobile as mobile','hamis.mobile2 as mobile2')
                          ->orderBy('deposits.created_at', 'desc')
                          ->filter()
                          ->where('deposits.hamahang_id', '=', auth::user()->id)
@@ -112,6 +141,9 @@ class DepositController extends Controller
                     })
                     ->addColumn('mobile', function ($data) {
                         return ($data->mobile);
+                    })
+                    ->addColumn('mobile2', function ($data) {
+                        return ($data->mobile2);
                     })
                     ->addColumn('date', function ($data) {
                         return ($data->date);
@@ -130,6 +162,12 @@ class DepositController extends Controller
                     })
                     ->addColumn('hamahangname', function ($data) {
                         return ($data->hamahangname);
+                    })
+                    ->addColumn('hamiyab', function ($data) {
+                        return ($data->hamiyab);
+                    })
+                    ->addColumn('description', function ($data) {
+                        return ($data->description);
                     })
                     ->addColumn('action', function ($row) {
                         $actionBtn = '<a href="' . route('deposits.edit', $row->id) . '" class="btn ripple btn-outline-info btn-sm">Edit</a>
@@ -177,12 +215,14 @@ class DepositController extends Controller
             $code = mt_rand(1000000, 9999999);
             $code = $code . jdate()->format('Ymd');
 
+        $hamiyab_name = Hami::leftjoin('users' , 'users.id' , '=', 'hamis.hamahang_id')->select('users.name')->where('hamis.id' , $request->input('hami_id'))->get();
 
         $deposits = new deposit();
 
         $deposits->user_id          = $request->input('hami_id');
         $deposits->amount           = str_replace(',' , '' , $request->input('amount'));
         $deposits->date             = $request->input('date');
+        $deposits->hamiyab          = $hamiyab_name;
         $deposits->reason_id        = $request->input('reason_id');
         $deposits->hamahang_id      = $request->input('hamahang_id');
         $deposits->acountnumber_id  = $request->input('acountnumber_id');
