@@ -99,7 +99,6 @@
                                                 <th class="wd-10p"> شماره موبایل2 </th>
                                                 <th class="wd-10p"> توضیحات </th>
                                                 <th class="wd-10p"> ویرایش/حذف</th>
-                                                <th class="wd-10p">بررسی </th>
                                             </tr>
                                             </thead>
                                             <tbody>
