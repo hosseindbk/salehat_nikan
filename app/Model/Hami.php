@@ -6,5 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Hami extends Model
 {
-    //
+    public function scopeFilter($query)
+    {
+        $name       = request('name');
+        if(isset($name)  && $name != null){
+            $query->where('hamis.name', 'like', '%' . $name . '%' );
+        }
+        $mobile       = request('mobile');
+        if(isset($mobile)  && $mobile != null){
+            $query->where('hamis.mobile' , '=' , $mobile)->orwhere('hamis.mobile2' , '=' , $mobile);
+        }
+        $total       = request('total');
+        if(isset($total)  && $total != null){
+            $query->where('hamis.countdeposit' , '=' , $total);
+        }
+        $hamiyab       = request('hamiyab');
+        if(isset($hamiyab)  && $hamiyab != null){
+            $query->where('users.name', 'like', '%' . $hamiyab . '%' );
+        }
+    }
 }

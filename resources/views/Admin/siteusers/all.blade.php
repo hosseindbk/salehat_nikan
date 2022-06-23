@@ -26,29 +26,26 @@
                     <div class="col-lg-12">
                         <div class="card custom-card overflow-hidden">
                             <div class="card-body">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="form-group col-md-1 ">
-                                            <input type="text" name="id" id="id" class="form-control " placeholder="کد کاربر">
-                                        </div>
-                                        <div class="form-group col-md-2 ">
-                                            <input type="text" name="name" id="name" class="form-control " placeholder="نام و نام خانوادگی">
-                                        </div>
-
-                                        <div class="form-group col-md-1 ">
-                                            <input type="text" name="page" id="page" class="form-control" placeholder="تعداد نمایش">
-                                        </div>
-                                        <div class="form-group col-md-1 ">
-                                            <button type="submit" id="btnFiterSubmitSearch" class="btn btn-default btnFiterSubmitSearch">اعمال فیلتر</button>
-                                        </div>
-
-                                    </div>
-                                </div>
                                 <div class="row">
-                                    <form method="get" action="{{ url('admin/siteusers') }}" style="display: flex">
-                                        <input type="number" class="form-control" name="page"    value="{{$page}}" autocomplete="off" style="width: 100px">
-                                        <button type="submit" class="btn btn-default">بروزرسانی جدول</button>
-                                    </form>
+                                    <div class="form-group col-md-2 ">
+                                        <input type="text" name="name" id="name" class="form-control " placeholder="نام و نام خانوادگی">
+                                    </div>
+                                    <div class="form-group col-md-2 ">
+                                        <input type="text" name="mobile" id="mobile" class="form-control " placeholder="شماره موبایل">
+                                    </div>
+                                    <div class="form-group col-md-2 ">
+                                        <input type="text" name="hamiyab" id="hamiyab" class="form-control" placeholder="حامی یاب">
+                                    </div>
+                                    <div class="form-group col-md-2 ">
+                                        <input type="text" name="total" id="total" class="form-control " placeholder="تعداد واریزی">
+                                    </div>
+                                    <div class="form-group col-md-2 ">
+                                        <input type="text" name="page" id="page" class="form-control" placeholder="تعداد نمایش">
+                                    </div>
+                                    <div class="form-group col-md-2 ">
+                                        <button type="submit" id="btnFiterSubmitSearch" class="btn btn-default btnFiterSubmitSearch">اعمال فیلتر</button>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="card-body">
@@ -136,7 +133,12 @@
                             columns: ':visible'
                         }
                     },
-                    'colvis'
+                    {
+                        extend: 'colvis',
+                        text: 'انتخاب فیلد',
+                        className: 'btn btn-default btn-xs',
+                        footer: true,
+                    },
 
                 ],
                 'columnDefs': [
@@ -146,31 +148,33 @@
                     }
                 ],
                 "lengthChange": true,
-                "pageLength": '{{$page}}',
-
+                {{--"pageLength": {{$page}},--}}
                 processing: true,
                 serverSide: true,
                 orderable: true,
-                searchable: true,
+                searching: false,
+                paging: false,
+                searchable: false,
                 fixedHeader: false,
                 orderCellsTop: false,
                 ajax:{
                     url:"{{ route('siteusers.index') }}",
                     type: 'GET',
                     data: function (d) {
-                        d.id          = $('#id').val();
                         d.name        = $('#name').val();
+                        d.page        = $('#page').val();
+                        d.total       = $('#total').val();
                         d.mobile      = $('#mobile').val();
-                        d.username    = $('#username').val();
+                        d.hamiyab     = $('#hamiyab').val();
                     }
                 },
                 columns: [
                     {data: 'DT_RowIndex'    , name: 'DT_RowIndex'   },
-                    {data: 'id'           , name: 'id'          },
+                    {data: 'id'             , name: 'id'            },
                     {data: 'name'           , name: 'name'          },
                     {data: 'mobile'         , name: 'mobile'        },
                     {data: 'username'       , name: 'username'      },
-                    {data: 'total'          , name: 'total'      },
+                    {data: 'countdeposit'   , name: 'countdeposit'  },
                     {
                         data: 'action',
                         name: 'action',

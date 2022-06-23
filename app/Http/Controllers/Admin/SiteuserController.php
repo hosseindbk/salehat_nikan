@@ -23,45 +23,36 @@ class SiteuserController extends Controller
     public function index(Request $request)
     {
 
-
         $menudashboards     = Menudashboard::whereStatus(4)->get();
         $submenudashboards  = Submenudashboard::whereStatus(4)->get();
-        $startdate  =   $request->startdate;
-        $enddate    =   $request->enddate;
-        if($request->page)
-            $page = $request->page;
-        else
-            $page = 25;
+
         if ($request->ajax()) {
 
             if (auth::user()->id == 1 || auth::user()->id == 2000 || auth::user()->id == 2006) {
-//
-//                $datas = Hami::leftjoin('users', 'users.id', '=', 'hamis.hamahang_id')
-//                    ->select('hamis.id', 'hamis.name', 'hamis.mobile', 'hamis.date', 'users.name as username', 'hamis.status')
-//                    ->orderBy('id' , 'DESC')
-//                    ->get();
+                $page      = (!empty($_GET["page"]))   ? ($_GET["page"])   : (10);
 
-//                $counts = Hami::leftjoin('deposits' ,'deposits.user_id' ,'=' , 'hamis.id')->SelectRaw('COUNT(deposits.user_id) as total' , 'hamis.id as hami')->groupBy('deposits.user_id')->get();
+                $datas = Hami::leftjoin('users', 'users.id', '=', 'hamis.hamahang_id')
+                    ->select('hamis.id', 'hamis.name', 'hamis.mobile', 'hamis.date', 'users.name as username', 'hamis.status' , 'hamis.countdeposit')
+                    ->orderBy('id' , 'DESC')
+                    ->filter()
+                    ->take($page)
+                    ->get();
 
-                $mergeTbl  = DB::select("SELECT COUNT(deposits.user_id) as total , hamis.id , hamis.name , hamis.mobile , users.name as username from hamis left join users on hamis.hamahang_id = users.id left join deposits on hamis.id = deposits.user_id GROUP BY deposits.user_id , hamis.id , hamis.name ,
-hamis.mobile , users.name");
-//                $mergeTbl = $datas->leftjoin($counts , $counts->hami , '=', $datas->id);
-
-                return Datatables::of($mergeTbl)
-                    ->addColumn('id', function ($mergeTbl) {
-                        return ($mergeTbl->id);
+                return Datatables::of($datas)
+                    ->addColumn('id', function ($datas) {
+                        return ($datas->id);
                     })
-                    ->addColumn('name', function ($mergeTbl) {
-                        return ($mergeTbl->name);
+                    ->addColumn('name', function ($datas) {
+                        return ($datas->name);
                     })
-                    ->addColumn('mobile', function ($mergeTbl) {
-                        return ($mergeTbl->mobile);
+                    ->addColumn('mobile', function ($datas) {
+                        return ($datas->mobile);
                     })
-                    ->addColumn('username', function ($mergeTbl) {
-                        return ($mergeTbl->username);
+                    ->addColumn('username', function ($datas) {
+                        return ($datas->username);
                     })
-                    ->addColumn('total', function ($mergeTbl) {
-                        return ($mergeTbl->total);
+                    ->addColumn('countdeposit', function ($datas) {
+                        return ($datas->countdeposit);
                     })
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {
@@ -79,8 +70,13 @@ hamis.mobile , users.name");
                     ->rawColumns(['action'])
                     ->make(true);
             }else{
-                $data = Hami::leftjoin('users', 'users.id', '=', 'hamis.hamahang_id')->
-                    select('hamis.id', 'hamis.name', 'hamis.mobile', 'hamis.date', 'users.name as username', 'hamis.phone_verify', 'hamis.status')
+                $page      = (!empty($_GET["page"]))   ? ($_GET["page"])   : (10);
+
+                $data = Hami::leftjoin('users', 'users.id', '=', 'hamis.hamahang_id')
+                    ->select('hamis.id', 'hamis.name', 'hamis.mobile', 'hamis.date', 'users.name as username', 'hamis.status' , 'hamis.countdeposit')
+                    ->orderBy('id' , 'DESC')
+                    ->filter()
+                    ->take($page)
                     ->where('hamis.hamahang_id', '=', Auth::user()->id)
                     ->get();
 
@@ -100,6 +96,9 @@ hamis.mobile , users.name");
                     ->addColumn('username', function ($data) {
                         return ($data->username);
                     })
+                    ->addColumn('countdeposit', function ($datas) {
+                        return ($datas->countdeposit);
+                    })
                     ->addColumn('action', function ($row) {
                         $actionBtn = '<a href="' . route('siteusers.edit', $row->id) . '" class="btn ripple btn-outline-info btn-sm">Edit</a>
                                   <form action="' . route('siteusers.destroy', $row->id) . '" method="post" style="display:inline">
@@ -118,12 +117,10 @@ hamis.mobile , users.name");
         }
 
         return view('Admin.siteusers.all')
-            ->with(compact('startdate'))
-            ->with(compact('enddate'))
-            ->with(compact('page'))
             ->with(compact('menudashboards'))
             ->with(compact('submenudashboards'));
     }
+
     public function create()
     {
         $typeusers          = Type_user::where('id' , 3)->get();
@@ -159,6 +156,7 @@ hamis.mobile , users.name");
         return redirect(route('siteusers.index'));
 
     }
+
     public function edit($id)
     {
         $hamis              = Hami::whereId($id)->get();
