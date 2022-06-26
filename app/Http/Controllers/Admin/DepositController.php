@@ -215,18 +215,25 @@ class DepositController extends Controller
         $code = mt_rand(1000000, 9999999);
         $code = $code . jdate()->format('Ymd');
 
-        $hamiyab_id = Hami::select('hamahang_id')->whereId($request->input('hami_id'))->get();
 
-        $hamiyab_names = User::whereId($hamiyab_id)->select('name')->get();
+        $hami_id                = Hami::select('id')->whereId($request->input('hami_id'))->get();
+        $countdeposit           = Hami::whereId($request->input('hami_id'))->pluck('countdeposit');
+        $hamis                  = Hami::findOrfail($hami_id)->first();
+        $hamis->countdeposit    = $countdeposit[0]+1;
+        $hamis->save();
+
+        $hamiyab_id             = Hami::whereId($request->input('hami_id'))->pluck('hamahang_id');
+        $hamiyab_names          = User::whereId($hamiyab_id[0])->pluck('name');
+
+//        $hamiyab_id         = Hami::select('hamahang_id')->whereId($request->input('hami_id'))->get();
+//        $hamiyab_names      = User::whereId($hamiyab_id)->select('name')->get();
 
         $deposits = new deposit();
 
         $deposits->user_id          = $request->input('hami_id');
         $deposits->amount           = str_replace(',' , '' , $request->input('amount'));
         $deposits->date             = $request->input('date');
-        foreach ($hamiyab_names as $hamiyab_name) {
-            $deposits->hamiyab = $hamiyab_name->name;
-        }
+        $deposits->hamiyab          = $hamiyab_names[0];
         $deposits->reason_id        = $request->input('reason_id');
         $deposits->hamahang_id      = $request->input('hamahang_id');
         $deposits->acountnumber_id  = $request->input('acountnumber_id');
@@ -234,6 +241,7 @@ class DepositController extends Controller
         $deposits->code_number      = $code;
 
         $deposits->save();
+
         alert()->success('عملیات موفق', 'اطلاعات با موفقیت ثبت شد');
         return redirect(route('deposits.index'));
     }
