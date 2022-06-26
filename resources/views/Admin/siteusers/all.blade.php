@@ -79,8 +79,10 @@
                                                 <th class="wd-10p"> کد حامی </th>
                                                 <th class="wd-10p"> نام و نام خانوادگی </th>
                                                 <th class="wd-10p"> شماره موبایل </th>
+                                                <th class="wd-10p"> شماره موبایل2 </th>
                                                 <th class="wd-10p"> حامی یاب </th>
                                                 <th class="wd-10p"> تعداد واریزی </th>
+                                                <th class="wd-10p"> توضیحات </th>
                                                 <th class="wd-10p"> ویرایش/حذف</th>
                                             </tr>
                                             </thead>
@@ -173,8 +175,10 @@
                     {data: 'id'             , name: 'id'            },
                     {data: 'name'           , name: 'name'          },
                     {data: 'mobile'         , name: 'mobile'        },
+                    {data: 'mobile2'        , name: 'mobile2'       },
                     {data: 'username'       , name: 'username'      },
                     {data: 'countdeposit'   , name: 'countdeposit'  },
+                    {data: 'description'    , name: 'description'   },
                     {
                         data: 'action',
                         name: 'action',

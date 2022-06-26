@@ -225,9 +225,6 @@ class DepositController extends Controller
         $hamiyab_id             = Hami::whereId($request->input('hami_id'))->pluck('hamahang_id');
         $hamiyab_names          = User::whereId($hamiyab_id[0])->pluck('name');
 
-//        $hamiyab_id         = Hami::select('hamahang_id')->whereId($request->input('hami_id'))->get();
-//        $hamiyab_names      = User::whereId($hamiyab_id)->select('name')->get();
-
         $deposits = new deposit();
 
         $deposits->user_id          = $request->input('hami_id');

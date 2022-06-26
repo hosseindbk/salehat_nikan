@@ -32,7 +32,7 @@ class SiteuserController extends Controller
                 $page      = (!empty($_GET["page"]))   ? ($_GET["page"])   : (10);
 
                 $datas = Hami::leftjoin('users', 'users.id', '=', 'hamis.hamahang_id')
-                    ->select('hamis.id', 'hamis.name', 'hamis.mobile', 'hamis.date', 'users.name as username', 'hamis.status' , 'hamis.countdeposit')
+                    ->select('hamis.id', 'hamis.name', 'hamis.mobile', 'hamis.mobile2', 'hamis.date', 'hamis.description', 'users.name as username', 'hamis.status' , 'hamis.countdeposit')
                     ->orderBy('id' , 'DESC')
                     ->filter()
                     ->take($page)
@@ -48,11 +48,17 @@ class SiteuserController extends Controller
                     ->addColumn('mobile', function ($datas) {
                         return ($datas->mobile);
                     })
+                    ->addColumn('mobile2', function ($datas) {
+                        return ($datas->mobile2);
+                    })
                     ->addColumn('username', function ($datas) {
                         return ($datas->username);
                     })
                     ->addColumn('countdeposit', function ($datas) {
                         return ($datas->countdeposit);
+                    })
+                    ->addColumn('description', function ($datas) {
+                        return ($datas->description);
                     })
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {
@@ -90,14 +96,17 @@ class SiteuserController extends Controller
                     ->addColumn('mobile', function ($data) {
                         return ($data->mobile);
                     })
-                    ->addColumn('date', function ($data) {
-                        return ($data->date);
+                    ->addColumn('mobile2', function ($datas) {
+                        return ($datas->mobile2);
                     })
-                    ->addColumn('username', function ($data) {
-                        return ($data->username);
+                    ->addColumn('username', function ($datas) {
+                        return ($datas->username);
                     })
                     ->addColumn('countdeposit', function ($datas) {
                         return ($datas->countdeposit);
+                    })
+                    ->addColumn('description', function ($datas) {
+                        return ($datas->description);
                     })
                     ->addColumn('action', function ($row) {
                         $actionBtn = '<a href="' . route('siteusers.edit', $row->id) . '" class="btn ripple btn-outline-info btn-sm">Edit</a>
