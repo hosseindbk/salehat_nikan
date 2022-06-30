@@ -80,9 +80,10 @@
                                             }
                                             td {
                                                 overflow-x: auto;
+                                                border-color: #0a0a0a !important;
                                             }
                                         </style>
-                                        <table id="sample1" class="table table-striped table-bordered yajra-datatable">
+                                        <table id="sample1" class="table table-bordered yajra-datatable">
                                             <thead>
                                             <tr>
                                                 <th class="wd-10p"> ردیف </th>
