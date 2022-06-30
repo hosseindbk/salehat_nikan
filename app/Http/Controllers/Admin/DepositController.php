@@ -298,8 +298,17 @@ class DepositController extends Controller
 
     public function destroy($id)
     {
+        $deposit = deposit::whereId($id)->pluck('user_id');
+        $hami_id                = Hami::select('id')->whereId($deposit[0])->get();
+        $countdeposit           = Hami::whereId($deposit[0])->pluck('countdeposit');
+        $hamis                  = Hami::findOrfail($hami_id)->first();
+        $hamis->countdeposit    = $countdeposit[0] - 1;
+        $hamis->save();
+
         $deposits = deposit::findOrfail($id);
         $deposits->delete();
+
+
 
         alert()->success('عملیات موفق', 'اطلاعات با موفقیت پاک شد');
         return redirect(route('deposits.index'));
