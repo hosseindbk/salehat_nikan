@@ -33,7 +33,7 @@
                         <div class="card custom-card">
                             <div class="card-body">
                                 <div>
-                                    <h6 class="main-content-label text-center mb-5">ورود اطلاعات منو داشبورد</h6>
+                                    <h6 class="main-content-label text-center mb-5">ورود اطلاعات واریزی</h6>
                                 </div>
                                 <form action="{{ route('deposits.store')}}" method="POST">
                                     <div class="row row-sm">

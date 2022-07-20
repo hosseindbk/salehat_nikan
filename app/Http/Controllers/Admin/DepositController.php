@@ -14,6 +14,7 @@ use App\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Yajra\DataTables\Facades\DataTables;
 
 class DepositController extends Controller
@@ -209,32 +210,39 @@ class DepositController extends Controller
         $code = mt_rand(1000000, 9999999);
         $code = $code . jdate()->format('Ymd');
 
+        $hamis                  = deposit::whereUser_id($request->input('hami_id'))->where('date' , $request->input('date'))->pluck('id');
+        //dd(trim($hamis));
+        if(trim($hamis) != '[]') {
+            alert()->warning('عملیات ناموفق', 'در این تاریخ واریزی ثبت شده است');
+            return Redirect::back();
+        }else{
+            $hami_id = Hami::select('id')->whereId($request->input('hami_id'))->get();
+            $countdeposit = Hami::whereId($request->input('hami_id'))->pluck('countdeposit');
+            $hamis = Hami::findOrfail($hami_id)->first();
 
-        $hami_id                = Hami::select('id')->whereId($request->input('hami_id'))->get();
-        $countdeposit           = Hami::whereId($request->input('hami_id'))->pluck('countdeposit');
-        $hamis                  = Hami::findOrfail($hami_id)->first();
-        $hamis->countdeposit    = $countdeposit[0]+1;
-        $hamis->save();
+            $hamis->countdeposit = $countdeposit[0] + 1;
+            $hamis->save();
 
-        $hamiyab_id             = Hami::whereId($request->input('hami_id'))->pluck('hamahang_id');
-        $hamiyab_names          = User::whereId($hamiyab_id[0])->pluck('name');
+            $hamiyab_id = Hami::whereId($request->input('hami_id'))->pluck('hamahang_id');
+            $hamiyab_names = User::whereId($hamiyab_id[0])->pluck('name');
 
-        $deposits = new deposit();
+            $deposits = new deposit();
 
-        $deposits->user_id          = $request->input('hami_id');
-        $deposits->amount           = str_replace(',' , '' , $request->input('amount'));
-        $deposits->date             = $request->input('date');
-        $deposits->hamiyab          = $hamiyab_names[0];
-        $deposits->reason_id        = $request->input('reason_id');
-        $deposits->hamahang_id      = $request->input('hamahang_id');
-        $deposits->acountnumber_id  = $request->input('acountnumber_id');
-        $deposits->description      = $request->input('description');
-        $deposits->code_number      = $code;
+            $deposits->user_id = $request->input('hami_id');
+            $deposits->amount = str_replace(',', '', $request->input('amount'));
+            $deposits->date = $request->input('date');
+            $deposits->hamiyab = $hamiyab_names[0];
+            $deposits->reason_id = $request->input('reason_id');
+            $deposits->hamahang_id = $request->input('hamahang_id');
+            $deposits->acountnumber_id = $request->input('acountnumber_id');
+            $deposits->description = $request->input('description');
+            $deposits->code_number = $code;
 
-        $deposits->save();
+            $deposits->save();
 
-        alert()->success('عملیات موفق', 'اطلاعات با موفقیت ثبت شد');
-        return redirect(route('deposits.index'));
+            alert()->success('عملیات موفق', 'اطلاعات با موفقیت ثبت شد');
+            return redirect(route('deposits.index'));
+        }
     }
 
     public function show($id)

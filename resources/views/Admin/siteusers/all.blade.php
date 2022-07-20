@@ -39,7 +39,7 @@
                                     <div class="form-group col-md-2 ">
                                         <input type="text" name="hamiyab" id="hamiyab" class="form-control" placeholder="حامی یاب">
                                     </div>
-                                    <div class="form-group col-md-2 ">
+                                    <div class="form-group col-md-1 ">
                                         <input type="text" name="total" id="total" class="form-control " placeholder="تعداد واریزی">
                                     </div>
                                     <div class="form-group col-md-2 ">
