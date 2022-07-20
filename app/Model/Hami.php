@@ -8,6 +8,10 @@ class Hami extends Model
 {
     public function scopeFilter($query)
     {
+        $user_id       = request('user_id');
+        if(isset($user_id)  && $user_id != null){
+            $query->where('hamis.id', $user_id );
+        }
         $name       = request('name');
         if(isset($name)  && $name != null){
             $query->where('hamis.name', 'like', '%' . $name . '%' );

@@ -27,6 +27,9 @@
                         <div class="card custom-card overflow-hidden">
                             <div class="card-body">
                                 <div class="row">
+                                    <div class="form-group col-md-1 ">
+                                        <input type="text" name="user_id" id="user_id" class="form-control " placeholder="کد کاربر">
+                                    </div>
                                     <div class="form-group col-md-2 ">
                                         <input type="text" name="name" id="name" class="form-control " placeholder="نام و نام خانوادگی">
                                     </div>
@@ -163,6 +166,7 @@
                     url:"{{ route('siteusers.index') }}",
                     type: 'GET',
                     data: function (d) {
+                        d.user_id     = $('#user_id').val();
                         d.name        = $('#name').val();
                         d.page        = $('#page').val();
                         d.total       = $('#total').val();
