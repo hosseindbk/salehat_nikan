@@ -89,12 +89,11 @@
                                                 <th class="wd-10p"> ردیف </th>
                                                 <th class="wd-10p"> کد کاربر </th>
                                                 <th class="wd-10p"> نام و نام خانوادگی </th>
-                                                <th class="wd-10p"> تاریخ واریز </th>
                                                 <th class="wd-10p"> شماره موبایل </th>
+                                                <th class="wd-10p"> تاریخ واریز </th>
                                                 <th class="wd-10p"> مبلغ واریزی(تومان) </th>
                                                 <th class="wd-10p"> علت واریز </th>
                                                 <th class="wd-10p"> شماره حساب </th>
-                                                <th class="wd-10p"> کد رهگیری </th>
                                                 <th class="wd-10p"> هماهنگ کننده </th>
                                                 <th class="wd-10p"> حامی یاب </th>
                                                 <th class="wd-10p"> شماره موبایل2 </th>
@@ -242,12 +241,11 @@
                 {data: 'DT_RowIndex'    , name: 'DT_RowIndex'   ,  "width": "20px"},
                 {data: 'userid'         , name: 'userid'        ,  "width": "50px"},
                 {data: 'name'           , name: 'name'          ,  "width": "100px"},
-                {data: 'date'           , name: 'date'          ,  "width": "70px"},
                 {data: 'mobile'         , name: 'mobile'        ,  "width": "70px"},
+                {data: 'date'           , name: 'date'          ,  "width": "70px"},
                 {data: 'amount'         , name: 'amount'        ,  "width": "100px"},
                 {data: 'reason'         , name: 'reason'        ,  "width": "100px"},
                 {data: 'hesabtitle'     , name: 'hesabtitle'    ,  "width": "80px"},
-                {data: 'code'           , name: 'code'          ,  "width": "100px"},
                 {data: 'hamahangname'   , name: 'hamahangname'  ,  "width": "100px"},
                 {data: 'hamiyab'        , name: 'hamiyab'       ,  "width": "100px"},
                 {data: 'mobile2'        , name: 'mobile2'       ,  "width": "70px"},

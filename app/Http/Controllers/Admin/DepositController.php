@@ -78,9 +78,6 @@ class DepositController extends Controller
                     ->addColumn('hesabtitle', function ($data) {
                         return ($data->hesabtitle);
                     })
-                    ->addColumn('code', function ($data) {
-                        return ($data->code);
-                    })
                     ->addColumn('hamahangname', function ($data) {
                         return ($data->hamahangname);
                     })
@@ -156,9 +153,6 @@ class DepositController extends Controller
                     })
                     ->addColumn('hesabtitle', function ($data) {
                         return ($data->hesabtitle);
-                    })
-                    ->addColumn('code', function ($data) {
-                        return ($data->code);
                     })
                     ->addColumn('hamahangname', function ($data) {
                         return ($data->hamahangname);
