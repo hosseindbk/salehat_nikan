@@ -72,5 +72,10 @@ class deposit extends Model
             $query->where('users.name', 'like', '%' . $hamahang . '%' );
         }
 
+        $hamiyab       = request('hamiyab');
+        if(isset($hamiyab)  && $hamiyab != null){
+            $query->where('deposits.hamiyab', 'like', '%' . $hamiyab . '%' );
+        }
+
     }
 }

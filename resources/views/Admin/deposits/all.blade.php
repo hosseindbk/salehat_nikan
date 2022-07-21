@@ -48,8 +48,11 @@
                                     <div class="form-group col-md-1 ">
                                         <input type="text" name="hesab" id="hesab" class="form-control " placeholder="شماره حساب">
                                     </div>
-                                    <div class="form-group col-md-2 ">
+                                    <div class="form-group col-md-1 ">
                                         <input type="text" name="hamahang" id="hamahang" class="form-control" placeholder="هماهنگ کننده">
+                                    </div>
+                                    <div class="form-group col-md-1 ">
+                                        <input type="text" name="hamiyab" id="hamiyab" class="form-control" placeholder="حامی یاب">
                                     </div>
                                     <div class="form-group col-md-1 ">
                                         <input type="text" name="page" id="page" class="form-control" placeholder="تعداد نمایش">
@@ -233,30 +236,38 @@
                 d.reason        = $('#reason').val();
                 d.hesab         = $('#hesab').val();
                 d.hamahang      = $('#hamahang').val();
+                d.hamiyab       = $('#hamiyab').val();
                 d.page          = $('#page').val();
 
             }
             },
             columns: [
-                {data: 'DT_RowIndex'    , name: 'DT_RowIndex'   ,  "width": "20px"},
-                {data: 'userid'         , name: 'userid'        ,  "width": "50px"},
-                {data: 'name'           , name: 'name'          ,  "width": "100px"},
-                {data: 'mobile'         , name: 'mobile'        ,  "width": "70px"},
-                {data: 'date'           , name: 'date'          ,  "width": "70px"},
-                {data: 'amount'         , name: 'amount'        ,  "width": "100px"},
-                {data: 'reason'         , name: 'reason'        ,  "width": "100px"},
-                {data: 'hesabtitle'     , name: 'hesabtitle'    ,  "width": "80px"},
-                {data: 'hamahangname'   , name: 'hamahangname'  ,  "width": "100px"},
-                {data: 'hamiyab'        , name: 'hamiyab'       ,  "width": "100px"},
-                {data: 'mobile2'        , name: 'mobile2'       ,  "width": "70px"},
-                {data: 'description'    , name: 'description'   ,  "width": "100px"},
+                {data: 'DT_RowIndex'    , name: 'DT_RowIndex'   ,  "width": "20px"  },
+                {data: 'userid'         , name: 'userid'        ,  "width": "50px"  },
+                {data: 'name'           , name: 'name'          ,  "width": "100px" },
+                {data: 'mobile'         , name: 'mobile'        ,  "width": "70px"  },
+                {data: 'date'           , name: 'date'          ,  "width": "70px"  },
+                {data: 'amount'         , name: 'amount'        ,  "width": "100px" },
+                {data: 'reason'         , name: 'reason'        ,  "width": "100px" },
+                {data: 'hesabtitle'     , name: 'hesabtitle'    ,  "width": "80px"  },
+                {data: 'hamahangname'   , name: 'hamahangname'  ,  "width": "100px" },
+                {data: 'hamiyab'        , name: 'hamiyab'       ,  "width": "100px" },
+                {data: 'mobile2'        , name: 'mobile2'       ,  "width": "70px"  },
+                {data: 'description'    , name: 'description'   ,  "width": "100px" },
                 {
                     data: 'action'      ,     name: 'action'    ,"width": "70px",
                     orderable: true,
                     searchable: false
                 },
-            ],
 
+            ],
+            customize: function ( doc ) {
+                $(doc.document.body).find('table').css('border', '1px solid #000');
+                $(doc.document.body).find('table td').css('border-left'     , '1px solid #000');
+                $(doc.document.body).find('table td').css('border-top'      , '1px solid #000');
+                $(doc.document.body).find('table td').css('border-right'    , '1px solid #000');
+                $(doc.document.body).find('table td').css('border-bottom'   , '1px solid #000');
+            },
         });
 
         });
