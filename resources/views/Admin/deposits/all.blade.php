@@ -255,19 +255,12 @@
                 {data: 'mobile2'        , name: 'mobile2'       ,  "width": "70px"  },
                 {data: 'description'    , name: 'description'   ,  "width": "100px" },
                 {
-                    data: 'action'      ,     name: 'action'    ,"width": "70px",
+                data: 'action'          , name: 'action'        ,"width": "70px"    ,
                     orderable: true,
                     searchable: false
                 },
 
             ],
-            customize: function ( doc ) {
-                $(doc.document.body).find('table').css('border', '1px solid #000');
-                $(doc.document.body).find('table td').css('border-left'     , '1px solid #000');
-                $(doc.document.body).find('table td').css('border-top'      , '1px solid #000');
-                $(doc.document.body).find('table td').css('border-right'    , '1px solid #000');
-                $(doc.document.body).find('table td').css('border-bottom'   , '1px solid #000');
-            },
         });
 
         });
