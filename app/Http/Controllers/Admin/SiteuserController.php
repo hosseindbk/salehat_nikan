@@ -54,6 +54,9 @@ class SiteuserController extends Controller
                     ->addColumn('username', function ($datas) {
                         return ($datas->username);
                     })
+                    ->addColumn('date', function ($datas) {
+                        return ($datas->date);
+                    })
                     ->addColumn('countdeposit', function ($datas) {
                         return ($datas->countdeposit);
                     })
@@ -101,6 +104,9 @@ class SiteuserController extends Controller
                     })
                     ->addColumn('username', function ($datas) {
                         return ($datas->username);
+                    })
+                    ->addColumn('date', function ($datas) {
+                        return ($datas->date);
                     })
                     ->addColumn('countdeposit', function ($datas) {
                         return ($datas->countdeposit);

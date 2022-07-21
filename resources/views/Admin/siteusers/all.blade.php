@@ -36,13 +36,19 @@
                                     <div class="form-group col-md-2 ">
                                         <input type="text" name="mobile" id="mobile" class="form-control " placeholder="شماره موبایل">
                                     </div>
-                                    <div class="form-group col-md-2 ">
+                                    <div class="form-group col-md-1 ">
+                                        <input type="text" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="از تاریخ">
+                                    </div>
+                                    <div class="form-group col-md-1 ">
+                                        <input type="text" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="تا تاریخ">
+                                    </div>
+                                    <div class="form-group col-md-1 ">
                                         <input type="text" name="hamiyab" id="hamiyab" class="form-control" placeholder="حامی یاب">
                                     </div>
                                     <div class="form-group col-md-1 ">
                                         <input type="text" name="total" id="total" class="form-control " placeholder="تعداد واریزی">
                                     </div>
-                                    <div class="form-group col-md-2 ">
+                                    <div class="form-group col-md-1 ">
                                         <input type="text" name="page" id="page" class="form-control" placeholder="تعداد نمایش">
                                     </div>
                                     <div class="form-group col-md-2 ">
@@ -83,6 +89,7 @@
                                                 <th class="wd-10p"> نام و نام خانوادگی </th>
                                                 <th class="wd-10p"> شماره موبایل </th>
                                                 <th class="wd-10p"> شماره موبایل2 </th>
+                                                <th class="wd-10p"> تاریخ ثبت </th>
                                                 <th class="wd-10p"> حامی یاب </th>
                                                 <th class="wd-10p"> تعداد واریزی </th>
                                                 <th class="wd-10p"> توضیحات </th>
@@ -166,6 +173,8 @@
                     url:"{{ route('siteusers.index') }}",
                     type: 'GET',
                     data: function (d) {
+                        d.start_date  = $('#start_date').val();
+                        d.end_date    = $('#end_date').val();
                         d.user_id     = $('#user_id').val();
                         d.name        = $('#name').val();
                         d.page        = $('#page').val();
@@ -180,6 +189,7 @@
                     {data: 'name'           , name: 'name'          },
                     {data: 'mobile'         , name: 'mobile'        },
                     {data: 'mobile2'        , name: 'mobile2'       },
+                    {data: 'date'           , name: 'date'       },
                     {data: 'username'       , name: 'username'      },
                     {data: 'countdeposit'   , name: 'countdeposit'  },
                     {data: 'description'    , name: 'description'   },

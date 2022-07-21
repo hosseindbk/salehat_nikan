@@ -8,6 +8,15 @@ class Hami extends Model
 {
     public function scopeFilter($query)
     {
+        $start_date     = request('start_date');
+        if(isset($start_date)  && $start_date != null){
+            $query->where('hamis.date' , '>=' , $start_date);
+        }
+
+        $end_date       = request('end_date');
+        if(isset($end_date)  && $end_date != null){
+            $query->where('hamis.date' , '<=' , $end_date);
+        }
         $user_id       = request('user_id');
         if(isset($user_id)  && $user_id != null){
             $query->where('hamis.id', $user_id );
