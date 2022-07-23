@@ -27,7 +27,7 @@ class Hamirequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'hamahang_id' => ['required'],
             'mobile' => [ 'required','min:9' , 'max:12', 'unique:hamis'],
-            'mobile2' => [ 'required','min:9' , 'max:12', 'unique:hamis'],
+            'mobile2' => [ 'unique:hamis'],
         ];
     }
 }
